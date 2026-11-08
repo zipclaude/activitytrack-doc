@@ -24,8 +24,11 @@ host, or on another machine.
 - A local user for the runner, no Microsoft account, automatic login or a service account.
 - Windows Update on, but outside a build; Defender on (the executables are not signed: this is
   how a user sees them).
-- Take a snapshot ("clean") once it is set up; revert to it before each release run, so every run
-  starts from the same system.
+- Take a snapshot ("clean") once it is set up **and the runner is registered, installed as a
+  service and started**; revert to it before each release run, so every run starts from the same
+  system. A revert also throws away the patches installed since: refresh the snapshot every month
+  (start the VM, let Windows Update finish, restart, check the runner is online, shut down, take
+  the snapshot again) and before the first release after an important update.
 
 ## What the jobs need in the machine
 
@@ -40,7 +43,15 @@ They are written for the shared runner's image: PowerShell 5.1 and Chocolatey.
    Invoke-WebRequest -Uri https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-windows-amd64.exe -OutFile gitlab-runner.exe
    .\gitlab-runner.exe register --url https://gitlab.com --token <the runner token> --executor shell
    ```
-   In `config.toml` set `shell = "powershell"` (5.1: the jobs rely on its behaviour).
+   In `config.toml` set `shell = "powershell"` (5.1: the jobs rely on its behaviour). Then install it
+   as a service and start it, under the local user of the machine, not SYSTEM (the jobs use the user
+   profile: `%LOCALAPPDATA%`, the Run key of the registry, the per-user installer):
+   ```
+   .\gitlab-runner.exe install --user ".\<the local user>" --password "<its password>"
+   .\gitlab-runner.exe start
+   ```
+   The service starts with the machine, so the runner is "online" in *Build → Runners* once the VM
+   has booted. Register, install and start **before** taking the snapshot "clean" (see below).
 3. The runner token: *Group activitytrack → Build → Runners → New group runner*, tag
    `windows-local`, **Protected on** (stable tags only), *Run untagged jobs* off. Paste it into the
    command above on the machine; do not write it in a file of a repository.
@@ -64,7 +75,7 @@ A stable release then starts with `WINDOWS_TAG=windows-local` (Run pipeline → 
 
 ## Routine
 
-1. Revert the snapshot "clean", start the VM, check the runner in *Build → Runners* (online).
+1. Revert the snapshot "clean" (refreshed this month, see above), start the VM, check the runner in *Build → Runners* (online).
 2. Start the pipeline on the stable tag with `WINDOWS_TAG=windows-local`.
 3. When the jobs end, shut the VM down. A failure shows what the real system does that Wine
    cannot show: the first thing to look at is Defender and SmartScreen, the console code page
