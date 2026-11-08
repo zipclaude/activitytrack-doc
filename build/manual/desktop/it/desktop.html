@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it" xml:lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ActivityTrack Desktop — Manuale</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style>
+  /* SPDX-License-Identifier: GPL-3.0-or-later */
+  /* Print style of the user documentation (scripts/build-manual.sh). */
+  @page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+  html { font-family: "Noto Sans", "DejaVu Sans", Helvetica, Arial, sans-serif; font-size: 10.5pt; color: #1d2230; }
+  body { max-width: none; margin: 0; padding: 0; line-height: 1.45; }
+  header#title-block-header { margin: 0 0 1.2em 0; padding-bottom: .6em; border-bottom: 3px solid #3d7bea; }
+  h1.title { font-size: 24pt; margin: 0; color: #12306b; }
+  p.subtitle { margin: .2em 0 0 0; color: #5b6475; font-size: 12pt; }
+  h1 { font-size: 17pt; color: #12306b; margin: 1.4em 0 .4em; break-before: page; }
+  h1:first-of-type { break-before: auto; }
+  h2 { font-size: 13pt; color: #1a4bb0; margin: 1.1em 0 .3em; break-after: avoid; }
+  h3 { font-size: 11pt; margin: .9em 0 .2em; break-after: avoid; }
+  nav#TOC { break-after: page; }
+  nav#TOC ul { list-style: none; padding-left: 1em; }
+  nav#TOC > ul { padding-left: 0; }
+  nav#TOC a { color: #1d2230; text-decoration: none; }
+  table { border-collapse: collapse; width: 100%; margin: .5em 0 1em; break-inside: avoid; font-size: 9.5pt; }
+  th, td { border: 1px solid #c8cdd8; padding: 4px 6px; vertical-align: top; text-align: left; }
+  th { background: #eef2fb; }
+  code { font-family: "DejaVu Sans Mono", monospace; font-size: 9pt; background: #f2f4f8; padding: 0 2px; }
+  /*
+   * Screenshots take at most a quarter of a page (owner, issue #37: at least
+   * 2×2 per page): half the width, ~105 mm high; consecutive ones sit side by
+   * side. Diagrams (SVG) keep the full width.
+   */
+  figure { margin: .8em 0; text-align: center; break-inside: avoid; display: inline-block; width: 48%; vertical-align: top; }
+  /* every screenshot, inside a figure or not (pandoc versions differ) */
+  img { max-width: 48%; max-height: 105mm; border: 1px solid #d5d9e2; border-radius: 6px; }
+  figure img { max-width: 100%; }
+  figure:has(img[src$=".svg"]) { display: block; width: auto; }
+  img[src$=".svg"], figure img[src$=".svg"] { border: 0; max-width: 100%; max-height: 150mm; }
+  figcaption { font-size: 9pt; color: #5b6475; margin-top: .3em; }
+  blockquote { margin: .6em 0; padding: .4em .8em; border-left: 4px solid #f2b705; background: #fff8e1; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">ActivityTrack Desktop — Manuale</h1>
+<p class="subtitle">0.9.9</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#1-cosa-serve" id="toc-1-cosa-serve">1. Cosa serve</a></li>
+<li><a href="#2-installazione" id="toc-2-installazione">2.
+Installazione</a></li>
+<li><a href="#3-associazione-al-server"
+id="toc-3-associazione-al-server">3. Associazione al server</a></li>
+<li><a href="#4-licona-e-il-menu" id="toc-4-licona-e-il-menu">4. L'icona
+e il menu</a></li>
+<li><a href="#5-la-finestra" id="toc-5-la-finestra">5. La
+finestra</a></li>
+<li><a href="#6-le-attività" id="toc-6-le-attività">6. Le
+attività</a></li>
+<li><a href="#7-i-da-fare" id="toc-7-i-da-fare">7. I Da fare</a></li>
+<li><a href="#8-i-promemoria" id="toc-8-i-promemoria">8. I
+promemoria</a></li>
+<li><a href="#9-generale" id="toc-9-generale">9. Generale</a></li>
+<li><a href="#10-scorciatoie-globali"
+id="toc-10-scorciatoie-globali">10. Scorciatoie globali</a></li>
+<li><a href="#11-la-policy-sul-pc" id="toc-11-la-policy-sul-pc">11. La
+policy sul PC</a></li>
+<li><a href="#12-problemi-comuni" id="toc-12-problemi-comuni">12.
+Problemi comuni</a></li>
+</ul>
+</nav>
+<p>Versione 0.9.9 (novembre 2026). ActivityTrack Desktop è l'app per il
+PC di ActivityTrack. Sta nell'area di notifica, vicino all'orologio, e
+tiene a un clic le attività in corso e i <em>Da fare</em>. Così
+un'attività, anche breve, si registra dalla tastiera, senza prendere il
+telefono.</p>
+<h2 id="1-cosa-serve">1. Cosa serve</h2>
+<ul>
+<li>Un server <strong>ActivityTrack Web</strong> dell'organizzazione: il
+PC si associa come un telefono e sincronizza nei due sensi.</li>
+<li><strong>Linux</strong> con KDE Plasma o XFCE, su Wayland o X11,
+oppure <strong>Windows 10 o 11</strong>.</li>
+</ul>
+<p>Senza rete il PC continua a lavorare: le modifiche partono quando la
+rete torna. Report, anagrafiche e gestionali restano al telefono e al
+web.</p>
+<p>Sul PC ActivityTrack è <strong>un'applicazione sola</strong>, con tre
+interfacce: questa nell'area di notifica, la riga di comando
+(<code>activitytrack</code>, pacchetto <code>activitytrack-cli</code>) e
+l'interfaccia a schermo intero nel terminale
+(<code>activitytrack-tui</code>). Usano gli stessi dati
+(<code>~/.local/share/activitytrack</code>, su Windows
+<code>%APPDATA%\activitytrack</code>) e la stessa associazione: quello
+che si fa con una compare subito nelle altre. Tutte dipendono dalla
+libreria <code>python3-activitytrack</code>.</p>
+<h2 id="2-installazione">2. Installazione</h2>
+<p>Dalla pagina delle release (<a
+href="https://gitlab.com/activitytrack/activitytrack-desktop/-/releases">https://gitlab.com/activitytrack/activitytrack-desktop/-/releases</a>):</p>
+<ul>
+<li><strong>Debian 13 e 14, Ubuntu 24.04 e 26.04</strong>: il pacchetto
+della propria distribuzione insieme a quello della libreria (dalla sua
+pagina, <a
+href="https://gitlab.com/activitytrack/python3-activitytrack/-/releases">https://gitlab.com/activitytrack/python3-activitytrack/-/releases</a>),
+installati con
+<code>sudo apt install ./python3-activitytrack_&lt;versione&gt;-1-&lt;distro&gt;_all.deb ./activitytrack-desktop_&lt;versione&gt;-1-&lt;distro&gt;_all.deb</code>.
+ActivityTrack compare nel menu delle applicazioni.</li>
+<li><strong>Altre distribuzioni Linux</strong>: servono Python 3.11 o
+più recente, PyQt6, cryptography e keyring dai pacchetti della
+distribuzione, e la libreria (<code>pip install</code> dal suo
+repository). Si scompatta
+<code>activitytrack-desktop-&lt;versione&gt;.tar.gz</code> e, nella sua
+cartella, si avvia <code>python3 -m activitytrack_desktop</code>.</li>
+<li><strong>Windows</strong>:
+<code>ActivityTrackDesktop-&lt;versione&gt;-setup.exe</code>. Si
+installa per l'utente corrente, senza diritti di amministratore. Il
+programma <strong>non è firmato</strong> (non ha costi di certificati):
+al primo avvio Windows SmartScreen avvisa; si sceglie <strong>"Ulteriori
+informazioni" → "Esegui comunque"</strong>. Chi vuole controllare il
+file confronta il suo SHA-256 con <code>SHA256SUMS</code> della stessa
+release.</li>
+</ul>
+<p>Su XFCE l'icona compare se il pannello ha l'<strong>area di
+notifica</strong> (plugin "Status Tray" o "Notification Area"). GNOME
+senza l'estensione AppIndicator non ha un'area di notifica:
+ActivityTrack resta allora aperto in una finestra.</p>
+<h2 id="3-associazione-al-server">3. Associazione al server</h2>
+<figure>
+<img src="../img/pair.png" alt="Associazione" />
+<figcaption aria-hidden="true">Associazione</figcaption>
+</figure>
+<ol type="1">
+<li>Sul web, apri <strong>Dispositivi → "Associa un
+dispositivo"</strong> (su ActivityTrack Web 0.9.3: <strong>Telefoni →
+"Associa un telefono"</strong>, il collegamento è sotto "Non riesci a
+inquadrarlo?").</li>
+<li>Copia il <strong>collegamento</strong> che inizia con
+<code>activitytrack://pair</code>.</li>
+<li>Al primo avvio ActivityTrack apre <strong>Impostazioni →
+Sincronizzazione</strong>: <strong>"Associa a un server…"</strong>
+(anche dalla Home) apre la finestra di associazione. Se il collegamento
+è già negli appunti lo trova da solo. Scegli
+<strong>"Associa"</strong>.</li>
+</ol>
+<p>Il collegamento vale 10 minuti e una volta sola. Dopo l'associazione
+il PC scarica i dati dell'utente e li tiene aggiornati.</p>
+<figure>
+<img src="../img/sync.png" alt="Sincronizzazione" />
+<figcaption aria-hidden="true">Sincronizzazione</figcaption>
+</figure>
+<p><strong>Impostazioni → Sincronizzazione</strong> mostra server,
+utente, organizzazione, le modifiche in attesa e quelle rifiutate dal
+server (<strong>"Non sincronizzati"</strong>), con <strong>"Sincronizza
+ora"</strong>, <strong>"Associa di nuovo…"</strong> e
+<strong>"Dissocia"</strong>. Dissociando il PC tiene i suoi dati;
+associandolo a un altro server o utente li riparte da zero.</p>
+<p>Il token di accesso sta nel portachiavi del sistema (KWallet, GNOME
+Keyring, Gestione credenziali di Windows). Senza portachiavi sta in un
+file leggibile solo dal proprio utente, e la pagina lo dice.</p>
+<h2 id="4-licona-e-il-menu">4. L'icona e il menu</h2>
+<p>L'icona prende il colore dell'attività in corso:
+<strong>verde</strong> al lavoro, <strong>gialla</strong> in pausa,
+<strong>blu</strong> in viaggio, grigia quando non c'è niente. Un
+<strong>punto rosso</strong> dice che la sincronizzazione ha un problema
+(non associato, associazione revocata, versioni incompatibili).</p>
+<ul>
+<li><strong>Passandoci sopra</strong>: le attività in corso con il tempo
+trascorso.</li>
+<li><strong>Clic</strong>: apre o chiude la finestra.</li>
+<li><strong>Clic centrale</strong>: mette in pausa o riprende l'attività
+al lavoro.</li>
+<li><strong>Menu</strong> (clic destro): per ogni attività in corso i
+suoi comandi (Pausa, Viaggio, Sospendi, Stop, Modifica…); <strong>"Nuova
+attività…"</strong>; <strong>"Avvia Da fare ▸"</strong> con quelli in
+ritardo e di oggi; <strong>"Nuovo Da fare…"</strong>; lo stato della
+sincronizzazione; <strong>"Esci"</strong>.</li>
+</ul>
+<p>Chiudere la finestra la nasconde soltanto: ActivityTrack resta
+nell'area di notifica fino a <strong>"Esci"</strong>.</p>
+<h2 id="5-la-finestra">5. La finestra</h2>
+<p>La finestra ha l'aspetto dell'app: a sinistra la barra verde con
+<strong>Home</strong>, <strong>Da fare</strong> e
+<strong>Impostazioni</strong> (Ctrl+1, Ctrl+2, Ctrl+3) e, in basso,
+<strong>Sincronizza</strong> (F5) con un punto rosso quando la
+sincronizzazione ha un problema. È chiara o scura come il sistema.</p>
+<figure>
+<img src="../img/home.png" alt="La Home" />
+<figcaption aria-hidden="true">La Home</figcaption>
+</figure>
+<p>La <strong>Home</strong> è quella del telefono:</p>
+<ul>
+<li>in alto la <strong>scheda grande</strong> dell'ultima attività:
+azienda, cliente e descrizione, lo stato con l'ora (<strong>"In lavoro
+dalle 07:46"</strong>), i totali di lavoro e viaggio, a destra il tempo
+del tratto in corso e i colori dei tag. Sotto, i pulsanti tondi con il
+nome: <strong>Pausa</strong> o <strong>Riprendi</strong>,
+<strong>Viaggio</strong>, <strong>Sospendi</strong>,
+<strong>Stop</strong>. Un clic sulla scheda apre l'attività;</li>
+<li>sotto, le <strong>schede piccole</strong> delle altre attività in
+corso o sospese: una riga con lo stato e gli orari, e il pulsante tondo
+che la riprende o la mette in pausa. Un clic la porta nella scheda
+grande;</li>
+<li>quando non c'è niente in corso, la scheda grande ha
+<strong>Avvia</strong> e <strong>Viaggio</strong>;</li>
+<li>poi i filtri e la lista dei <em>Da fare</em> e delle attività chiuse
+(§7).</li>
+</ul>
+<p>La striscia colorata a sinistra di ogni scheda è il colore
+dell'azienda (o del cliente) scelto sul web o sul telefono.</p>
+<figure>
+<img src="../img/home-dark.png" alt="La Home con il tema scuro" />
+<figcaption aria-hidden="true">La Home con il tema scuro</figcaption>
+</figure>
+<h3 id="scorciatoie-da-tastiera">Scorciatoie da tastiera</h3>
+<p>Valgono quando la finestra di ActivityTrack è attiva; i suggerimenti
+dei pulsanti le ricordano.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Tasti</th>
+<th>Cosa fa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Ctrl+N</strong></td>
+<td>Nuova attività (inserimento rapido)</td>
+</tr>
+<tr class="even">
+<td><strong>Ctrl+P</strong></td>
+<td>Pausa dell'attività al lavoro o in viaggio; se nessuna lo è,
+riprende quella in pausa o l'ultima sospesa</td>
+</tr>
+<tr class="odd">
+<td><strong>Ctrl+T</strong></td>
+<td>Stop dell'attività della scheda grande; se mancano i dettagli apre
+"Completa l'attività"</td>
+</tr>
+<tr class="even">
+<td><strong>Ctrl+D</strong></td>
+<td>Nuovo <em>Da fare</em></td>
+</tr>
+<tr class="odd">
+<td><strong>Ctrl+F</strong></td>
+<td>Cerca nella lista</td>
+</tr>
+<tr class="even">
+<td><strong>Ctrl+1</strong>, <strong>Ctrl+2</strong>,
+<strong>Ctrl+3</strong></td>
+<td>Home, Da fare, Impostazioni</td>
+</tr>
+<tr class="odd">
+<td><strong>F5</strong></td>
+<td>Sincronizza ora</td>
+</tr>
+<tr class="even">
+<td><strong>Ctrl+Invio</strong></td>
+<td>Conferma il modulo aperto</td>
+</tr>
+</tbody>
+</table>
+<p>Con più attività al lavoro insieme (quando la policy lo consente)
+Ctrl+P chiede quale, in un piccolo elenco: Invio sceglie la prima, la
+più recente.</p>
+<p>Avvio, pausa e stop hanno anche scorciatoie che funzionano da
+qualunque programma: §10.</p>
+<h2 id="6-le-attività">6. Le attività</h2>
+<h3 id="nuova-attività">Nuova attività</h3>
+<figure>
+<img src="../img/quick.png" alt="Nuova attività" />
+<figcaption aria-hidden="true">Nuova attività</figcaption>
+</figure>
+<p><strong>"Nuova attività"</strong> (dal menu, dalla Home o con
+<strong>Ctrl+N</strong>) apre l'inserimento rapido, sopra le altre
+finestre:</p>
+<ul>
+<li><strong>Descrizione</strong> su più righe;</li>
+<li><strong>Cliente</strong>: si sceglie dall'elenco o si scrive. Un
+nome nuovo diventa un'anagrafica personale, se la policy lo
+consente;</li>
+<li><strong>Tag</strong>, separati da virgole;</li>
+<li><strong>Lavoro</strong> o <strong>Viaggio</strong>;</li>
+<li><strong>Adesso</strong> o <strong>"Già fatta"</strong>: un'attività
+finita, con inizio e fine;</li>
+<li>le <strong>attività in corso</strong>: lasciarle in corso,
+sospenderle o fermarle.</li>
+</ul>
+<p><strong>Ctrl+Invio</strong> avvia. <strong>"Altri campi…"</strong>
+passa al modulo completo con quanto già scritto.</p>
+<p>Il modulo completo si apre anche dal menu <strong>⋯</strong> della
+Home, <strong>"Modulo completo…"</strong>.</p>
+<h3 id="il-modulo-completo">Il modulo completo</h3>
+<figure>
+<img src="../img/entry.png" alt="Modulo completo" />
+<figcaption aria-hidden="true">Modulo completo</figcaption>
+</figure>
+<p>Azienda, cliente, ruolo, scelta rapida, descrizione, località, note e
+tag, secondo la policy (che può rinominarli, nasconderli o renderli
+obbligatori). Per un'attività esistente mostra anche i
+<strong>tempi</strong>: ogni tratto (lavoro, viaggio, pausa) si può
+modificare o eliminare, e se ne aggiunge uno nuovo, quando la policy lo
+permette. Due tratti sovrapposti segnano l'attività <strong>"da
+verificare"</strong>.</p>
+<p>L'<strong>azienda</strong> viene prima del <strong>cliente</strong> e
+ne filtra l'elenco; scegliendo un cliente conosciuto, l'azienda diventa
+la sua.</p>
+<h3 id="date-e-orari">Date e orari</h3>
+<p>Date e orari si scrivono nel formato scelto in <strong>Impostazioni →
+Generale</strong>, oppure si scelgono: il calendario dalla freccia del
+campo e, per gli orari, la <strong>griglia a 5 minuti</strong> dell'app
+dal pulsante <strong>▦</strong> accanto al campo. Una riga per ora, 12
+ore alla volta (<strong>▲ Prima</strong> / <strong>Dopo ▼</strong>
+spostano la finestra di 3 ore). Inizio e fine si scelgono insieme:
+trascinando dalla prima casella all'ultima, oppure cliccando la prima e
+poi l'ultima, e <strong>OK</strong>; in alto l'intervallo e la durata,
+le caselle <strong>tratteggiate</strong> sono occupate da altre attività
+di quel giorno. <strong>Orario esatto</strong> con <strong>Usa</strong>
+prende i minuti fuori griglia (es. 09:37).</p>
+<figure>
+<img src="../img/grid.png" alt="La griglia degli orari" />
+<figcaption aria-hidden="true">La griglia degli orari</figcaption>
+</figure>
+<h3 id="stop-e-completamento">Stop e completamento</h3>
+<p><strong>Stop</strong> (o <strong>Ctrl+T</strong>) chiude subito
+l'attività se ha cliente e descrizione. Altrimenti, o se viene da un
+<em>Da fare</em>, chiede quello che manca:</p>
+<figure>
+<img src="../img/stop.png" alt="Completa l&#39;attività" />
+<figcaption aria-hidden="true">Completa l'attività</figcaption>
+</figure>
+<p><strong>"Chiudi l'attività"</strong> la completa (senza descrizione
+chiede conferma); <strong>"Più tardi"</strong> la lascia tra i
+<strong>"Dettagli mancanti"</strong> della Home.</p>
+<h2 id="7-i-da-fare">7. I Da fare</h2>
+<p>Sotto le attività in corso la Home ha un'unica lista, come l'app:
+<strong>In ritardo</strong>, <strong>Dettagli mancanti</strong>,
+<strong>Oggi</strong>, <strong>Prossimi giorni</strong>, <strong>Giorni
+precedenti</strong>, <strong>Senza data</strong>,
+<strong>Ignorate</strong>. I filtri <strong>periodo</strong> (Oggi, 24
+h, 3 gg…), <strong>stato</strong> (Da fare, Dettagli mancanti, Fatte,
+Ignorate), <strong>azienda</strong> e <strong>tag</strong> sono pulsanti
+con il loro menu, colorati quando non sono quelli iniziali, e restano
+memorizzati; <strong>Cerca</strong> (Ctrl+F) restringe la lista alle
+righe che contengono le parole scritte.</p>
+<p>Ogni riga ha a sinistra il segno del suo stato: <strong>!</strong> in
+ritardo, l'orologio se pianificata, il cerchio se aperta, la matita se
+mancano i dettagli, il quadrato se chiusa, la spunta se fatta. Un <em>Da
+fare</em> ha i pulsanti tondi <strong>Avvia</strong> (un'attività con i
+suoi dati) e <strong>Fatto</strong> e, nel menu <strong>⋯</strong>,
+<strong>Posticipa</strong>, <strong>Ignora</strong> e
+<strong>Modifica…</strong>; un clic sulla riga lo apre. Un'attività con
+i dettagli mancanti ha <strong>Completa…</strong>.</p>
+<figure>
+<img src="../img/todos.png" alt="La sezione Da fare" />
+<figcaption aria-hidden="true">La sezione Da fare</figcaption>
+</figure>
+<p>La sezione <strong>Da fare</strong> (Ctrl+2) li mostra tutti, per
+scadenza e pianificazione, con <strong>"Anche le fatte"</strong>,
+<strong>Ignorate</strong>, l'azienda e la ricerca; <strong>"Nuovo Da
+fare"</strong> (o <strong>Ctrl+D</strong>) ne crea uno.</p>
+<figure>
+<img src="../img/todo.png" alt="Da fare" />
+<figcaption aria-hidden="true">Da fare</figcaption>
+</figure>
+<p>Il modulo ha titolo, azienda, cliente, note, riferimenti (ticket,
+link: uno per riga), <strong>scadenza</strong>,
+<strong>pianificazione</strong> (giorno, ora, durata) e
+<strong>priorità</strong>. Un <em>Da fare</em> del gestionale non si
+elimina: si ignora.</p>
+<h2 id="8-i-promemoria">8. I promemoria</h2>
+<p>Gli stessi del telefono, come <strong>notifiche</strong> del
+desktop:</p>
+<ul>
+<li><strong>"Ancora su …?"</strong> mentre un'attività è in corso: Sì,
+Pausa, Stop all'ora dell'ultima conferma;</li>
+<li><strong>"Ancora in pausa?"</strong>: Riprendi, Stop;</li>
+<li><strong>"Nessuna attività oggi"</strong> dopo l'inizio dell'orario
+di lavoro: Assente tutto il giorno, Avvia un'attività;</li>
+<li>un <strong>Da fare pianificato</strong> in arrivo: Avvia, Posticipa,
+Ripianifica;</li>
+<li>la <strong>fine prevista</strong> di un'attività: Sì, stop; No,
+continua.</li>
+</ul>
+<p>Su Linux le notifiche hanno i pulsanti. Su Windows, o dove le
+notifiche non li hanno, un clic apre la domanda in una finestra:</p>
+<figure>
+<img src="../img/question.png" alt="Una domanda" />
+<figcaption aria-hidden="true">Una domanda</figcaption>
+</figure>
+<figure>
+<img src="../img/reminders.png" alt="Promemoria" />
+<figcaption aria-hidden="true">Promemoria</figcaption>
+</figure>
+<p><strong>Impostazioni → Promemoria</strong> accende o spegne ciascuno
+e ne regola gli intervalli; quelli fissati dalla policy sono grigi. Il
+telefono mostra gli stessi promemoria: una risposta che cambia
+l'attività o il <em>Da fare</em> vale anche sull'altro dispositivo.</p>
+<h2 id="9-generale">9. Generale</h2>
+<figure>
+<img src="../img/general.png" alt="Generale" />
+<figcaption aria-hidden="true">Generale</figcaption>
+</figure>
+<p><strong>Impostazioni → Generale</strong> ha:</p>
+<ul>
+<li><strong>"Avvia ActivityTrack all'accesso"</strong>: parte con la
+sessione, nascosto nell'area di notifica. Su Linux si accende al primo
+avvio; su Windows lo propone l'installazione;</li>
+<li><strong>date e orari</strong>: il formato delle date, europeo
+(31/12/2026), americano (12/31/2026) o ISO (2026-12-31), e degli orari,
+24 ore (18:30) o 12 ore (6:30 PM). Valgono anche per la riga di comando
+e il terminale, come le preferenze di ActivityTrack Web;</li>
+<li><strong>aggiornamenti</strong>: le versioni nuove le annuncia il
+<strong>server a cui il PC è associato</strong>, con ogni
+sincronizzazione; <strong>"Controlla ora"</strong> lo chiede subito.
+L'annuncio è firmato e si accetta solo se la firma è quella del server,
+la cui chiave arriva nel collegamento di associazione: con un
+collegamento più vecchio (senza chiave) o con una firma diversa, il
+programma lo dice e non offre nulla. Quando c'è una versione nuova
+arriva una notifica con <strong>"Scarica"</strong>: il pacchetto si
+scarica dal server, se ne controlla l'impronta (SHA-256) e poi si apre
+con il programma di sistema che lo installa. Se ActivityTrack è stato
+installato dal gestore di pacchetti (<code>apt</code>), la versione
+nuova si segnala ma <strong>non si scarica</strong>: l'aggiorna il
+gestore. <strong>"Anche le versioni beta"</strong> include le versioni
+di prova. La policy può fissare entrambe le scelte.</li>
+</ul>
+<h2 id="10-scorciatoie-globali">10. Scorciatoie globali</h2>
+<p>Tre combinazioni di tasti funzionano da qualunque programma, anche
+con la finestra di ActivityTrack chiusa:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Tasti</th>
+<th>Cosa fanno</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Ctrl+Alt+A</strong></td>
+<td>apre in primo piano la finestra della nuova attività</td>
+</tr>
+<tr class="even">
+<td><strong>Ctrl+Alt+P</strong></td>
+<td>mette in pausa l'attività al lavoro o in viaggio (la più recente);
+se non ce n'è, riprende quella in pausa, altrimenti l'ultima
+sospesa</td>
+</tr>
+<tr class="odd">
+<td><strong>Ctrl+Alt+S</strong></td>
+<td>ferma l'attività in corso; se mancano i dettagli apre in primo piano
+la scheda per completarla</td>
+</tr>
+</tbody>
+</table>
+<p>Quando le attività candidate sono più d'una (attività contemporanee),
+una piccola finestra chiede quale. Pausa, ripresa e stop si confermano
+con una notifica.</p>
+<p>In <strong>Generale</strong> → <strong>Scorciatoie globali</strong>
+ciascuna si accende o si spegne e prende altri tasti (servono Ctrl, Alt
+o Super, tranne per i tasti funzione); <strong>"Ripristina
+predefinite"</strong> torna a quelli sopra. La riga sotto dice come
+funzionano su questo desktop:</p>
+<ul>
+<li><strong>Windows</strong>: direttamente;</li>
+<li><strong>Linux su X11</strong> (XFCE, KDE o GNOME su X11): con il
+pacchetto <code>python3-xlib</code>, che il pacchetto <code>.deb</code>
+installa; chi usa il <code>.tar.gz</code> lo installa dalla
+distribuzione;</li>
+<li><strong>Linux su Wayland</strong> (KDE Plasma 6, GNOME 48 o
+successivi): attraverso il portale del desktop. La prima volta il
+desktop chiede di confermare i tasti; dopo si cambiano nelle sue
+impostazioni (KDE: Impostazioni di sistema → Scorciatoie; GNOME:
+Impostazioni → Tastiera → Scorciatoie). Su Wayland il desktop può non
+portare la finestra davanti alle altre: allora lampeggia nella barra
+delle applicazioni.</li>
+</ul>
+<p>Se un tasto è già preso da un altro programma, la riga lo dice. Dove
+le scorciatoie non sono disponibili, o per usare tasti propri, si
+assegna una scorciatoia del desktop a uno di questi comandi:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">activitytrack-desktop</span> <span class="at">--start</span>    <span class="co"># nuova attività</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">activitytrack-desktop</span> <span class="at">--pause</span>    <span class="co"># pausa o ripresa</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">activitytrack-desktop</span> <span class="at">--stop</span>     <span class="co"># stop</span></span></code></pre></div>
+<p>Il comando passa all'ActivityTrack già aperto; se non è aperto lo
+avvia nell'area di notifica ed esegue il comando. Su Windows il
+programma è <code>ActivityTrack.exe</code> nella cartella
+d'installazione (<code>%LOCALAPPDATA%\Programs\ActivityTrack</code>),
+con le stesse opzioni.</p>
+<h2 id="11-la-policy-sul-pc">11. La policy sul PC</h2>
+<p>Il PC riceve la stessa policy del telefono e applica le chiavi che lo
+riguardano: funzioni (attività, viaggi, Da fare, pianificazione,
+ignorare ed eliminare), campi (nomi, obbligatori, nascosti, sola
+lettura), tempi modificabili, tag liberi, attività solo dai <em>Da
+fare</em>, anagrafiche solo centrali, intervalli dei promemoria,
+aggiornamenti. Le chiavi solo del telefono (posizione, chiamate,
+widget…) non lo riguardano.</p>
+<h2 id="12-problemi-comuni">12. Problemi comuni</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Problema</th>
+<th>Cosa fare</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Una scorciatoia non funziona</td>
+<td>Leggi la riga sotto <strong>Scorciatoie globali</strong> in
+<strong>Generale</strong>: il tasto può essere preso da un altro
+programma, o mancare <code>python3-xlib</code> (X11). In alternativa
+assegna <code>activitytrack-desktop --pause</code> (o
+<code>--start</code>, <code>--stop</code>) a un tasto nelle impostazioni
+del desktop</td>
+</tr>
+<tr class="even">
+<td>L'icona non si vede</td>
+<td>XFCE: aggiungi al pannello l'area di notifica. GNOME: serve
+l'estensione AppIndicator</td>
+</tr>
+<tr class="odd">
+<td>Windows: "Windows ha protetto il PC"</td>
+<td>Il programma non è firmato: "Ulteriori informazioni" → "Esegui
+comunque"</td>
+</tr>
+<tr class="even">
+<td>"Codice scaduto o già usato"</td>
+<td>Il collegamento vale 10 minuti e una volta: creane un altro sul
+web</td>
+</tr>
+<tr class="odd">
+<td>"Il certificato del server non è valido"</td>
+<td>Il server ha un certificato autofirmato: usa il collegamento appena
+creato, che contiene la sua chiave</td>
+</tr>
+<tr class="even">
+<td>"Il server ha revocato l'associazione"</td>
+<td>Associa di nuovo il PC dal web: i dati restano</td>
+</tr>
+<tr class="odd">
+<td>"Il server non accetta più questa versione"</td>
+<td>Aggiorna ActivityTrack Desktop (Impostazioni → Generale, "Controlla
+ora")</td>
+</tr>
+<tr class="even">
+<td>"Va aggiornato il server"</td>
+<td>Avvisa l'amministratore di ActivityTrack Web</td>
+</tr>
+<tr class="odd">
+<td>Un'attività fatta sul telefono non compare</td>
+<td>Arriva entro 30 secondi; <strong>F5</strong> ("Sincronizza") la
+porta subito</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

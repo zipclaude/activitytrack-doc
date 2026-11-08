@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it" xml:lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ActivityTrack Web — Manuale dell'amministratore</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style>
+  /* SPDX-License-Identifier: GPL-3.0-or-later */
+  /* Print style of the user documentation (scripts/build-manual.sh). */
+  @page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+  html { font-family: "Noto Sans", "DejaVu Sans", Helvetica, Arial, sans-serif; font-size: 10.5pt; color: #1d2230; }
+  body { max-width: none; margin: 0; padding: 0; line-height: 1.45; }
+  header#title-block-header { margin: 0 0 1.2em 0; padding-bottom: .6em; border-bottom: 3px solid #3d7bea; }
+  h1.title { font-size: 24pt; margin: 0; color: #12306b; }
+  p.subtitle { margin: .2em 0 0 0; color: #5b6475; font-size: 12pt; }
+  h1 { font-size: 17pt; color: #12306b; margin: 1.4em 0 .4em; break-before: page; }
+  h1:first-of-type { break-before: auto; }
+  h2 { font-size: 13pt; color: #1a4bb0; margin: 1.1em 0 .3em; break-after: avoid; }
+  h3 { font-size: 11pt; margin: .9em 0 .2em; break-after: avoid; }
+  nav#TOC { break-after: page; }
+  nav#TOC ul { list-style: none; padding-left: 1em; }
+  nav#TOC > ul { padding-left: 0; }
+  nav#TOC a { color: #1d2230; text-decoration: none; }
+  table { border-collapse: collapse; width: 100%; margin: .5em 0 1em; break-inside: avoid; font-size: 9.5pt; }
+  th, td { border: 1px solid #c8cdd8; padding: 4px 6px; vertical-align: top; text-align: left; }
+  th { background: #eef2fb; }
+  code { font-family: "DejaVu Sans Mono", monospace; font-size: 9pt; background: #f2f4f8; padding: 0 2px; }
+  /*
+   * Screenshots take at most a quarter of a page (owner, issue #37: at least
+   * 2×2 per page): half the width, ~105 mm high; consecutive ones sit side by
+   * side. Diagrams (SVG) keep the full width.
+   */
+  figure { margin: .8em 0; text-align: center; break-inside: avoid; display: inline-block; width: 48%; vertical-align: top; }
+  /* every screenshot, inside a figure or not (pandoc versions differ) */
+  img { max-width: 48%; max-height: 105mm; border: 1px solid #d5d9e2; border-radius: 6px; }
+  figure img { max-width: 100%; }
+  figure:has(img[src$=".svg"]) { display: block; width: auto; }
+  img[src$=".svg"], figure img[src$=".svg"] { border: 0; max-width: 100%; max-height: 150mm; }
+  figcaption { font-size: 9pt; color: #5b6475; margin-top: .3em; }
+  blockquote { margin: .6em 0; padding: .4em .8em; border-left: 4px solid #f2b705; background: #fff8e1; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">ActivityTrack Web — Manuale dell'amministratore</h1>
+<p class="subtitle">0.9.9</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#1-cosè-activitytrack-web"
+id="toc-1-cosè-activitytrack-web">1. Cos'è ActivityTrack Web</a></li>
+<li><a href="#2-installazione-e-aggiornamenti"
+id="toc-2-installazione-e-aggiornamenti">2. Installazione e
+aggiornamenti</a></li>
+<li><a href="#3-accesso" id="toc-3-accesso">3. Accesso</a></li>
+<li><a href="#4-utenti-e-profili" id="toc-4-utenti-e-profili">4. Utenti
+e profili</a></li>
+<li><a href="#5-dispositivi" id="toc-5-dispositivi">5.
+Dispositivi</a></li>
+<li><a href="#6-anagrafiche" id="toc-6-anagrafiche">6.
+Anagrafiche</a></li>
+<li><a href="#7-policy" id="toc-7-policy">7. Policy</a></li>
+<li><a href="#8-il-lavoro-sul-web" id="toc-8-il-lavoro-sul-web">8. Il
+lavoro sul web</a></li>
+<li><a href="#9-report" id="toc-9-report">9. Report</a></li>
+<li><a href="#10-sicurezza-e-backup" id="toc-10-sicurezza-e-backup">10.
+Sicurezza e backup</a></li>
+<li><a href="#11-problemi-frequenti" id="toc-11-problemi-frequenti">11.
+Problemi frequenti</a></li>
+</ul>
+</nav>
+<p>Versione 0.9.9 (novembre 2026). Per chi installa e amministra il
+server dell'organizzazione; chi usa l'app trova tutto nel
+<em>Manuale</em> di ActivityTrack.</p>
+<h2 id="1-cosè-activitytrack-web">1. Cos'è ActivityTrack Web</h2>
+<p>ActivityTrack Web è il server dell'organizzazione per l'app
+ActivityTrack:</p>
+<ul>
+<li>tiene una <strong>copia di ogni telefono</strong>, sincronizzata nei
+due sensi: attività, voci <em>Da fare</em>, anagrafiche, allegati;</li>
+<li>dà a ciascuno lo <strong>stesso lavoro dal browser</strong>: Home,
+attività, Agenda, Da fare, report;</li>
+<li>gestisce <strong>utenti e profili</strong>, le <strong>anagrafiche
+centrali</strong> e le <strong>policy</strong> che regolano le app dei
+telefoni.</li>
+</ul>
+<p>Un server serve una sola organizzazione. Il telefono funziona anche
+senza rete: le modifiche aspettano e partono quando la rete torna.</p>
+<figure>
+<img src="../img/home.png"
+alt="La Home sul web: attività in corso, poi la lista con i filtri" />
+<figcaption aria-hidden="true">La Home sul web: attività in corso, poi
+la lista con i filtri</figcaption>
+</figure>
+<h2 id="2-installazione-e-aggiornamenti">2. Installazione e
+aggiornamenti</h2>
+<p>Le istruzioni complete sono in <code>docs/INSTALL.md</code>, nel
+repository e nel pacchetto. In breve:</p>
+<ul>
+<li><strong>Debian 13 e 14, Ubuntu 24.04 e 26.04</strong>: il pacchetto
+<code>.deb</code> della pagina delle release.</li>
+<li><strong>RHEL / Oracle Linux 9, Arch, FreeBSD 14</strong>: l'archivio
+<code>.tar.gz</code>, o un clone del repository.</li>
+</ul>
+<p>Il pacchetto prepara l'utente di servizio, le cartelle e il database,
+ma non avvia il servizio. Prima si scrive
+<code>/etc/activitytrack-web/settings.ini</code>:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Chiave</th>
+<th>Cosa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>[server] base_url</code></td>
+<td>l'indirizzo HTTPS con cui i telefoni raggiungono il server; finisce
+nei codici QR. Con un percorso
+(<code>https://www.example.com/activitytrack</code>) l'app vive lì</td>
+</tr>
+<tr class="even">
+<td><code>[server] allowed_hosts</code></td>
+<td>i nomi e gli indirizzi con cui si raggiunge il server</td>
+</tr>
+<tr class="odd">
+<td><code>[server] time_zone</code></td>
+<td>il fuso dei giorni e dei report (predefinito
+<code>Europe/Rome</code>)</td>
+</tr>
+<tr class="even">
+<td><code>[server] tls_pin</code></td>
+<td>solo con un certificato autofirmato: l'impronta della sua chiave,
+che l'app fissa</td>
+</tr>
+<tr class="odd">
+<td><code>[database]</code></td>
+<td>SQLite (predefinito) o PostgreSQL</td>
+</tr>
+<tr class="even">
+<td><code>[files] max_mb</code>, <code>offload</code></td>
+<td>dimensione massima degli allegati; chi li invia: Django, nginx o
+Apache</td>
+</tr>
+<tr class="odd">
+<td><code>[policy] key</code>, <code>cert</code></td>
+<td>chiave e certificato per firmare le policy e i manifesti degli
+aggiornamenti (facoltativi); senza, il server genera una chiave propria
+al primo avvio, in <code>signing/</code> della cartella dei dati:
+salvala</td>
+</tr>
+<tr class="even">
+<td><code>[updates]</code></td>
+<td>indirizzo del manifesto, canali e intervallo per le nuove versioni
+(facoltativi, vedi Aggiornamenti)</td>
+</tr>
+<tr class="odd">
+<td><code>[mail]</code></td>
+<td>server di posta per i codici di accesso via email (facoltativo)</td>
+</tr>
+</tbody>
+</table>
+<p>Poi si crea l'organizzazione con il primo amministratore e si avvia
+il servizio:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">activitytrack-web-manage</span> setup <span class="at">--org</span> <span class="st">&quot;La mia azienda&quot;</span> <span class="at">--admin</span> admin</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> enable <span class="at">--now</span> activitytrack-web.socket</span></code></pre></div>
+<p>Davanti serve un web server (nginx o Apache): gli esempi sono in
+<code>/usr/share/activitytrack-web/deploy/</code>.</p>
+<p><strong>Aggiornare.</strong> Con il pacchetto basta installare il
+nuovo <code>.deb</code>: il database si aggiorna e il servizio riparte
+da solo. Con l'archivio o il clone si sostituisce il codice, poi
+<code>activitytrack-web-manage migrate</code>,
+<code>activitytrack-web-manage collectstatic --noinput</code> e il
+riavvio del servizio.</p>
+<p><strong>Comandi di gestione.</strong>
+<code>activitytrack-web-manage</code> esegue i comandi di Django con
+l'utente del servizio, per esempio <code>migrate</code>,
+<code>createsuperuser</code> o <code>shell</code>. <code>setup</code> e
+le pagine web chiedono una password di almeno 10 caratteri, non comune e
+diversa dal nome utente. <code>clean_json_fields</code> ripara, una
+volta dopo l'aggiornamento da 0.9.4-beta4 o precedenti, i tag, i numeri
+di telefono e i campi dei gestionali salvati da un telefono in una forma
+sbagliata (<code>--dry-run</code> li elenca soltanto).</p>
+<h2 id="3-accesso">3. Accesso</h2>
+<figure>
+<img src="../img/login.png" alt="Accesso" />
+<figcaption aria-hidden="true">Accesso</figcaption>
+</figure>
+<p>Ognuno accede con il nome utente e la password che gli ha dato
+l'amministratore. Dopo 10 tentativi sbagliati di fila dallo stesso
+indirizzo, il login si blocca per qualche minuto.</p>
+<p><strong>Verifica in due passaggi.</strong> Da <strong>"Sicurezza
+dell'account"</strong> (il proprio nome in fondo al menu) ognuno può
+chiedere, dopo la password, un codice di 6 cifre:</p>
+<ul>
+<li>da un'<strong>app di autenticazione</strong> sul telefono (Aegis,
+FreeOTP, Google Authenticator…): si inquadra il codice QR e si conferma
+con il primo codice;</li>
+<li>oppure via <strong>email</strong>, se l'utente ha un indirizzo e sul
+server è configurata la posta (<code>[mail]</code> in
+<code>settings.ini</code>).</li>
+</ul>
+<p>Attivandola si ricevono <strong>10 codici di recupero</strong>, da
+conservare: ognuno vale una volta al posto del codice, se si perde il
+telefono o la posta. Dopo 5 codici sbagliati si ricomincia dalla
+password. I telefoni associati non cambiano: sincronizzano con il loro
+token.</p>
+<p>Il menu a sinistra (sul telefono, la barra in basso) contiene
+<strong>Home</strong>, <strong>Da fare</strong>,
+<strong>Agenda</strong>, <strong>Report</strong>,
+<strong>Attività</strong>, <strong>Anagrafiche</strong> e
+<strong>Dispositivi</strong>; per gli amministratori anche
+<strong>Policy</strong> e <strong>Utenti</strong>. In fondo c'è il
+proprio nome: un clic apre <strong>"Cambia password"</strong>.</p>
+<h2 id="4-utenti-e-profili">4. Utenti e profili</h2>
+<figure>
+<img src="../img/users.png" alt="Utenti" />
+<figcaption aria-hidden="true">Utenti</figcaption>
+</figure>
+<p>La pagina <strong>Utenti</strong> elenca le persone
+dell'organizzazione. Si cerca per nome, utente o email, e si filtra per
+profilo e stato. <strong>"Nuovo utente"</strong> chiede nome utente,
+nome, profilo e una password (almeno 10 caratteri, non comune, non
+simile al nome).</p>
+<table>
+<thead>
+<tr class="header">
+<th>Profilo</th>
+<th>Può</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Amministratore</strong></td>
+<td>tutto: utenti, telefoni, policy, anagrafiche centrali, i dati di
+tutti</td>
+</tr>
+<tr class="even">
+<td><strong>Responsabile</strong></td>
+<td>le anagrafiche centrali; legge le attività del suo team e quelle
+fatte per le <strong>sue aziende</strong>, chiunque le abbia fatte;
+corregge gli orari del suo team; assegna le <em>Da fare</em> al team; i
+report del team</td>
+</tr>
+<tr class="odd">
+<td><strong>Utente</strong></td>
+<td>le sue attività e <em>Da fare</em>, dal telefono e dal web; le sue
+anagrafiche personali, se la policy lo permette</td>
+</tr>
+<tr class="even">
+<td><strong>Lettore azienda</strong></td>
+<td>solo il report delle attività <strong>chiuse</strong> delle aziende
+assegnate; nessun telefono. Pensato per l'amministrazione di un
+cliente</td>
+</tr>
+</tbody>
+</table>
+<figure>
+<img src="../img/user.png" alt="La scheda di un responsabile" />
+<figcaption aria-hidden="true">La scheda di un responsabile</figcaption>
+</figure>
+<p>Nella scheda di un utente:</p>
+<ul>
+<li><strong>Team di (responsabile)</strong>: il responsabile del cui
+team fa parte.</li>
+<li><strong>Aziende</strong>, solo per responsabili e lettori: per un
+responsabile, le aziende di cui legge tutte le attività; per un lettore,
+quelle di cui vede il report.</li>
+<li><strong>Attivo</strong>: togliendo la spunta l'utente non entra più
+nel web e i suoi dispositivi smettono subito di sincronizzare. I dati
+restano.</li>
+<li><strong>Dispositivi</strong>: i telefoni e i PC associati, con
+l'ultima sincronizzazione e <strong>"Revoca"</strong>.</li>
+<li><strong>Policy dell'utente</strong>: apre la sua policy personale
+(§7).</li>
+<li><strong>Nuova password</strong>: l'utente esce dal web; i
+dispositivi restano associati.</li>
+</ul>
+<p>Un amministratore non può togliersi il profilo né disattivarsi.
+L'altro amministratore, o il comando
+<code>activitytrack-web-manage createsuperuser</code>, rimedia se
+serve.</p>
+<p>In fondo alla pagina Utenti, <strong>"Verifica in due passaggi
+obbligatoria per"</strong>: nessuno, amministratori, amministratori e
+responsabili, tutti. Chi è indicato e non l'ha ancora attivata, al primo
+accesso può solo attivarla. Nella scheda di un utente,
+<strong>"Azzera"</strong> la toglie a chi ha perso il telefono: la
+riattiva al prossimo accesso. Il lucchetto 🔒 nell'elenco indica chi
+l'ha attiva.</p>
+<p>La vecchia amministrazione di Django resta raggiungibile dal fondo
+della pagina Utenti (<strong>"amministrazione avanzata"</strong>), per
+l'organizzazione e i dati grezzi. La usa solo chi ha il profilo
+Amministratore, e ci si entra dall'accesso normale, con la verifica in
+due passaggi e il blocco dei tentativi sbagliati; ha il tema e il colore
+scelti nelle preferenze.</p>
+<h2 id="5-dispositivi">5. Dispositivi</h2>
+<figure>
+<img src="../img/phones.png" alt="Dispositivi" />
+<figcaption aria-hidden="true">Dispositivi</figcaption>
+</figure>
+<p>Ogni utente associa i suoi telefoni e PC da
+<strong>Dispositivi</strong> → <strong>"Associa un
+dispositivo"</strong>: compare un <strong>codice QR</strong>, da
+inquadrare nell'app con Impostazioni → Sincronizzazione → "Inquadra il
+codice QR", e sotto il collegamento da incollare in ActivityTrack
+Desktop sul PC. Il codice vale 10 minuti e una sola volta; la pagina
+mostra il dispositivo appena è associato. Un PC non manda mai ai
+gestionali.</p>
+<ul>
+<li><strong>Revoca</strong>: il telefono smette subito di sincronizzare
+e avvisa che il server ha revocato l'associazione. I suoi dati restano
+sul telefono e sul server. Per ricollegarlo serve un nuovo codice.</li>
+<li><strong>Invia ai gestionali</strong>: con più telefoni, solo quello
+scelto manda le attività ai gestionali (plugin); gli altri lavorano
+normalmente.</li>
+</ul>
+<p><strong>Quando sincronizza il telefono.</strong></p>
+<ul>
+<li>pochi secondi dopo ogni modifica;</li>
+<li>con l'app aperta, ogni 30 secondi;</li>
+<li>ogni 15 minuti in background.</li>
+</ul>
+<p>Non ci sono notifiche push: una modifica fatta sul web arriva al
+telefono entro 15 minuti, o subito se l'app è aperta. Senza rete aspetta
+e parte al ritorno della rete.</p>
+<h3 id="mappe-offline-per-i-telefoni">Mappe offline per i telefoni</h3>
+<p>La mappa degli spostamenti dell'app può usare una <strong>mappa
+offline</strong>: una mappa basilare (strade, fiumi, laghi, confini,
+nomi dei luoghi) tenuta sul telefono, che funziona senza rete. La pagina
+<strong>Mappe</strong> (solo amministratori) la prepara:</p>
+<ol type="1">
+<li>Spunta <strong>Rendi disponibili le mappe offline ai
+telefoni</strong>. Spenta, i telefoni non ricevono nulla e tolgono le
+mappe avute da qui.</li>
+<li>In <strong>Aree</strong> aggiungi le zone che servono: un
+<strong>centro</strong> (latitudine e longitudine), un
+<strong>raggio</strong> (5–250 km) e un <strong>livello di
+zoom</strong>. Il modulo dice, mentre scrivi, quanti tile e quanti MB
+sarà la mappa. In alternativa parti da una delle 23 aree predefinite
+(una città e 100 km attorno) e la modifichi.</li>
+<li>Il livello 10 (circa 1:400.000, 2–3 MB per 100 km) basta per strade
+e paesi; l'11 (circa 1:200.000, 5 MB) aggiunge la ferrovia e più
+dettaglio. Il massimo si fissa in <code>settings.ini</code>
+(<code>[maps]</code>); una mappa sopra i 48 MB è rifiutata.</li>
+<li>Salvando, il server prepara la mappa (qualche decina di secondi)
+leggendo i dati di OpenStreetMap nel formato di Protomaps: serve che
+raggiunga <code>build.protomaps.com</code>. La riga mostra <em>in
+preparazione</em>, poi <em>pronta</em> (o <em>non riuscita</em>, con il
+motivo; la versione precedente resta disponibile).
+<strong>Aggiorna</strong> la prepara di nuovo.</li>
+</ol>
+<p>I telefoni scaricano le mappe con la sincronizzazione, su Wi-Fi
+(entro 15 minuti, subito se l'app è aperta) e tolgono quelle che togli
+tu. Un telefono senza server può avere le stesse mappe copiando file
+<code>.pmtiles</code> nella cartella <code>maps</code> della sua
+cartella dati. Dettagli e comandi (<code>build_maps</code>,
+aggiornamento periodico): <code>docs/OFFLINE-MAPS.md</code>.</p>
+<h3 id="aggiornamenti">Aggiornamenti</h3>
+<p>La pagina <strong>Aggiornamenti</strong> (solo admin) dice al server
+dove cercare le nuove versioni di ActivityTrack e di chi fidarsi:</p>
+<ul>
+<li><strong>Dove cercare</strong>: l'indirizzo di un manifesto firmato
+(di default quello del progetto, su GitLab), i canali seguiti
+(<code>prod</code>, <code>beta</code>, <code>test</code>,
+<code>dev</code>), le ore fra un controllo e l'altro (0 = mai da solo).
+<strong>Controlla ora</strong> controlla subito.</li>
+<li><strong>Copia dei pacchetti</strong>: acceso di default, il server
+conserva i pacchetti e i dispositivi li scaricano da qui; tiene sempre
+almeno le ultime due versioni. Spento, scaricano dagli indirizzi del
+manifesto.</li>
+<li><strong>Di chi ci si fida</strong>: il server accetta un manifesto
+firmato con la chiave dell'app o con una chiave di cui incolli qui
+l'impronta (SHA-256 del certificato). La chiave del server, la cui
+impronta è nel QR dell'associazione, firma ciò che ricevono telefoni e
+PC, che lo vedono alla prima sincronizzazione.</li>
+<li>Se il manifesto ha una versione più recente del server web, la
+pagina lo dice; il server si aggiorna installando il pacchetto.</li>
+</ul>
+<h2 id="6-anagrafiche">6. Anagrafiche</h2>
+<p>Aziende, clienti, ruoli, tag, scelte rapide e materiali sono
+<strong>centrali</strong> (le vedono tutti; le modificano amministratori
+e responsabili) o <strong>personali</strong> (di un utente, se la policy
+lo consente). L'app e il web mostrano quale è quale. Aziende, clienti e
+tag hanno un <strong>colore</strong> facoltativo, scelto tra quelli
+dell'app, anche dal web.</p>
+<p>Se sul telefono e sul server c'è un'anagrafica con lo stesso nome,
+diventano una sola alla prima sincronizzazione, con i dati del server.
+Per i tag conta il testo: il nome resta, il colore è quello del
+server.</p>
+<h2 id="7-policy">7. Policy</h2>
+<figure>
+<img src="../img/policy.png" alt="Policy" />
+<figcaption aria-hidden="true">Policy</figcaption>
+</figure>
+<p>Una policy decide cosa possono fare e cambiare le app dei telefoni:
+funzioni, campi, impostazioni, comportamenti. Ogni telefono riceve,
+chiave per chiave, la policy dell'<strong>organizzazione</strong>, poi
+quella del <strong>profilo</strong>, poi quella
+dell'<strong>utente</strong>: vince la più specifica. Ciò che resta "non
+impostato" lascia l'app com'è.</p>
+<figure>
+<img src="../img/policyedit.png" alt="Policy dell&#39;organizzazione" />
+<figcaption aria-hidden="true">Policy dell'organizzazione</figcaption>
+</figure>
+<p>Per ogni impostazione:</p>
+<ul>
+<li><strong>valore iniziale</strong>: lo propone, l'utente lo può
+cambiare;</li>
+<li><strong>bloccato</strong>: l'utente lo vede grigio con il
+lucchetto;</li>
+<li><strong>nascosto</strong>: non compare.</li>
+</ul>
+<p>Le policy arrivano ai telefoni con la sincronizzazione, firmate dal
+server: con chiave e certificato di <code>[policy]</code> in
+<code>settings.ini</code> se li imposti, altrimenti con una chiave che
+il server genera per sé al primo avvio (<code>signing/</code> nella
+cartella dei dati). L'app controlla la firma, e <strong>la prima policy
+firmata che applica fissa il nome (CN) del firmatario</strong>: da
+allora rifiuta quelle firmate con un altro nome e quelle non firmate.
+Quindi salva <code>signing/</code> insieme ai dati e non sostituire la
+chiave con una di un altro nome. Le app precedenti alla 0.9.9 non
+conoscono la chiave generata: continuano a ricevere la policy non
+firmata.</p>
+<p>Alcune impostazioni valgono anche sul web:</p>
+<ul>
+<li><strong>Arrotondamenti</strong> e <strong>scavalco notturno</strong>
+(<code>rounding…</code>, <code>carryOverMin</code>): il web calcola
+Agenda e Report con le regole della policy di ciascuno. Le impostazioni
+personali del telefono non arrivano al server: per avere sul web gli
+stessi tempi del telefono, conviene fissarle nella policy.</li>
+<li><strong>Orari modificabili</strong> (<code>editableTimes</code>)
+bloccato su "no": sul web l'utente può solo aggiungere viaggi e pause;
+gli orari li corregge un amministratore o il suo responsabile.</li>
+<li><strong>Tag liberi</strong> (<code>tagsFreeText</code>) spento: sul
+web si scelgono solo i tag dell'anagrafica.</li>
+<li>La funzione <strong>Da fare</strong> o
+<strong>Pianificazione</strong> spenta toglie le voci <em>Da fare</em>
+dalla Home e la pianificazione dall'Agenda.</li>
+</ul>
+<h2 id="8-il-lavoro-sul-web">8. Il lavoro sul web</h2>
+<p>Ognuno trova sul web il proprio lavoro, come nell'app.</p>
+<ul>
+<li><strong>Home</strong>: le attività in corso con i comandi (Pausa,
+Viaggio, Sospendi, Stop), poi una lista unica di voci <em>Da fare</em> e
+attività fermate, con i filtri periodo, stato, azienda e tag.</li>
+<li><strong>Attività</strong> e la <strong>scheda
+dell'attività</strong>: dettagli, orari (segmenti), spese, allegati,
+tag.</li>
+<li><strong>Agenda</strong>: giorno, settimana e mese; un clic su uno
+spazio libero pianifica una voce <em>Da fare</em> a quell'ora.</li>
+</ul>
+<figure>
+<img src="../img/agenda.png" alt="Agenda: la settimana" />
+<figcaption aria-hidden="true">Agenda: la settimana</figcaption>
+</figure>
+<p><strong>Date e orari.</strong> Nei moduli date e orari si scrivono
+nel formato scelto nelle preferenze, oppure si scelgono con il pulsante
+a destra del campo: un calendario che parte dal lunedì e, per gli orari,
+la <strong>griglia a 5 minuti</strong> dell'app (una riga per ora, 12
+ore alla volta; <strong>▲ Prima</strong> / <strong>Dopo ▼</strong>
+spostano la finestra di 3 ore). Inizio e fine si scelgono insieme:
+trascinando dalla prima casella all'ultima, oppure toccando la prima e
+poi l'ultima, e <strong>OK</strong>; in alto l'intervallo e la durata,
+le caselle <strong>tratteggiate</strong> sono occupate da altre attività
+di quel giorno. <strong>Orario esatto</strong> accetta i minuti fuori
+griglia (es. 09:37). Nei moduli l'<strong>azienda</strong> viene prima
+del <strong>cliente</strong> e ne filtra l'elenco; scegliendo un
+cliente, l'azienda diventa la sua.</p>
+<figure>
+<img src="../img/picker.png"
+alt="La griglia degli orari: 08:15–09:45, tratteggiata l&#39;attività in corso" />
+<figcaption aria-hidden="true">La griglia degli orari: 08:15–09:45,
+tratteggiata l'attività in corso</figcaption>
+</figure>
+<p><strong>Preferenze.</strong> Dall'icona della tavolozza, accanto al
+proprio nome (sul telefono: <em>Altro → Preferenze</em>), ognuno
+sceglie:</p>
+<ul>
+<li>il <strong>formato delle date</strong>: europeo (31/12/2026),
+americano (12/31/2026) o ISO (2026-12-31);</li>
+<li>il <strong>formato degli orari</strong>: 24 ore (18:30) o 12 ore
+(6:30 PM);</li>
+<li>il <strong>tema</strong>: chiaro, scuro o come il sistema; le pagine
+restano bianche e grigie (nere nel tema scuro);</li>
+<li>il <strong>colore del tema</strong>, per le barre dei menu e i
+pulsanti: verde, blu, viola, arancione o grigio.</li>
+</ul>
+<p>Le preferenze sono dell'utente: valgono su ogni browser con cui
+accede.</p>
+<p>La <strong>lingua</strong> (italiano o inglese) si sceglie nella
+stessa pagina e vale per il browser in uso; finché non la scegli, le
+pagine seguono la lingua del browser.</p>
+<figure>
+<img src="../img/preferences.png" alt="Preferenze" />
+<figcaption aria-hidden="true">Preferenze</figcaption>
+</figure>
+<p><strong>Da fare assegnate.</strong> Un responsabile, o un
+amministratore, crea una voce e sceglie <strong>"Assegnata a"</strong>:
+la voce diventa della persona scelta e arriva sui suoi telefoni.
+Riassegnandola, sparisce dai telefoni di chi l'aveva. Chi la riceve vede
+"Assegnata da …" e la lavora come le sue; il responsabile la segue nella
+pagina <em>Da fare</em> con <strong>Persona → "Tutto il
+team"</strong>.</p>
+<figure>
+<img src="../img/todos.png" alt="Da fare del team" />
+<figcaption aria-hidden="true">Da fare del team</figcaption>
+</figure>
+<figure>
+<img src="../img/todo.png" alt="Una voce assegnata" />
+<figcaption aria-hidden="true">Una voce assegnata</figcaption>
+</figure>
+<p><strong>Verifiche dopo la sincronizzazione.</strong> Se due telefoni
+hanno modificato la stessa attività e i tratti si sovrappongono,
+l'attività diventa <strong>"da verificare"</strong>. Con gli orari
+bloccati dalla policy la correggono un amministratore o il responsabile,
+dalla scheda sul web. Una modifica che il server rifiuta (per esempio
+un'anagrafica centrale bloccata) compare sul telefono come "Non
+sincronizzati", con il motivo.</p>
+<h2 id="9-report">9. Report</h2>
+<figure>
+<img src="../img/report.png" alt="Report" />
+<figcaption aria-hidden="true">Report</figcaption>
+</figure>
+<p>Il <strong>Report</strong> mostra i totali per azienda e cliente in
+un periodo, con i tempi <strong>arrotondati</strong> come nell'app e, in
+piccolo, quelli registrati. Sotto c'è il dettaglio giorno per giorno.
+Un'attività a cavallo di più giorni conta in ciascuno, salvo lo scavalco
+notturno.</p>
+<p><strong>CSV</strong> esporta una riga per attività e giorno, con i
+minuti registrati e quelli arrotondati. Responsabili e amministratori
+filtrano per persona; un lettore vede solo le attività chiuse delle sue
+aziende.</p>
+<h2 id="10-sicurezza-e-backup">10. Sicurezza e backup</h2>
+<p>Il documento <code>docs/SECURITY.md</code> descrive cosa protegge il
+server e cosa deve fare l'amministratore. In sintesi:</p>
+<ul>
+<li>solo <strong>HTTPS</strong>, con un certificato valido, o
+autofirmato e fissato con <code>tls_pin</code>; poi HSTS nel web
+server;</li>
+<li><strong>backup</strong> regolari del database e della cartella
+<code>files/</code> (allegati), insieme alla chiave segreta
+(<code>/var/lib/activitytrack-web/secret_key</code>) e alla chiave delle
+policy;</li>
+<li><strong>aggiornamenti</strong> della distribuzione: Django e le
+librerie arrivano da lì;</li>
+<li>password lunghe, utenti disattivati appena una persona lascia
+l'organizzazione, telefoni persi revocati subito.</li>
+</ul>
+<p>Per salvare un database SQLite:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> /var/lib/activitytrack-web/activitytrack.sqlite3 <span class="st">&quot;.backup &#39;/root/activitytrack-</span><span class="va">$(</span><span class="fu">date</span> +%F<span class="va">)</span><span class="st">.sqlite3&#39;&quot;</span></span></code></pre></div>
+<p>Con PostgreSQL si usa <code>pg_dump activitytrack</code>.</p>
+<h2 id="11-problemi-frequenti">11. Problemi frequenti</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Problema</th>
+<th>Cosa fare</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Il sito risponde 400 "Bad Request"</td>
+<td>il nome usato non è in <code>allowed_hosts</code></td>
+</tr>
+<tr class="even">
+<td>Il telefono dice "certificato non valido"</td>
+<td>certificato autofirmato senza <code>tls_pin</code>, o creato come CA
+(<code>docs/INSTALL.md</code> §4)</td>
+</tr>
+<tr class="odd">
+<td>Il QR non viene letto</td>
+<td>aumentare la luminosità dello schermo, o copiare nell'app il
+collegamento sotto "Non riesci a inquadrarlo?"</td>
+</tr>
+<tr class="even">
+<td>"Codice scaduto"</td>
+<td>il codice vale 10 minuti e una volta: generarne un altro</td>
+</tr>
+<tr class="odd">
+<td>Un utente ha perso il telefono con l'app di autenticazione</td>
+<td>usa un codice di recupero, o l'amministratore
+<strong>"Azzera"</strong> la verifica nella sua scheda</td>
+</tr>
+<tr class="even">
+<td>Il codice dell'app è sempre "non valido"</td>
+<td>l'ora del telefono o del server è sbagliata: va sincronizzata
+(NTP)</td>
+</tr>
+<tr class="odd">
+<td>Un utente non sincronizza più</td>
+<td>è disattivato, o il telefono è stato revocato (Utenti → la sua
+scheda)</td>
+</tr>
+<tr class="even">
+<td>Gli allegati non si aprono sul web</td>
+<td>con <code>offload = nginx</code> o <code>apache</code> serve la
+configurazione del web server dell'esempio</td>
+</tr>
+<tr class="odd">
+<td>Una modifica dal web non arriva subito</td>
+<td>arriva entro 15 minuti; aprire l'app la fa arrivare subito</td>
+</tr>
+<tr class="even">
+<td>Tempi diversi fra telefono e web</td>
+<td>arrotondamenti personali del telefono: fissarli nella policy
+(§7)</td>
+</tr>
+<tr class="odd">
+<td>Dopo un aggiornamento il sito non risponde</td>
+<td><code>systemctl status activitytrack-web.socket activitytrack-web.service</code>,
+e il log con <code>journalctl -u activitytrack-web</code></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
