@@ -23,8 +23,10 @@ Tags `v*` are protected. Nobody pushes to `main` or `next` directly.
 3. Tag `vX.Y.Z` on `main`. The full pipeline runs on the owner's command, Windows jobs
    included (they are the only ones that run the packaged executables).
 4. Right after the release, **merge `main` into `next`** (not a rebase: `next` is shared).
-   It is a no-op except where CI commits to `main` after the tag (the app's
-   `Update manifest for vX.Y.Z [skip ci]`); without it the next fast-forward is refused.
+   It is a no-op except where CI commits to `main` after a tag, beta or stable (the app's
+   `Update manifest for vX.Y.Z [skip ci]`, the file the installed apps read at
+   `raw/main/update-manifest.json`); without it the next fast-forward is refused. Do the same
+   before opening the `next` → `main` merge request.
 
 Order across repositories: library first (the cli, tui and desktop clone it at the tag
 named in `.gitlab/lib-ref`), then cli, tui, desktop, web, app, and the documentation.
@@ -34,8 +36,9 @@ named in `.gitlab/lib-ref`), then cli, tui, desktop, web, app, and the documenta
 - Tag `vX.Y.Z-beta-N` on `next`, with X.Y.Z the **next** version (`v0.9.10-beta-1`).
 - The update checks treat any suffix as a pre-release: a beta is older than its release
   and is offered to those who asked for betas only.
-- In Debian packages the version is written `X.Y.Z~betaN-1` (a hyphen in an upstream
-  version sorts after the release, the tilde before it).
+- In Debian packages the version is written `X.Y.Z~beta-N-1`: the CI turns the tag's first hyphen
+  into a tilde (a hyphen would sort after the release, the tilde before it) and the changelog adds
+  the Debian revision `-1`.
 - Prerequisite: the unit tests and the **Wine** jobs of the local runner pass. The paid
   Windows pipeline is not required. The Windows executables of a beta are built under
   Wine and are **not started** there (Wine cannot run a PyInstaller bundle): the release
