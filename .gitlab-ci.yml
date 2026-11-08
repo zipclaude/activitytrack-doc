@@ -13,7 +13,7 @@ workflow:
     - if: $CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "api"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "next"
 
-stages: [test, package, release]
+stages: [test, package, release, secret-detection]
 
 default:
   tags: [local]
@@ -21,6 +21,13 @@ default:
 
 variables:
   DEBIAN_FRONTEND: noninteractive
+
+# the public repository must hold no secret: GitLab's scanner runs on the merge requests and by hand
+include:
+  - template: Security/Secret-Detection.gitlab-ci.yml
+
+secret_detection:
+  stage: test
 
 # the PDFs of the three projects, it and en; on a tag the version lines are checked first
 manual:

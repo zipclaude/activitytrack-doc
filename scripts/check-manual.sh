@@ -4,6 +4,7 @@
 # Release step: fails when
 #   - VERSION or debian/changelog differ from the tag,
 #   - a document does not carry the version of the tag in its first lines,
+#   - the brochure's footer does not carry the version,
 #   - an image a document references is missing.
 # The documentation is released with every version of the projects, so every release
 # bumps the version lines (replaces the old "unchanged since the previous tag" check).
@@ -44,6 +45,12 @@ for f in manual/app/*/manual.md manual/app/*/quickstart.md manual/app/*/connecto
 		fi
 	done
 done
+
+# the brochure's footer carries the version too
+if ! grep -q "Versione $VERSION " brochure/brochure.html; then
+	echo "::error file=brochure/brochure.html::the brochure's footer does not say version $VERSION"
+	fail=1
+fi
 
 [ $fail -eq 0 ] && echo "documentation ok for $VERSION"
 exit $fail

@@ -79,14 +79,17 @@ app() {
 # server and desktop: one document per language, the images shared in manual/<project>/img
 single() { # project file prefix it-title it-name en-title en-name
 	style "manual/$1" "$1"
-	cp -r "manual/$1/img" "$OUT/img"
+	# one directory per project: the images of the server and of the desktop share names (home.png...)
+	mkdir -p "$OUT/$1"
+	cp -r "manual/$1/img" "$OUT/$1/img"
 	for lang in it en; do
 		case $lang in
 			it) title=$4; name=$5 ;;
 			en) title=$6; name=$7 ;;
 		esac
-		mkdir -p "$OUT/$1-$lang"
-		html_pdf "manual/$1/$lang/$2.md" "$OUT/$1-$lang/$2.html" "ActivityTrack-$3-$name" "$title" "$lang" 1 "$1"
+		mkdir -p "$OUT/$1/$lang"
+		# the document refers to ../img/<file>
+		html_pdf "manual/$1/$lang/$2.md" "$OUT/$1/$lang/$2.html" "ActivityTrack-$3-$name" "$title" "$lang" 1 "$1"
 	done
 }
 
