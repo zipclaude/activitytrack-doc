@@ -16,11 +16,17 @@ for the people (and agents) who work on them.
   versions, releases, security patches), then [`agents/local-ci.md`](agents/local-ci.md)
   (the local runner) and [`agents/local-ci-remote-agent.md`](agents/local-ci-remote-agent.md)
   (the same, for an agent that works from another machine).
-- `manual/` (to come): user and administrator manuals, installation guides, brochure.
-  They move here from the code repositories and are packaged as `activitytrack-doc`.
+- `manual/app`, `manual/server`, `manual/desktop`: the manuals (Italian and English); `brochure/`: the brochure.
+  They come from the code repositories, with their history, and are packaged as `activitytrack-doc`.
 
 What stays with the code, because it changes together with it: SPEC, SYNC, POLICY,
 PLUGINS, INTERCHANGE, DESIGN and ARCHITECTURE.
 
 This repository follows the same branches and version numbers as the others
 (see the workflow). No secrets, tokens or personal data here: it is public.
+
+## Build
+
+`scripts/build-manual.sh` makes the PDFs (pandoc, graphviz, Chromium) into `build/manual`; the CI job
+`manual` does it on a merge request into `next`, and on a tag it publishes the PDFs and the Debian
+package `activitytrack-doc` (`/usr/share/doc/activitytrack-doc/{it,en}`). See `CLAUDE.md`.

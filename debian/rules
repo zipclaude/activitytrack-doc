@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+# The PDFs are built beforehand (scripts/build-manual.sh, in the CI job "manual", which needs
+# a Chromium): the package only installs build/manual/*.pdf, sorted by language.
+D = debian/activitytrack-doc/usr/share/doc/activitytrack-doc
+
+%:
+	dh $@
+
+# PDFs are compressed already: installed as they are, openable straight from /usr/share/doc
+override_dh_compress:
+	dh_compress -X.pdf
+
+override_dh_auto_build:
+	@ls build/manual/*.pdf >/dev/null
+
+override_dh_auto_install:
+	install -d $(D)/it $(D)/en
+	for f in build/manual/*.pdf; do \
+	  case $$f in \
+	    *-GuidaRapida-*|*-Manuale-*|*-Guida-*|*-Amministratore-*) install -m 644 $$f $(D)/it/ ;; \
+	    *-QuickStart-*|*-Manual-*|*-Guide-*|*-Administrator-*) install -m 644 $$f $(D)/en/ ;; \
+	    *) echo "unclassified PDF: $$f" >&2; exit 1 ;; \
+	  esac; \
+	done
+	install -m 644 brochure/ActivityTrack-Brochure.pdf $(D)/

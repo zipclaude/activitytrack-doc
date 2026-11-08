@@ -1,13 +1,110 @@
-# Shared-runner minutes are paid for: no pipeline starts on its own. Start one by
-# hand ("Run pipeline") or through the pipelines API, e.g. for the secret scan.
+# CI of activitytrack-doc on GitLab. No pipeline starts on its own (not on pushes or tags;
+# a merge request into next starts one, see workflow below): start one by hand ("Run pipeline"
+# on a branch or tag) or with the pipelines API. The jobs run on the owner's local runner
+# (tag local, set in default below), free of charge.
+# Started on a branch a pipeline builds the PDFs and the package and publishes nothing;
+# started on a tag vX.Y.Z it also checks that the documents carry that version and publishes
+# the release: the PDFs and the package activitytrack-doc.
+
+# A merge request into next also starts a pipeline: only the job manual runs in it, on the
+# local runner (the package and the release need a tag or a pipeline started by hand).
 workflow:
   rules:
     - if: $CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "api"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "next"
 
-stages:
-- test
-- secret-detection
-secret_detection:
-  stage: secret-detection
-include:
-- template: Security/Secret-Detection.gitlab-ci.yml
+stages: [test, package, release]
+
+default:
+  tags: [local]
+  interruptible: true
+
+variables:
+  DEBIAN_FRONTEND: noninteractive
+
+# the PDFs of the three projects, it and en; on a tag the version lines are checked first
+manual:
+  stage: test
+  image: debian:trixie
+  script:
+    - apt-get update
+    - apt-get install -y --no-install-recommends ca-certificates git pandoc graphviz chromium fonts-dejavu fonts-liberation python3 python3-pymupdf
+    - if [ -n "$CI_COMMIT_TAG" ]; then scripts/check-manual.sh "$CI_COMMIT_TAG"; fi
+    - V=$(cat VERSION)
+    - scripts/build-manual.sh "$V"
+    # the diagrams are generated: the committed ones must be what the build makes of them
+    - git diff --exit-code -- manual/app/*/diagrams || { echo "regenerate the diagrams (scripts/build-manual.sh) and commit them"; exit 1; }
+    - python3 -I scripts/check-pdf.py build/manual/*.pdf
+    - mkdir dist && cp build/manual/*.pdf dist/
+  artifacts:
+    paths: ["dist/*.pdf"]
+    expire_in: 30 days
+
+# the package is tried on a tag and in pipelines started by hand or by the API
+.packaging:
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v[0-9]/
+    - if: $CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "api"
+
+deb:
+  extends: .packaging
+  stage: package
+  image: debian:trixie
+  needs: [manual]
+  script:
+    - apt-get update
+    - apt-get install -y --no-install-recommends ca-certificates build-essential debhelper devscripts lintian
+    # version: a beta 0.9.10-beta-1 is 0.9.10~beta-1 (sorts before 0.9.10), the revision follows
+    - V=$(cat VERSION)
+    - if [ -n "$CI_COMMIT_TAG" ]; then test "v$V" = "$CI_COMMIT_TAG"; fi
+    - DV=$(echo "$V" | sed 's/-/~/')
+    - PV=$(dpkg-parsechangelog -S Version)
+    - test "$(dpkg-parsechangelog -S Source)" = activitytrack-doc && test "${PV%-*}" = "$DV" && test "$PV" != "$DV"
+    - mkdir -p build/manual && cp dist/*.pdf build/manual/
+    - dpkg-buildpackage -b -us -uc
+    - mkdir -p out && mv ../activitytrack-doc_*.deb out/
+    - dpkg-deb --info out/*.deb
+    - dpkg-deb --contents out/*.deb
+    - lintian --fail-on error --no-tag-display-limit out/*.deb
+    - apt-get install -y ./out/*.deb
+    - ls /usr/share/doc/activitytrack-doc/it /usr/share/doc/activitytrack-doc/en
+    - apt-get purge -y activitytrack-doc
+  artifacts:
+    paths: ["out/*.deb"]
+    expire_in: 30 days
+
+# the PDFs and the package go to the project's Generic Packages and the release links them
+# (permalinks .../-/releases/<tag>/downloads/<file>); a version with a suffix is a beta
+release:
+  stage: release
+  image: alpine:3.22
+  needs: [manual, deb]
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v[0-9]/
+  interruptible: false
+  script:
+    - apk add --no-cache curl jq coreutils
+    - V="${CI_COMMIT_TAG#v}"
+    - mkdir artifacts && cp dist/*.pdf out/*.deb artifacts/
+    - cd artifacts
+    # "~" of the package versions is not allowed in a package file's name: "-" instead
+    - for f in activitytrack-doc_*~*_all.deb; do [ -e "$f" ] && mv "$f" "$(echo "$f" | tr '~' '-')"; done; true
+    - sha256sum * > SHA256SUMS && cat SHA256SUMS
+    - cd ..
+    - |
+      {
+        echo "ActivityTrack documentation $V: manuals of the app, the server and the desktop application, Italian and English."
+        echo
+        echo "- PDFs: the files below. Package for Debian and Ubuntu: \`apt install ./activitytrack-doc_*_all.deb\` (files in /usr/share/doc/activitytrack-doc)."
+        echo "- The other projects' releases link here for their manuals."
+      } > notes.md
+    - |
+      links='[]'
+      for f in artifacts/*; do
+        n=$(basename "$f")
+        curl --fail -sS --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file "$f" "$CI_API_V4_URL/projects/$CI_PROJECT_ID/packages/generic/activitytrack-doc/$V/$n"
+        links=$(echo "$links" | jq -c --arg n "$n" --arg u "$CI_API_V4_URL/projects/$CI_PROJECT_ID/packages/generic/activitytrack-doc/$V/$n" '. + [{name:$n, url:$u, direct_asset_path:("/"+$n), link_type:"package"}]')
+      done
+      jq -n --arg tag "$CI_COMMIT_TAG" --arg name "ActivityTrack documentation $V" --rawfile desc notes.md --argjson links "$links" \
+        '{tag_name:$tag, name:$name, description:$desc, assets:{links:$links}}' |
+        curl --fail-with-body -sS -X POST --header "JOB-TOKEN: $CI_JOB_TOKEN" --header "Content-Type: application/json" --data @- "$CI_API_V4_URL/projects/$CI_PROJECT_ID/releases"

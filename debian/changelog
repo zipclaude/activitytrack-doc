@@ -1,0 +1,8 @@
+activitytrack-doc (0.9.9-1) unstable; urgency=medium
+
+  * First package of the documentation: the manuals of the app, the server and
+    the desktop application, in Italian and English, as PDF, and the brochure.
+    They used to live in the code repositories and travelled as release
+    attachments only.
+
+ -- ActivityTrack contributors <noreply@activitytrack.invalid>  Sun, 08 Nov 2026 15:00:00 +0000

@@ -18,8 +18,8 @@ Tags `v*` are protected. Nobody pushes to `main` or `next` directly.
 
 1. On `next`: bump versions and manuals (the files of each repository are listed in
    its `CLAUDE.md`), changelog entries, `docs/manual` changes in `activitytrack-doc`.
-2. Merge request `next` → `main`, merged **fast-forward only** (no merge commit, no
-   rebase). After it, `main` and `next` are the same commit.
+2. Merge request `next` → `main`, merged **fast-forward only** (the projects have the
+   merge method `ff`: no merge commit; every merge request is rebased before it is merged). After it, `main` and `next` are the same commit.
 3. Tag `vX.Y.Z` on `main`. The full pipeline runs on the owner's command, Windows jobs
    included (they are the only ones that run the packaged executables).
 4. Right after the release, **merge `main` into `next`** (not a rebase: `next` is shared).
@@ -27,6 +27,10 @@ Tags `v*` are protected. Nobody pushes to `main` or `next` directly.
    `Update manifest for vX.Y.Z [skip ci]`, the file the installed apps read at
    `raw/main/update-manifest.json`); without it the next fast-forward is refused. Do the same
    before opening the `next` → `main` merge request.
+   The projects merge by fast-forward, so a merge request `main` → `next` cannot be merged
+   (GitLab would have to rebase `main`). Use a sync branch instead:
+   `git switch -c sync/main-into-next origin/next && git merge origin/main`, push it and open the
+   merge request into `next`: it fast-forwards, because the branch is `next` plus the merge.
 
 Order across repositories: library first (the cli, tui and desktop clone it at the tag
 named in `.gitlab/lib-ref`), then cli, tui, desktop, web, app, and the documentation.
@@ -58,8 +62,9 @@ named in `.gitlab/lib-ref`), then cli, tui, desktop, web, app, and the documenta
 
 1. `git switch next && git pull`, then `git switch -c feature/<name>`.
 2. Test locally first (see below), commit with a message that says why.
-3. Merge request to `next`. The jobs tagged `local` run on the owner's runner (free);
-   jobs on GitLab's shared runners and the Windows jobs run **only on command**.
+3. Merge request to `next`. Its pipeline runs the test job on the owner's runner (free: tag
+   `local`); packaging, the Windows jobs and anything on GitLab's shared runners run **only on
+   command**. Duo reviews the merge request: fix what it finds, it blocks the merge until then.
 4. A feature that changes behaviour also changes its manual: a second merge request in
    `activitytrack-doc`, to its `next`, linked from the first.
 

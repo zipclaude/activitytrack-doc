@@ -1,0 +1,19 @@
+Source: activitytrack-doc
+Section: doc
+Priority: optional
+Maintainer: ActivityTrack contributors <noreply@activitytrack.invalid>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.7.0
+Homepage: https://gitlab.com/activitytrack/activitytrack-doc
+Vcs-Git: https://gitlab.com/activitytrack/activitytrack-doc.git
+Vcs-Browser: https://gitlab.com/activitytrack/activitytrack-doc
+
+Package: activitytrack-doc
+Architecture: all
+Depends: ${misc:Depends}
+Description: manuals of the ActivityTrack projects (Italian and English)
+ The user manual, the quick start guide and the connector guides of the
+ ActivityTrack app, the administrator's manual of ActivityTrack Web and the
+ manual of ActivityTrack Desktop, as PDF, plus the brochure. The other
+ ActivityTrack packages recommend this one and carry only their README,
+ changelog and examples.
