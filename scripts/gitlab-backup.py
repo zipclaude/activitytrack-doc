@@ -134,7 +134,8 @@ def backup_git(project, dest, askpass, report):
 		elif "not found" in r.stderr.lower() or "does not appear to be a git repository" in r.stderr.lower():
 			report["wiki"] = "none (no pages)"
 		else:
-			raise RuntimeError("wiki clone failed: " + r.stderr.strip()[:200].replace(TOKEN, "***"))
+			# an error to report, but the code below must still be saved
+			report.setdefault("errors", []).append("wiki: " + r.stderr.strip()[:200].replace(TOKEN, "***"))
 	if project.get("empty_repo"):
 		report["repo"] = "empty"
 		return
