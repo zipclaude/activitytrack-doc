@@ -21,7 +21,10 @@ Per project: `repo.git` and `repo.bundle` (all branches and tags), `wiki.git`,
 releases, pipelines' metadata, settings), `json/` (the same as plain JSON), `packages/` (the
 release files of the package registry), `variables.keys.json` (names and flags only). At the top:
 `SHA256SUMS`, `backup.json` (counts and errors), `_groups/` (group data, members, labels).
-Check it with `cd <backup> && sha256sum -c SHA256SUMS --quiet`.
+Check it with `cd <backup> && sha256sum -c SHA256SUMS --quiet` (it covers `backup.json` too).
+Secrets GitLab puts in its records (`runners_token` and the like) are removed from the JSON.
+Exit code: 0 complete, 1 a step failed (`backup.json` says which), 2 complete but some parts were
+refused or unsupported (`skipped` in `backup.json`).
 
 ## What it does NOT hold (keep it where it was created)
 

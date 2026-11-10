@@ -9,8 +9,8 @@
 #
 # The token is read from $GITLAB_TOKEN or from --token-file (default
 # ~/API-keys/gitlab-token.txt). It needs the scope `api` and the role
-# Maintainer on the projects (the project export asks for it); a group export
-# needs Owner and is skipped when refused. The token is never printed, never
+# Maintainer on the projects (the project export asks for it). The group's own
+# export (needs Owner) is not made; only the group's data is saved as JSON. The token is never printed, never
 # put on a command line and never written to the backup.
 #
 # For every project the backup holds, under <out>/<stamp>/<path>/:
@@ -46,12 +46,37 @@ API = "https://gitlab.com/api/v4"
 TOKEN = ""
 
 
+class SameHostRedirect(urllib.request.HTTPRedirectHandler):
+	"""Downloads may redirect to object storage: the token must not follow."""
+
+	def redirect_request(self, req, fp, code, msg, headers, newurl):
+		new = super().redirect_request(req, fp, code, msg, headers, newurl)
+		if new is not None and urllib.parse.urlsplit(newurl).netloc != urllib.parse.urlsplit(req.full_url).netloc:
+			for h in ("Private-token", "PRIVATE-TOKEN"):
+				new.headers.pop(h, None)
+				new.unredirected_hdrs.pop(h, None)
+		return new
+
+
+OPENER = urllib.request.build_opener(SameHostRedirect)
+
+
+def scrub(obj):
+	"""GitLab returns secrets (runners_token, ...) in project and group records: drop them."""
+	if isinstance(obj, dict):
+		return {k: scrub(v) for k, v in obj.items()
+			if not any(w in k.lower() for w in ("token", "secret", "password"))}
+	if isinstance(obj, list):
+		return [scrub(v) for v in obj]
+	return obj
+
+
 def request(path, method="GET", raw=False, retries=5):
 	url = path if path.startswith("http") else API + "/" + path
 	for attempt in range(retries):
 		req = urllib.request.Request(url, method=method, headers={"PRIVATE-TOKEN": TOKEN})
 		try:
-			with urllib.request.urlopen(req, timeout=120) as r:
+			with OPENER.open(req, timeout=120) as r:
 				body = r.read()
 				return body if raw else (json.loads(body) if body.strip() else None)
 		except urllib.error.HTTPError as e:
@@ -81,7 +106,7 @@ def pages(path):
 def save(path, data):
 	os.makedirs(os.path.dirname(path), exist_ok=True)
 	with open(path, "w", encoding="utf-8") as f:
-		json.dump(data, f, indent=1, ensure_ascii=False)
+		json.dump(scrub(data), f, indent=1, ensure_ascii=False)
 
 
 def git(*args, cwd=None):
@@ -100,20 +125,25 @@ def sha256(path):
 def backup_git(project, dest, askpass, report):
 	env = dict(os.environ, GIT_ASKPASS=askpass, GIT_TERMINAL_PROMPT="0", GITLAB_TOKEN=TOKEN)
 	url = project["http_url_to_repo"]
-	repo = os.path.join(dest, "repo.git")
+	if project.get("wiki_enabled"):  # a wiki can exist in a project without commits
+		wiki = os.path.join(dest, "wiki.git")
+		r = subprocess.run(["git", "clone", "-q", "--mirror", url[:-4] + ".wiki.git", wiki],
+			env=env, capture_output=True, text=True)
+		if r.returncode == 0:
+			report["wiki"] = "ok"
+		elif "not found" in r.stderr.lower() or "does not appear to be a git repository" in r.stderr.lower():
+			report["wiki"] = "none (no pages)"
+		else:
+			raise RuntimeError("wiki clone failed: " + r.stderr.strip()[:200].replace(TOKEN, "***"))
 	if project.get("empty_repo"):
 		report["repo"] = "empty"
 		return
+	repo = os.path.join(dest, "repo.git")
 	subprocess.run(["git", "clone", "-q", "--mirror", url, repo], check=True, env=env)
 	subprocess.run(["git", "bundle", "create", "-q", os.path.join(dest, "repo.bundle"), "--all"],
 		cwd=repo, check=True, env=env)
 	# refs/merge-requests/* are hidden from clones; the project export keeps them
 	report["repo"] = "ok"
-	if project.get("wiki_enabled"):
-		wiki = os.path.join(dest, "wiki.git")
-		r = subprocess.run(["git", "clone", "-q", "--mirror", url[:-4] + ".wiki.git", wiki],
-			env=env, capture_output=True)
-		report["wiki"] = "ok" if r.returncode == 0 else "none (no pages)"
 
 
 def backup_json(project, dest, report):
@@ -277,20 +307,25 @@ def main():
 	finally:
 		shutil.rmtree(tmp, ignore_errors=True)
 
-	sums = []
-	for d, _, files in os.walk(root):
-		for fn in sorted(files):
-			path = os.path.join(d, fn)
-			sums.append("%s  %s" % (sha256(path), os.path.relpath(path, root)))
 	summary["finished"] = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d-%H%M%S")
 	save(os.path.join(root, "backup.json"), summary)
+	sums = []
+	for d, _, files in os.walk(root):
+		for fn in files:
+			path = os.path.join(d, fn)
+			sums.append((os.path.relpath(path, root), sha256(path)))
 	with open(os.path.join(root, "SHA256SUMS"), "w") as f:
-		f.write("\n".join(sorted(sums, key=lambda s: s.split("  ", 1)[1])) + "\n")
+		for rel, digest in sorted(sums):
+			f.write("%s  %s\n" % (digest, rel))
 	failed = [n for n, r in summary["projects"].items() if r.get("errors")]
+	skipped = [n for n, r in summary["projects"].items() if r.get("skipped")] + (["groups"] if summary.get("skipped") else [])
 	print("backup in", root)
 	if failed:
 		print("with errors:", ", ".join(failed), "(see backup.json)", file=sys.stderr)
 		sys.exit(1)
+	if skipped:  # refused or unsupported parts: the backup is usable but not complete
+		print("incomplete, some parts were skipped:", ", ".join(skipped), "(see backup.json)", file=sys.stderr)
+		sys.exit(2)
 
 
 if __name__ == "__main__":
