@@ -16,7 +16,6 @@ One server serves one organisation. The phone works without a network too:
 the changes wait and leave when the network is back.
 
 ![The Home on the web: running activities, then the list with its filters](../img/home.png)
-<!-- screenshot to retake: web Home with the 1.0 states and no Suspend -->
 
 ## 2. Installation and updates
 
@@ -312,7 +311,6 @@ Everyone finds their own work on the web, as in the app.
   activity at that time (planned segments are dashed, absences fuchsia; the colour is the client's, else the company's).
 
 ![Agenda: the week](../img/agenda.png)
-<!-- screenshot to retake: Agenda week with dashed planned segments, fuchsia absences, client/company colours -->
 
 **Dates and times.** In the forms dates and times are typed in the format
 chosen in the preferences, or picked with the button at the right of the
@@ -355,10 +353,8 @@ it as their own; the manager follows it on the *Da fare* page with
 **Persona → "Tutto il team"** (the whole team).
 
 ![The team's to-dos](../img/todos.png)
-<!-- screenshot to retake: To-dos page with displayed states, priority names, Bin link -->
 
 ![An assigned to-do](../img/todo.png)
-<!-- screenshot to retake: an assigned activity in the new detail page (state, actions, priority names) -->
 
 **Checks after a sync.** When two phones changed the same activity and its
 segments overlap, the activity is marked **"To check"**. With times locked by
@@ -369,7 +365,6 @@ shows on the phone as "Not synced", with the reason.
 ## 9. Reports
 
 ![Report](../img/report.png)
-<!-- screenshot to retake: Report with the Assenze section -->
 
 The **Report** shows the totals by company and client over a period, with
 the times **rounded** as in the app and, in small, the recorded ones. Below

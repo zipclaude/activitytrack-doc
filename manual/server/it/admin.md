@@ -16,7 +16,6 @@ Un server serve una sola organizzazione. Il telefono funziona anche senza
 rete: le modifiche aspettano e partono quando la rete torna.
 
 ![La Home sul web: attività in corso, poi la lista con i filtri](../img/home.png)
-<!-- screenshot to retake: web Home with the 1.0 states and no Sospendi -->
 
 ## 2. Installazione e aggiornamenti
 
@@ -314,7 +313,6 @@ Ognuno trova sul web il proprio lavoro, come nell'app.
   quello del cliente, altrimenti dell'azienda).
 
 ![Agenda: la settimana](../img/agenda.png)
-<!-- screenshot to retake: Agenda week with dashed planned segments, fuchsia absences, client/company colours -->
 
 **Date e orari.** Nei moduli date e orari si scrivono nel formato scelto
 nelle preferenze, oppure si scelgono con il pulsante a destra del campo: un
@@ -355,10 +353,8 @@ responsabile la segue nella pagina *Da fare* con **Persona → "Tutto il
 team"**.
 
 ![Da fare del team](../img/todos.png)
-<!-- screenshot to retake: Da fare page with displayed states, priority names, Cestino link -->
 
 ![Una voce assegnata](../img/todo.png)
-<!-- screenshot to retake: an assigned activity in the new detail page (state, actions, priority names) -->
 
 **Verifiche dopo la sincronizzazione.** Se due telefoni hanno modificato la
 stessa attività e i tratti si sovrappongono, l'attività diventa **"da
@@ -370,7 +366,6 @@ telefono come "Non sincronizzati", con il motivo.
 ## 9. Report
 
 ![Report](../img/report.png)
-<!-- screenshot to retake: Report with the Assenze section -->
 
 Il **Report** mostra i totali per azienda e cliente in un periodo, con i
 tempi **arrotondati** come nell'app e, in piccolo, quelli registrati. Sotto
