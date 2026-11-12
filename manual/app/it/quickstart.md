@@ -1,4 +1,4 @@
-Versione 0.9.9 · per l'uso di tutti i giorni; il *Manuale* spiega tutto il
+Versione 1.0.0-alfa-1 · per l'uso di tutti i giorni; il *Manuale* spiega tutto il
 resto.
 
 ## 1. Prima volta
