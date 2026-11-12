@@ -16,7 +16,8 @@ workflow:
 stages: [test, package, release, secret-detection]
 
 default:
-  tags: [local]
+  # the owner's test VM (agents/testvm-ci.md): faster and with a steady network; [local] = the owner's runner
+  tags: [testvm]
   interruptible: true
 
 variables:
