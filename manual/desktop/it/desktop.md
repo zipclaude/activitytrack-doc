@@ -112,7 +112,6 @@ La finestra ha l'aspetto dell'app: a sinistra la barra verde con **Home**,
 problema. È chiara o scura come il sistema.
 
 ![La Home](../img/home.png)
-<!-- screenshot to retake: Home 1.0 with the header buttons Da fare/Lavoro/Viaggio/Assenza, state pill, no Sospendi -->
 
 La **Home** è quella del telefono:
 
@@ -133,7 +132,6 @@ La striscia colorata a sinistra di ogni scheda è il colore dell'azienda (o
 del cliente) scelto sul web o sul telefono.
 
 ![La Home con il tema scuro](../img/home-dark.png)
-<!-- screenshot to retake: dark Home with the 1.0 layout -->
 
 ### Scorciatoie da tastiera
 
@@ -162,7 +160,6 @@ programma: §10.
 ### Nuova attività
 
 ![Nuova attività](../img/quick.png)
-<!-- screenshot to retake: quick entry 1.0 with the modes Adesso / Già iniziata / Passata -->
 
 **"Nuova attività"** (dal menu, dalla Home con **Lavoro** o con **Ctrl+N**) apre l'inserimento rapido, sopra le altre finestre:
 
@@ -194,7 +191,6 @@ contate a parte nei report.
 ### Il modulo completo
 
 ![Modulo completo](../img/entry.png)
-<!-- screenshot to retake: activity form/detail 1.0 with the state pill, total and action buttons -->
 
 Azienda, cliente, ruolo, scelta rapida, descrizione, località, note e tag,
 secondo la policy (che può rinominarli, nasconderli o renderli obbligatori).
@@ -262,14 +258,12 @@ spuntata per errore (senza tratti) torna indietro con **"Rimetti da fare"**; un 
 **Incompleta** si apre e si corregge come le altre.
 
 ![La sezione Da fare](../img/todos.png)
-<!-- screenshot to retake: Da fare section with state names, priority names, Cestino -->
 
 La sezione **Da fare** (Ctrl+2) le mostra tutte, per scadenza e pianificazione, con **"Anche le fatte"**, il **Cestino**,
 l'azienda e la ricerca; **"Nuovo Da fare"** (o **Ctrl+D**) ne crea una. **Elimina** sposta l'attività nel **Cestino**, da dove
 **Ripristina** la rimette a posto ed **Elimina definitivamente** la cancella.
 
 ![Da fare](../img/todo.png)
-<!-- screenshot to retake: new "Da fare" form with priority names (Nessuna … Emergenza) -->
 
 Il modulo ha azienda, cliente, descrizione, note, riferimenti (ticket, link: uno per riga), **scadenza**, **pianificazione**
 (giorno, ora, durata) e **priorità** (Nessuna, Bassa, Media, Alta, Urgenza, Emergenza; al posto di P1…P5). Una voce del

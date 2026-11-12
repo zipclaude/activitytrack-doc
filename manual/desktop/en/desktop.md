@@ -113,7 +113,6 @@ at the bottom, **Sincronizza** (sync, F5) with a red dot when the sync has a
 problem. It is light or dark as the system.
 
 ![The Home](../img/home.png)
-<!-- screenshot to retake: Home 1.0 with the header buttons Da fare/Lavoro/Viaggio/Assenza, state pill, no Sospendi -->
 
 The **Home** is the phone's:
 
@@ -135,7 +134,6 @@ The coloured strip on the left of each card is the company's (or the
 client's) colour chosen on the web or on the phone.
 
 ![The Home in the dark theme](../img/home-dark.png)
-<!-- screenshot to retake: dark Home with the 1.0 layout -->
 
 ### Keyboard shortcuts
 
@@ -164,7 +162,6 @@ Start, pause and stop also have shortcuts that work from any program:
 ### A new activity
 
 ![New activity](../img/quick.png)
-<!-- screenshot to retake: quick entry 1.0 with the modes Adesso / Già iniziata / Passata -->
 
 **"Nuova attività"** (from the menu, the Home's **Lavoro** button or with **Ctrl+N**) opens the
 quick entry, on top of the other windows:
@@ -198,7 +195,6 @@ counted apart in the reports.
 ### The full form
 
 ![Full form](../img/entry.png)
-<!-- screenshot to retake: activity form/detail 1.0 with the state pill, total and action buttons -->
 
 Company, client, role, quick pick, description, locality, notes and tags, as
 the policy says (it may rename, hide or require them). For an existing
@@ -267,7 +263,6 @@ An activity to do has the round buttons **Avvia** (start) and **Fatto** (done) a
 fare"** (put back to do); a click on the row opens it. An **Incomplete** activity is opened and fixed like the others.
 
 ![The Da fare section](../img/todos.png)
-<!-- screenshot to retake: Da fare section with state names, priority names, Cestino -->
 
 The **Da fare** section (Ctrl+2) shows them all, by due date and plan, with **"Anche le fatte"** (done ones too), the
 **Cestino** (bin), the company and the search; **"Nuovo Da fare"** (or **Ctrl+D**) makes one. **Elimina** moves the activity
@@ -275,7 +270,6 @@ to the **Cestino**, where **Ripristina** (restore) puts it back and **Elimina de
 removes it.
 
 ![To-do](../img/todo.png)
-<!-- screenshot to retake: new "Da fare" form with priority names (Nessuna … Emergenza) -->
 
 The form has company, client, description, notes, references (tickets, links: one per line), **due date**, **plan** (day,
 time, duration) and **priority** (None, Low, Medium, High, Urgent, Emergency; instead of P1…P5). A management-system item
