@@ -13,24 +13,30 @@ Version 0.9.9 · for everyday use; the *User manual* explains everything else.
    code" shown on the web (*Dispositivi* → "Associa un dispositivo"); from
    then on the data stay in step by themselves.
 
-## 2. Starting
-On Home tap **▶** (work) or **🚗** (travel, starts at once).
+## 2. Creating
+On Home you have four buttons: **To do**, **Work**, **Travel** (starts at once, even without a client) and **Absence**.
+A *To do* is an activity in the "To do" state: when you start it, it becomes Work or Travel, at the end Done or
+Incomplete (states: see the *User manual*).
 
 ![Home](img/home.png)
+<!-- screenshot to retake: Home 1.0 with the four buttons To do/Work/Travel/Absence -->
 
-In "New activity" pick **Work / Travel** and **Now / Already started / Past**,
-then the **client** (type to search), the **description** (or a quick pick;
+In "Work" pick **Now / Already started / Past**, then the **client** (type to search), the **description** (or a quick pick;
 also dictated with the microphone) and the **role**. "Already started" asks
 only the start time, "Past" the day, start and end. The green button says
-what it will do: "Start now", "Start from 09:15", "Record 09:15–10:40".
+what it will do: "Start now", "Start from 09:15", "Record 09:15–10:40". "More information" opens segments, notes
+and references.
 
 ![New activity](img/start.png)
+<!-- screenshot to retake: "New activity" 1.0 (Now/Already started/Past, More information, buttons Work/Travel) -->
 
 ## 3. While working
 - The card (and notification) buttons, with their names underneath:
-  **▶ Work**, **⏸ Pause** (a break inside the activity), **🚗 Travel**,
-  **🌙 Suspend** (leave it to resume later), **⏹ Stop**.
-- Drag the card: left pause / resume, right stop / suspend.
+  **▶ Work**, **⏸ Pause** (a break inside the activity), **🚗 Travel**, **⏹ Stop**.
+  There is no "Suspend": starting another activity sets the first aside (Suspended) when concurrent ones are not allowed.
+- **Travel** while working asks "Have you completed the work activity?": Yes = it closes and a new travel starts,
+  No = travel inside the same activity.
+- Drag the card: left pause / resume, right stop.
 - Every 30 minutes the app asks "Still on …?": answer from the notification.
 - When you move, the app proposes the **travel**; when you arrive, the
   **work**.
@@ -38,21 +44,29 @@ what it will do: "Start now", "Start from 09:15", "Record 09:15–10:40".
   client pauses the activity and proposes to record the call.
 
 ## 4. Stopping
-**⏹ Stop** opens the closing sheet: end of work or return travel, end time,
-the description if missing, the to-do done; **"Close"**. With client and
-description filled in, the activity is **closed**; otherwise it has **details
-missing** (red card): tap it, fill in and "Complete". In the activity screen:
-the summary on top with "+ Travel" and "+ Pause" for forgotten segments;
-further down expenses, attachments and tags.
+**⏹ Stop** closes the activity. If you made an outbound trip and work with no return, the app offers: **Start return
+trip**, **End the activity**, **End the activity and add the return trip** (a copy of the outbound). With editable times you
+can give the end up to 60 minutes in the future. With a client, work and the required fields the activity is **Done**,
+otherwise **Incomplete**: tap it, fix and "Save". Reopening a closed one always asks for confirmation. Tapping any
+activity opens its dialog: state, timeline, actions, segments (Work · Travel · Pause button), expenses, attachments,
+place, notes and tags.
 
 ![Activity screen](img/entry.png)
+<!-- screenshot to retake: activity detail dialog 1.0 -->
 
 ## 5. Consulting
 - **Agenda**: list, day, week, month; search and tag filter.
 - **Report**: the day's total, CSV export.
-- **To-dos** (a tab of the bottom bar): items from a management system or
-  created by hand, with reminders; after "done" or "ignore" an **"Undo"**
-  shows for a few seconds.
+- **To-dos** (a tab of the bottom bar): activities from a management system or
+  created by hand, with reminders and a **priority** (None … Emergency); after "Done" or "Delete" an **"Undo"**
+  shows for a few seconds. Deleted ones are in the **Bin** (Restore / Delete permanently).
+- **Absence**: kind (Absence, Holiday, Leave, Sick leave), days and, if you like, times: a leave.
+
+**States** (icon and colour): To do (check box, white), Planned (clock, grey), Late (!, brown), Work (▶, green), Travel
+(car, blue), Pause (⏸, yellow), Suspended (moon, orange), Done (✓, greenish), Incomplete (■, reddish), Absence (dot,
+fuchsia), Deleted (bin, grey).
+
+**Moving to 1.0**: data converts by itself and old backups restore; to sync, server and devices must all be on 1.0.
 
 ## 6. Field colours
 A field's border tells how much it matters:

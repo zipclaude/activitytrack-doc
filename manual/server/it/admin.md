@@ -6,7 +6,7 @@ ActivityTrack.
 
 ActivityTrack Web è il server dell'organizzazione per l'app ActivityTrack:
 - tiene una **copia di ogni telefono**, sincronizzata nei due sensi:
-  attività, voci *Da fare*, anagrafiche, allegati;
+  attività (comprese quelle da fare e le assenze), anagrafiche, allegati;
 - dà a ciascuno lo **stesso lavoro dal browser**: Home, attività, Agenda,
   Da fare, report;
 - gestisce **utenti e profili**, le **anagrafiche centrali** e le
@@ -16,6 +16,7 @@ Un server serve una sola organizzazione. Il telefono funziona anche senza
 rete: le modifiche aspettano e partono quando la rete torna.
 
 ![La Home sul web: attività in corso, poi la lista con i filtri](../img/home.png)
+<!-- screenshot to retake: web Home with the 1.0 states and no Sospendi -->
 
 ## 2. Installazione e aggiornamenti
 
@@ -51,6 +52,17 @@ systemctl enable --now activitytrack-web.socket
 
 Davanti serve un web server (nginx o Apache): gli esempi sono in
 `/usr/share/activitytrack-web/deploy/`.
+
+**Aggiornamento alla 1.0.** La 1.0 cambia il modello dei dati: la voce *Da fare* non è più un oggetto a parte, ma
+un'attività nello stato "Da fare" (vedi il *Manuale* dell'app). Il database si converte **da solo** con
+`migrate`: le voci diventano attività Da fare (o Fatte, se spuntate), le assenze attività di tipo Assenza, le voci ignorate
+vanno nel Cestino, le priorità P1…P5 diventano Emergenza…Bassa. I **backup** del server di versioni precedenti (file
+SQLite o dump PostgreSQL) si ripristinano come sempre: la conversione parte con le migrazioni. **La sincronizzazione richiede
+che il server e tutti i dispositivi siano alla 1.0**: un'app più vecchia riceve l'errore `upgrade_required` ("Aggiorna
+l'app per sincronizzare") e aspetta. Aggiorna **prima il server**, poi i telefoni e i PC. Alla prima sincronizzazione dopo
+l'aggiornamento ogni dispositivo si riallinea al server, ma **le modifiche non ancora sincronizzate sono conservate e
+inviate**. Se un telefono ha dati che il server non ha mai visto, vi arrivano; in ultima istanza si possono reimportare i
+dati del telefono sul server.
 
 **Aggiornare.** Con il pacchetto basta installare il nuovo `.deb`: il
 database si aggiorna e il servizio riparte da solo. Con l'archivio o il
@@ -89,7 +101,7 @@ Dopo 5 codici sbagliati si ricomincia dalla password. I telefoni associati
 non cambiano: sincronizzano con il loro token.
 
 Il menu a sinistra (sul telefono, la barra in basso) contiene **Home**,
-**Da fare**, **Agenda**, **Report**, **Attività**, **Anagrafiche** e
+**Da fare**, **Cestino**, **Agenda**, **Report**, **Attività**, **Anagrafiche** e
 **Dispositivi**; per gli amministratori anche **Policy** e **Utenti**. In
 fondo c'è il proprio nome: un clic apre **"Cambia password"**.
 
@@ -257,21 +269,52 @@ Alcune impostazioni valgono anche sul web:
   amministratore o il suo responsabile.
 - **Tag liberi** (`tagsFreeText`) spento: sul web si scelgono solo i tag
   dell'anagrafica.
-- La funzione **Da fare** o **Pianificazione** spenta toglie le voci *Da
+- La funzione **Da fare** o **Pianificazione** spenta toglie le attività *Da
   fare* dalla Home e la pianificazione dall'Agenda.
+- **Attività solo da pianificate** (`plannedOnly`, prima `todosOnly`: il vecchio nome è ancora letto): le attività
+  si avviano solo da un'attività Da fare pianificata o assegnata.
+- **Salva i valori arrotondati** (`roundStoredTimes`): i pulsanti di avvio, cambio, stop e riapri registrano orari
+  arrotondati; vale solo con gli orari modificabili; gli orari scritti a mano restano esatti.
 
 ## 8. Il lavoro sul web
 
 Ognuno trova sul web il proprio lavoro, come nell'app.
-- **Home**: le attività in corso con i comandi (Pausa, Viaggio, Sospendi,
-  Stop), poi una lista unica di voci *Da fare* e attività fermate, con i
-  filtri periodo, stato, azienda e tag.
-- **Attività** e la **scheda dell'attività**: dettagli, orari (segmenti),
-  spese, allegati, tag.
+- **Home**: le attività in corso con i comandi (Pausa, Lavoro, Viaggio, Stop; non c'è più Sospendi), poi una lista
+  unica di tutte le attività nei loro **stati**, con i filtri periodo, stato, azienda e tag.
+- **Stati.** Ogni attività mostra uno di undici stati, con icona e colore (gli stessi dell'app):
+
+  | Stato | Icona | Colore |
+  |---|---|---|
+  | Da fare | casella | bianco |
+  | Pianificata | orologio | grigio |
+  | In ritardo | **!** | marrone |
+  | Lavoro | ▶ | verde |
+  | Viaggio | auto | blu |
+  | Pausa | ⏸ | giallo |
+  | Sospesa | luna | arancione |
+  | Fatta | ✓ | verdino |
+  | Incompleta | ■ | rossiccio |
+  | Assenza | punto | fucsia |
+  | Eliminata | cestino | grigio |
+
+  *Sospesa* appare solo quando un'altra attività parte e le contemporanee non sono ammesse; *Incompleta* è una chiusa senza
+  cliente o senza tratto di lavoro (si corregge come le altre: non c'è un passo "Completa"). Lo stato "In ritardo" usa
+  una sola regola, sulla Home come nella pagina del lavoro.
+- **Attività** e la **scheda dell'attività**: stato ("In <stato> dalle"), azione dello stato, dettagli, orari
+  (segmenti, anche pianificati), spese, allegati, località, tag. **Riapri** si divide in **Lavoro** e **Viaggio** e
+  chiede sempre conferma; **"Rimetti da fare"** toglie la spunta a una voce spuntata per errore (senza tratti reali).
+  Allo Stop di un'attività con andata e lavoro si può aggiungere il **viaggio di ritorno**. La **priorità** ha i nomi
+  Nessuna, Bassa, Media, Alta, Urgenza, Emergenza.
+- **Cestino**: le attività eliminate, con **Ripristina** ed **Elimina definitivamente** (al posto di "Ignorate").
+- **Assenze**: il modulo chiede il tipo (Assenza, Ferie, Permesso, Malattia), l'azienda (facoltativa: vuota = tutte),
+  dal giorno al giorno e gli orari facoltativi (un permesso); senza orari si crea uno spezzone per ogni giorno
+  lavorativo, saltando i giorni liberi. Si possono pianificare anche ferie future.
 - **Agenda**: giorno, settimana e mese; un clic su uno spazio libero
-  pianifica una voce *Da fare* a quell'ora.
+  pianifica un'attività Da fare a quell'ora (i tratti pianificati sono tratteggiati, le assenze fucsia; il colore è
+  quello del cliente, altrimenti dell'azienda).
 
 ![Agenda: la settimana](../img/agenda.png)
+<!-- screenshot to retake: Agenda week with dashed planned segments, fuchsia absences, client/company colours -->
 
 **Date e orari.** Nei moduli date e orari si scrivono nel formato scelto
 nelle preferenze, oppure si scelgono con il pulsante a destra del campo: un
@@ -304,16 +347,18 @@ browser in uso; finché non la scegli, le pagine seguono la lingua del browser.
 
 ![Preferenze](../img/preferences.png)
 
-**Da fare assegnate.** Un responsabile, o un amministratore, crea una voce
-e sceglie **"Assegnata a"**: la voce diventa della persona scelta e arriva
-sui suoi telefoni. Riassegnandola, sparisce dai telefoni di chi l'aveva.
+**Da fare assegnate.** Un responsabile, o un amministratore, crea un'attività Da fare
+e sceglie **"Assegnata a"**: diventa della persona scelta e arriva
+sui suoi telefoni. Finché è nello stato Da fare si può riassegnare: sparisce dai telefoni di chi l'aveva.
 Chi la riceve vede "Assegnata da …" e la lavora come le sue; il
 responsabile la segue nella pagina *Da fare* con **Persona → "Tutto il
 team"**.
 
 ![Da fare del team](../img/todos.png)
+<!-- screenshot to retake: Da fare page with displayed states, priority names, Cestino link -->
 
 ![Una voce assegnata](../img/todo.png)
+<!-- screenshot to retake: an assigned activity in the new detail page (state, actions, priority names) -->
 
 **Verifiche dopo la sincronizzazione.** Se due telefoni hanno modificato la
 stessa attività e i tratti si sovrappongono, l'attività diventa **"da
@@ -325,14 +370,17 @@ telefono come "Non sincronizzati", con il motivo.
 ## 9. Report
 
 ![Report](../img/report.png)
+<!-- screenshot to retake: Report with the Assenze section -->
 
 Il **Report** mostra i totali per azienda e cliente in un periodo, con i
 tempi **arrotondati** come nell'app e, in piccolo, quelli registrati. Sotto
 c'è il dettaglio giorno per giorno. Un'attività a cavallo di più giorni
 conta in ciascuno, salvo lo scavalco notturno.
 
+Le **assenze** sono contate a parte, per tipo (Assenza, Ferie, Permesso, Malattia), in una sezione *Assenze*.
+
 **CSV** esporta una riga per attività e giorno, con i minuti registrati e
-quelli arrotondati. Responsabili e amministratori filtrano per persona; un
+quelli arrotondati; gli spezzoni di assenza hanno righe proprie e c'è la colonna `absence_min`. Responsabili e amministratori filtrano per persona; un
 lettore vede solo le attività chiuse delle sue aziende.
 
 ## 10. Sicurezza e backup
@@ -369,6 +417,7 @@ Con PostgreSQL si usa `pg_dump activitytrack`.
 | Il codice dell'app è sempre "non valido" | l'ora del telefono o del server è sbagliata: va sincronizzata (NTP) |
 | Un utente non sincronizza più | è disattivato, o il telefono è stato revocato (Utenti → la sua scheda) |
 | Gli allegati non si aprono sul web | con `offload = nginx` o `apache` serve la configurazione del web server dell'esempio |
+| Un telefono o un PC dice "Aggiorna l'app per sincronizzare" | il server è alla 1.0 e il dispositivo no: aggiornare l'app o Desktop alla 1.0 |
 | Una modifica dal web non arriva subito | arriva entro 15 minuti; aprire l'app la fa arrivare subito |
 | Tempi diversi fra telefono e web | arrotondamenti personali del telefono: fissarli nella policy (§7) |
 | Dopo un aggiornamento il sito non risponde | `systemctl status activitytrack-web.socket activitytrack-web.service`, e il log con `journalctl -u activitytrack-web` |

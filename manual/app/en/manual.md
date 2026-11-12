@@ -3,6 +3,40 @@ manual and the app. The *Quick start* sums up daily use in a few pages; this
 manual covers everything: **Part I** how to use the app, **Part II** the
 reference (settings, entities, states, flows).
 
+**New in 1.0** (the to-do is no longer a separate thing: it is a state of the activity)
+- **One activity, from plan to closure.** What used to be a to-do item is now an activity in the **To do** state: when you
+  start it, it becomes Work or Travel; when you stop it, Done or Incomplete. No duplicates, no moving between lists.
+  There are eleven displayed states, each with its icon and colour (§1).
+- **Four creation buttons**: **To do**, **Work**, **Travel**, **Absence** (§4). Work can be recorded *Now*, *Already
+  started* or *Past*; Travel starts at once, even without a client.
+- **One detail dialog** for every activity (§6): state, timeline, actions, fields, segments, expenses and attachments,
+  place, notes, tags.
+- **No more "Suspend"**: an activity becomes *Suspended* by itself only when another one starts and concurrent activities
+  are not allowed. No more "Complete the details" step: an activity closed without a client or a work segment is
+  **Incomplete** and is edited like any other.
+- **Named priorities**: None, Low, Medium, High, Urgent, Emergency (instead of P1…P5).
+- **Bin** instead of "Ignored": a deleted item is restored or deleted permanently (§8).
+- **Absences** with a kind (Absence, Holiday, Leave, Sick leave), an optional company and one segment per working day
+  (§9); they can also be planned ahead.
+- **Travel while working**: the app asks "Have you completed the work activity?" (§5). Stopping an activity with an
+  outbound trip and work offers the **return trip** (§6).
+- **Closing in the future** up to 60 minutes and the **"Save rounded values"** switch in Reports settings (§6, §17).
+- Reopening a closed activity always asks for confirmation; **"Put back to do"** undoes a tick given by mistake.
+- Reports count absences apart; the CSV has the absence rows and the `absence_min` and `absence_kind` columns.
+- Policy: `todosOnly` is now `plannedOnly` (the old name is still read). Interchange version 2 (version 1 files are
+  still imported); in plugins `@todo` becomes `@activity` and `todoDone` `activityClosed` (the old names are read).
+
+### Upgrading to 1.0
+- **Data is converted automatically** on first start: to-do items become activities in the To do state (or Done, if ticked),
+  planned absences become activities of kind Absence, ignored items go to the Bin, priorities are converted (P1 →
+  Emergency, P2 → Urgent, P3 → High, P4 → Medium, P5 → Low; none → None). A to-do still open with activities already
+  closed stays an activity of its own in the To do state. The to-do colour is gone: the Agenda uses the client's colour,
+  else the company's.
+- **Backups of earlier versions are restored** as usual: the data is converted during the restore.
+- **Sync requires every device and the server to be on 1.0.** An older app says "Update the app to sync"; update the
+  server first (§ Sync with ActivityTrack Web), then phones and PCs. After the upgrade the first sync realigns the data
+  with the server; **changes not yet synced are kept and pushed**.
+
 **New in 0.9.9** (an external security review of 0.9.8)
 - A record the server sends with a strange identifier (not letters, digits, `-` and `_`) is refused and
   reported in the sync errors instead of being used in a file name or an address.
@@ -226,17 +260,26 @@ tags, expenses and attachments.
 - They are recorded to the minute; rounding and day attribution apply only to
   reports and exports.
 
-**States of an activity**
+**States of an activity** — an activity has a state, with its icon and colour on the Home, in the lists and in the
+detail dialog. There are eleven, in this order of precedence:
 
-| State | Meaning |
-|---|---|
-| Running (work / travel / pause) | time is running |
-| Suspended (orange) | interrupted, to be resumed later |
-| Details missing (red) | stopped, client or description missing |
-| Closed | completed |
+| State | Icon | Colour | When |
+|---|---|---|---|
+| Deleted | bin | grey | it is in the Bin (§8) |
+| Absence | dot | fuchsia | it is an absence (Absence, Holiday, Leave, Sick leave) |
+| Late | **!** | brown | to do, with the due date or the planned block passed |
+| Planned | clock | grey | to do, with a date, a time or a due date |
+| To do | check box | white | to do, without dates |
+| Work | ▶ | green | running, the open segment is work |
+| Travel | car | blue | running, the open segment is travel |
+| Pause | ⏸ | yellow | running, the open segment is a pause |
+| Suspended | moon | orange | running but with no open segment: another one started |
+| Done | ✓ | greenish | closed and complete |
+| Incomplete | ■ | reddish | closed, but without a client or a work segment (or a required management-system field empty) |
 
-Several activities can run at the same time (e.g. a travel and a work call
-for another client).
+A ticked-off to-do without recorded segments is **Done**. Under the state the dialog says "In <state> since" with the
+start time. Several activities can run at the same time (e.g. a travel and a work call for another client) when the
+policy allows it.
 
 **Total** — the time of the Report and of the evening summary: the sum of
 rounded work and travel of all activities, by the rules below.
@@ -282,8 +325,8 @@ test build installed from the PC: a separate app with its own data and folder
 
 | Tab | Content |
 |---|---|
-| **Home** | the running activity's card (or ▶ Start / 🚗 Travel), small cards of the others; below, the list of to-dos and stopped activities, with its filters |
-| **To-dos** | all the to-dos, with filters (§8) |
+| **Home** | the running activity's card (or the four buttons To do / Work / Travel / Absence), small cards of the others; below, the list of activities in their states, with its filters |
+| **To-dos** | all the activities to do, with state and priority filters and the Bin (§8) |
 | **Agenda** | consultation: list, day, week, month |
 | **Report** | one day's report: total, one line per activity, export |
 | **More** | "Import / export", "Master data", "Settings" (with "Gestures") |
@@ -291,66 +334,48 @@ test build installed from the PC: a separate app with its own data and folder
 From a tab other than Home, Back returns to Home.
 
 ### The Home
-- At the top the **big card**: the most recent open activity, with time,
-  state and commands (each button named underneath). With no open
-  activity it shows "No activity running" with **▶ Start** (opens "New
-  activity") and **🚗 Travel** (the travel starts at once, the destination
-  comes later or with the arrival); dragging it left starts, right starts a
-  travel.
-- With open activities, ▶ and 🚗 move to the top bar (🚗 opens "New
-  activity" with Travel picked, since it asks what to do with the others).
-- Below, a **small card** for each other open activity (paused or
-  suspended): state and times as "from–to (duration)" (e.g. "11:00–11:45
-  (0:45)"), and a button to resume or pause it. Tapping it brings the
-  activity to the big card.
-- At the bottom **one list** (0.8.0, instead of the "To-dos" and "Done"
-  tabs): to-dos and stopped activities, every row the same shape: the state
-  mark on the left (**!** overdue, clock planned, **✎** details missing,
-  **✓** done, **■** closed, **○** open), the title, "client · kind · state"
-  and the time on the right; done and closed rows are dimmed. The groups:
-  **Overdue**, **Details missing**, **Today**, **Next days**, **Earlier**,
-  **No date**, **Ignored**.
-- The filters, on one row: the **period** with its value (**Today**, the
-  default, from the 06:00 boundary as in the reports; **24 h**, **3 d**,
-  **7 d**, **30 d**, **All**: ahead for the to-dos, the overdue ones always
-  kept; behind for what was done); then **State**, **Company** and **Tag**
-  by name, grey while they are the starting ones and coloured once
-  changed. **State** picks with check boxes *To-dos*, *Details missing*,
-  *Done*, *Ignored* (the first two at first), with the shortcuts "Only
-  to-dos", "Only done", "All"; activities with details missing always stay
-  in view, whatever the period, and while the list shows them they have no
-  small card; a to-do whose activity is still open is not listed: the
-  activity stands for it. **Tag** appears when the list shows stopped activities and
-  hides the to-dos (they have no tags). The choices are remembered. At the
-  end **"All to-dos →"** opens the "To-dos" tab of the bottom bar.
+- With no activity running, the top panel says "No activity running" and has **four buttons**: **To do**, **Work**,
+  **Travel**, **Absence** (§4). With an activity running, the big card shows it, with time, state and commands (the name
+  under each button), and the four buttons move to the top right, on dark grey discs. **Travel** starts at once, without
+  a client; while you are working it first asks "Have you completed the work activity?" (§5).
+- Below, a **small card** for every other open activity (paused or suspended): state and times in the form
+  "from–to (duration)" (e.g. "11:00–11:45 (0:45)") and a button to resume it or pause it. Tapping it moves the activity
+  to the big card.
+- At the bottom **one list** of all the activities, in their states: each row has the coloured state icon (§1) on the
+  left, the title, "client · state" and the time on the right; done or incomplete rows are dimmed. The groups:
+  **Late**, **Today**, **Next days**, **Earlier**, **Without a date**.
+- The filters, on one row: the **period** (**Today**, default, from the 06:00 boundary as in the reports; **24 h**,
+  **3 d**, **7 d**, **30 d**, **All**: forward for activities to do, which stay when late; backward for what is done);
+  then **State**, **Company** and **Tag**, grey while they are at their start value and coloured when you change them.
+  **State** picks among the displayed states (§1) with the shortcuts "Only to do", "Only done", "All"; **Incomplete**
+  activities always stay in view, whatever the period. The choices are remembered. At the end **"All to-dos →"** opens
+  the "To-dos" tab of the bottom bar (§8).
+- When one activity pushes another's end back (its end is after the start of the new one), the Home tells you the end was
+  moved back (§6).
 
-![Home: a running activity, the others below, the list with its filters](img/home.png)
+![Home: a running activity, the others below, the list with filters](img/home.png)
+<!-- screenshot to retake: Home with the 1.0 layout (four buttons To do/Work/Travel/Absence top right, no Suspend, list rows with state icons, no "Ignored" group) -->
 
-![Home, the list with Done too](img/home-closed.png)
+![Home, the list with the Done ones too](img/home-closed.png)
+<!-- screenshot to retake: Home list with Done/Incomplete rows, new state icons and colours -->
 
 ### Gestures (dragging the cards)
-Every card can be dragged left or right (Home, Agenda list, "To-dos"
-tab). A short drag reveals the buttons to tap; a long drag runs the first
-one at once. One rule for every row (0.8.0): **left is the step
-forward**, **right puts off or goes back**.
+Every card can be dragged left or right (Home, Agenda list, "To-dos" tab). A short drag shows the buttons, to tap; a
+long one runs the first at once. One rule for every row: **left is the step forward**, **right is putting off or going
+back**.
 
 | Card | Left | Right |
 |---|---|---|
-| Running activity | Pause, or Resume if paused or suspended | Stop (the closing sheet) or Suspend |
-| To-do | Start or Done | Postpone (if planned) or Ignore |
-| Done to-do | — | Reopen |
-| Ignored to-do | Restore | Restore |
-| Activity with details missing | Complete (opens it) | Reopen |
-| Closed activity | — | Reopen (back to suspended) |
+| Running activity | Pause, or Resume if paused or suspended | Stop |
+| To do | Start or Done | Postpone (if planned) or Delete (goes to the Bin) |
+| Done or Incomplete | — | Reopen (asks for confirmation) |
+| Deleted (Bin) | Restore | Restore |
 
-After a gesture on a to-do, or after Reopen on an activity, **"Undo"**
-stays for 10 seconds. They are changed in "Settings" → **"Gestures"**: for
-each kind of card and direction what it offers (also nothing, or the
-directions swapped), and whether a long drag runs the first action. At
-first the Home shows a **tip** about the gestures ("Got it" closes it) and
-the cards carry a faint ‹ › on their sides until one is dragged;
-"Gestures" → **"Show the gesture hints again"** brings both back, with the
-explanation of the first Suspend (§5).
+After a gesture on an activity **"Undo"** stays for 10 seconds. You change them in "Settings" → **"Gestures"**: for every
+card type and direction what to offer (even no action, or the directions swapped), and whether the long drag runs the
+first at once. On first use the Home shows a **hint** about gestures ("Got it" dismisses it) and the cards have a small
+‹ › at the sides until you drag one; "Gestures" → **"Show the gesture hints again"** shows them again. The
+drags that suspended are gone.
 
 ### Company and client colours
 In a company or client screen ("More" → "Master data") pick a **colour** out
@@ -360,13 +385,13 @@ company, the band has the **client** colour. Without a chosen colour there is
 no band; in the Agenda the blocks of those companies are grey.
 
 Next to the planned-to-dos period (and in the "To-dos" tab) the **"All
-companies"** button filters to-dos by company: the filter stays until you
+companies"** button filters activities to do by company: the filter stays until you
 remove it with ✕. Running activities are not filtered. In the "To-dos" tab
 the period filter (**24 h**, **3 d**, **7 d**, **30 d**, **All**, the same as
 on Home) shows the
-to-dos planned or due within that time (overdue ones always),
-**"Ignored"** shows or hides ignored to-dos. **"Filters"** opens the
-advanced filters: client, priority, state (open, planned, overdue), planned
+activities planned or due within that time (late ones always),
+the **"Bin"** chip shows the deleted ones. **"Filters"** opens the
+advanced filters: client, **priority** (None … Emergency), **state** (To do, Planned, Late…), planned
 yes/no; "Clear" removes them.
 
 ### Coloured tags
@@ -435,55 +460,58 @@ the chosen client stays until you pick another.
 
 ---
 
-## 4. Starting an activity
+## 4. Creating an activity
 
-On Home: **▶ Start** in the "No activity running" card (or drag it left), or
-**▶** in the top bar when other activities are open.
+Four buttons, in the "No activity running" panel of the Home or, with an activity running, at the top right: **To do**,
+**Work**, **Travel**, **Absence**. The Agenda offers them too ("Add", or a tap on a free slot).
 
-In the "New activity" screen (0.7.8):
-- two selectors at the top: **Work / Travel** (a travel may start without a
-  client) and, with "Times freely editable" (on by default), **Now / Already
-  started / Past**, which decides the times asked;
-- **Company** filters the clients; **Client** is a box where you type to
-  search (case and accents are ignored) or pick from the list, in the order
-  chosen in Master data (by default the most recent first).
-- Within the radius of a site, client and company are already proposed;
-  otherwise the app proposes the company of today's last activity.
-- then **Quick pick** and **Description**, then the **role**: description and
-  role are proposed from the last activity on the same client in the last 30
-  days. The microphone in the field dictates.
-- **Now**: no times, the activity starts at once.
-- **Already started**: only **"Started at"**, with the shortcuts **15 / 30 /
-  60 min ago**; the activity stays open until Stop. A time still to come
-  today asks **"Start at HH:MM"**: **"Plan it today at HH:MM"** creates a
-  planned to-do (client, title = description), **"Start now"** starts at
-  once, **"Started yesterday at HH:MM"** records it from yesterday.
-- **Past**: **Date** (empty = today) and **Start / End** on one row; tapping
-  them, the grid picks start and end together. The activity is recorded
-  already stopped at that time, with no further question, also about the
-  running activities. A future date offers to plan it as a to-do.
-- The green button at the bottom (blue with the car for a travel) says what
-  happens: **"Start now"**, **"Start from HH:MM"** or **"Record
-  HH:MM–HH:MM"**.
+**Work** — opens the "New activity" screen (the same entries come from the widget, the shortcuts and the calls):
+- at the top, with "Editable times" (on at the start), **Now / Already started / Past**, which decides which times to ask for;
+- **Company** filters the clients; **Client** is a box where you type to search (case and accents do not count) or pick
+  from the list, in the order chosen in Master data. If you are within the radius of a site, client and company are
+  already suggested; otherwise the app suggests the company of today's last activity;
+- then **Quick pick**, **Description** and **Role**: description and role are suggested from the last activity on the same
+  client in the last 30 days. The microphone in the field dictates the text;
+- **"More information"** opens **Segments**, **Notes** and **External references**; the management-system fields appear
+  here when optional, or among the main fields when required;
+- **Now**: no time, the activity starts at once.
+- **Already started**: only **"Started at"**, with the shortcuts **15 / 30 / 60 min ago**; the activity stays running and
+  you stop it with Stop. A time that has not yet come today asks **"Start at HH:MM"**: **"Plan today at HH:MM"** creates a
+  planned *To do* activity, **"Start now"** starts at once, **"Started yesterday at HH:MM"** records it from yesterday.
+- **Past**: **Date** (empty = today), **Start / End** on the same row and the **Segments** visible; a single **"Save"**
+  button. The activity is recorded already closed, with no questions about running activities. A future date offers to
+  plan it as *To do*.
+- The buttons at the bottom are **Work** (green) and **Travel** (blue): they say what happens ("Start now", "Start from
+  HH:MM", "Record HH:MM–HH:MM").
 
 ![New activity](img/start.png)
+<!-- screenshot to retake: "New activity" with the 1.0 dialog (Now/Already started/Past, "More information", green Work / blue Travel buttons) -->
 
-**If another activity is running**, the app asks what to do with it:
-- working: close, suspend or leave it running;
-- travelling: "is the travel over?" (yes = stop, no = leave, or suspend);
-- paused: close or leave it.
+**Travel** — starts at once, as an anonymous activity (no client or description, which you add later in the detail
+dialog). If you are working the app first asks "Have you completed the work activity?" (§5).
 
-When the policy does not allow **concurrent activities**, "leave it" is not
-offered; and **Resume** on a suspended activity (Home, widget, tile,
-notification) also suspends the running one, or stops it when paused.
+**To do** — the dialog asks **Company**, **Client**, **Description**, **Date**, **Time** (with an optional duration),
+**Due date** and **Priority** (None, Low, Medium, High, Urgent, Emergency); under "More information": **Notes**,
+**References** and **Planned segments** (drawn dashed: they never count in the totals and disappear when the activity
+starts). See also §8.
+
+**Absence** — see §9.
+
+**If another activity is already running**, the app asks what to do with it:
+- working: close it or leave it running (concurrent, if allowed);
+- travelling: "is the travel over?" (yes = stop, no = leave it);
+- paused: close it or leave it.
+
+If the policy does not allow **concurrent activities**, "leave it" is not offered: the running activity becomes
+**Suspended** (if paused, it is stopped), and **Resume** on a suspended activity (Home, widget, tile, notification) does
+the same to the running one. This is the only way an activity becomes Suspended: there is no "Suspend" button.
 
 **Other ways to start**
 - from the day-start notification ("Start activity");
-- from a **to-do** (client, description and references already filled);
-- from the 4×1 **widget** or the icon **shortcuts** (recent clients): the
-  start screen opens with the client selected;
-- from a recognised **call**: the screen opens as **Past** with the call's
-  times.
+- from an activity in the **To do** state (client, description and references already filled in): **Start** in its dialog
+  or in the list;
+- from the 4×1 **widget** or the icon's **shortcuts** (recent clients): the start screen opens with the client already chosen;
+- from a recognised **call**: the screen opens in **Past** mode with the times of the call.
 
 ---
 
@@ -497,17 +525,17 @@ On the Home card and in the notification:
 | ▶ green | Work / Resume |
 | ⏸ yellow | Pause |
 | 🚗 blue | Travel |
-| 🌙 orange | Suspend |
 | ⏹ red | Stop |
 
-The card shows the time of the current segment in large type and the state
-in a coloured label; each button has its name underneath. **Pause** is a
-break inside the activity, counted as a pause; **Suspend** leaves the
-activity to resume it later (e.g. to work on another one), and the time in
-between does not count. The first Suspend explains this once, before running.
+The card shows the time of the current segment large and the state in a coloured label; under each button is its name.
+**Pause** is an interruption inside the activity, counted as pause. There is no "Suspend": to work on something else, just
+start it (§4).
 
-**"Stop"** opens the closing sheet (§6). Stop from the notification, the
-widget or the quick tile always stops at once.
+**Travel while working.** If you tap Travel while working, the app asks **"Have you completed the work activity?"**: **Yes**
+closes the activity and starts a new, anonymous travel activity; **No** makes the travel inside the same activity (a travel
+from a widget is always a travel in the same activity). From a pause, Work and Travel restart directly.
+
+**"Stop"** closes the activity (§6). Stop from the notification, the widget or the quick tile always stops at once.
 
 ### Ongoing notification
 One notification per running activity, with a chronometer and commands.
@@ -608,84 +636,74 @@ Calls with unknown numbers are ignored.
 
 ---
 
-## 6. Stopping and completing
+## 6. Stopping and editing
 
-**Stop** from the app (button or drag) opens one **closing sheet** (0.7.8):
-- **End of work / Start return travel** (the return travel belongs to the
-  same activity; not shown when already travelling);
-- **End**, with "Times freely editable": empty = now, otherwise the activity
-  stops (or the return travel starts) at that time; it cannot be in the
-  future nor before the start of the current segment;
-- the **description**, when missing, with **"Copy the last: …"** (the last
-  one on the same client); without a description the activity stays
-  **"details missing"**;
-- **"To-do done"**, when the activity started from a to-do (ticked at
-  first): untick it if you will come back to it;
-- when the activity lasted **less than a minute** (without attachments or
-  expenses), a warning with **"Discard"**: it was probably started by
-  mistake;
-- **"Close"** stops the activity; **"Quick stop"** stops at once ignoring the
-  rest of the sheet; **"Cancel"** leaves everything as it was.
+**Stop** from the app (button or drag) closes the activity:
+- with "Editable times" you can give the **End**: empty = now; otherwise the activity closes at that time, even **up to 60
+  minutes in the future** (useful to stop just before a planned break). If another activity starts before that time, the
+  end of the first is **moved back** to the start of the new one, with a notice. Beyond 60 minutes, or without "Editable
+  times", the end cannot be in the future;
+- if the activity lasted **under a minute** (no attachments or expenses), a notice with **"Discard"**: it probably started
+  by mistake;
+- **"Quick stop"** stops at once without looking at the rest; **"Cancel"** leaves everything as it was.
 
-A travel with nothing to ask (times not editable, description present, no
-to-do) stops at once, without the sheet.
+**Return trip.** If the activity has an outbound travel followed by work, and no travel after its last work, Stop offers
+three choices:
+1. **Start return trip** — the activity stays running, travelling;
+2. **End the activity** — closes it;
+3. **End the activity and add the return trip** — closes it and adds a travel equal to the outbound (same duration and
+   km, start and arrival swapped). Offered only with editable times, because the return's end may be in the future (it is
+   a declared estimate).
 
-After Stop, when client and description are there the activity is
-**closed**; otherwise it has **details missing** (persistent notification
-and red card).
+An activity with nothing to ask stops at once.
 
-![An activity](img/entry.png)
+**Closed: Done or Incomplete.** There is no "Complete the details" step: after Stop the activity is **Done** if it has a
+client, at least one work segment and the management system's required fields filled in; otherwise it is **Incomplete**
+(■ reddish icon, always in view on the Home) and is fixed like any other by opening it. A ticked-off *To do* without
+segments is **Done**.
 
-In the activity screen (0.7.8):
-- at the top the **summary**: state, total of work and travel, a **coloured
-  bar** of the segments in their order (tap it, or "Times ›", to go to the
-  segments), the work, travel and pause totals and the **+ Travel** and
-  **+ Pause** buttons (forgotten segments, also with km; at least one
-  minute);
-- then client, quick pick, description (can be dictated), contact, role;
-  locality, place and notes stay folded under **"More details ▾"** while
-  empty. The **Contact** field (optional, when the client has contacts) ties
-  the activity to the person you worked for;
-- "Times": every segment has the coloured icon of its kind (work green,
-  pause yellow, travel blue). With "Times freely editable" on, tapping a closed segment opens
-  **"Edit segment"**: date, start, end and, for travels, km; **"Delete"**
-  removes it (not the running one nor the only one left). The running
-  segment changes its date and start only (e.g. a restart recorded late);
-  its end is recorded with the next command. The new values
-  replace the recorded ones. When the segment (also one added with Travel or
-  Pause) overlaps other segments of the same activity, the app shows them
-  and asks to confirm: then the saved segment wins and the others are
-  shortened, split or removed where it covers them. Segments of other
-  activities are not checked: they stay concurrent activities;
-- **"Delete"** in the **⋮** menu at the top deletes the **whole activity** with segments,
-  expenses, references and tags. With attachments, delete them by hand
-  first from the "Attachments" section. An activity started from a
-  management-system **ticket** loses only the recorded time: the to-do goes
-  back to the open ones (you may ignore it afterwards);
-- **pauses** have an optional **description** (e.g. "Phone call CLIENT" for
-  those made by a call; empty for manual ones): tap a pause to edit or clear
-  it, also with "Times freely editable" off;
-- **Tags**: labels (e.g. `#remote`, `#urgent`); type one or more and tap
-  "Add", or tap a suggestion: first the master data's, in their colour, then
-  the free ones already used. The ✕ on a tag removes it. They can be added
-  after closing too. A free (grey) tag is kept in the master data by tapping
-  it: **"Keep in the master data"** gives it a colour. With the **"Free tags
-  too"** option off (or locked by the policy) only the master data's tags
-  are added: the others are left out ("Only the tags of the master data: …
-  not added"); free tags already on activities stay;
-- **Expenses and attachments**: one row of coloured buttons (**Expense**,
-  **Photo**, **Voice note**, **File**, **Material**) above their sections;
-- "External references": tickets, URLs or codes (recognised automatically);
-- at the bottom the main button fills the row: **"Complete"** (green) when
-  details are missing, otherwise **"Save"**.
+**Reopening.** From the dialog (or with the gesture) **Reopen** takes a closed activity back to running, in **Work** or
+**Travel**, and **always asks for confirmation**; the time in between stays a gap, it is not filled. For an item ticked
+off by mistake, without recorded segments, **"Put back to do"** removes the tick.
 
-Completing without a description the app asks: **"Leave empty"**, **"Copy
-the last: …"** or **"Back to editing"**; for an activity started from a
-to-do still open it asks **"Is the to-do done?"** ("Yes" marks it done, "No,
-I'll come back" leaves it open).
+**Save rounded values.** In Settings → "Reports" the switch **"Save rounded values"** (off at the start; works only with
+"Editable times"; the policy can fix it) makes the **buttons** (start, switch, stop, reopen) record rounded times: the
+start down, the stop up, the switch to the nearest multiple, each on the quantum of the segment's rule (§1). Times typed by
+hand stay exact.
 
-"Reopen" brings a closed activity, or one with details missing, back to
-suspended.
+### The activity dialog
+![An activity's dialog](img/entry.png)
+<!-- screenshot to retake: activity detail dialog 1.0 (state pill "In <state> since" with total, timeline, action buttons, segments with Work·Travel·Pause split button, Place, no "Complete" button) -->
+
+Tapping any activity (running, to do, closed, absence, deleted) opens the same dialog; from the top:
+- the **state** in the Home's style ("In Work since 09:06", with icon and colour) and, on the right, the **total work
+  time**; below it the coloured **timeline** with the segments in order;
+- the **action buttons of the state** (for example Start for a To do; Pause, Travel, Stop for a running one; Reopen for a
+  closed one; Restore for a deleted one);
+- company, client, quick pick, description (dictation), role, contact (optional, if the client has contacts: it ties the
+  activity to the person you worked for);
+- **Segments**: each has the coloured icon of its kind (work green, pause yellow, travel blue, absence fuchsia; planned
+  ones dashed). The split button **Work · Travel · Pause** adds forgotten segments (with km too; at least a minute). With
+  "Editable times" on, tapping a finished segment opens **"Edit segment"**: date, start, end and, for travels, km;
+  **"Delete"** removes it (not the running segment nor the only one left). Of the running segment you can change date and
+  start; the end is recorded by the next command. If a segment overlaps others of the same activity, the app shows them and
+  asks for confirmation: confirming, the saved segment wins and the others are shortened, split in two or deleted where
+  it covers them. With other activities' segments there is no check: they stay concurrent activities;
+- **pauses** have an optional **description** (e.g. "Call CLIENT" for those created by a call): tapping a pause edits or
+  deletes it, even with "Editable times" off;
+- **Expenses and attachments**: a row of coloured buttons (**Expense**, **Photo**, **Voice note**, **File**,
+  **Material**) above their sections; "External references": tickets, URLs or codes (recognised automatically);
+- **Place**: if location services are on, the app suggests it from a site of the client, the company or yours, else from
+  the municipality;
+- **Notes** and **Tags**: labels (e.g. `#remote`, `#urgent`); type one or more in the field and tap "Add", or tap a
+  suggestion: first those of the master data, with their colour, then the free ones already used. The ✕ on a tag removes
+  it. They can be added after closing too. A free (grey) tag is kept in master data by tapping it: **"Keep in master
+  data"** gives it a colour. With **"Free tags too"** off (or fixed by the policy) only master-data tags are added
+  ("Master-data tags only: … not added");
+- at the bottom **"Cancel"** and **"Save"**;
+- **"Delete"** in the **⋮** menu at the top moves the **whole activity** to the Bin (§8). If it has attachments, delete
+  them first by hand from the "Attachments" section. An activity born from a management-system **ticket** deletes only
+  the recorded time: the item goes back to *To do*.
 
 ---
 
@@ -695,27 +713,28 @@ suspended.
 At the top the modes and the period ("‹ ›" to scroll, "Today" to come back;
 on the right the period's reported total).
 - **List** — the month, day by day, with a search on client, description or
-  tag (`remote` or `#remote`); tags follow the description; planned or due
-  to-dos show with ☐.
+  tag (`remote` or `#remote`); tags follow the description; activities to do,
+  late or planned, show with their state icon.
 - **Day** — a timeline: every activity is a block from start to end;
-  concurrent activities side by side; planned to-dos are blocks with a
-  coloured border.
+  concurrent activities side by side; the planned segments of activities to do are **dashed**
+  blocks, absences **fuchsia** blocks.
 - **Week** — seven columns from Monday; tapping a day opens the Day view.
 - In Day and Week the timeline covers the whole day and opens with all the
   working hours on the screen (or on the running activity, when outside
   them); **two fingers** (pinch) zoom the scale in or out.
 - The Agenda reopens on the last view picked.
 - **Month** — a grid with reported hours per day, one dot per company and one
-  for to-dos; tapping a day opens the Day view.
+  for activities to do; tapping a day opens the Day view.
 
 ![Agenda: Day view (two fingers change the scale)](img/agenda-day.png)
+<!-- screenshot to retake: Agenda day view with dashed planned segments, fuchsia absences and colours from client/company -->
 
 **Tag filter**: the "All tags ▾" chip next to the modes (shown when the
 period has tagged activities) shows only the activities with that tag;
 to-dos are hidden and totals count only what is shown.
 
-Every company has its colour. Tapping an activity opens it; tapping a to-do
-opens its actions (start, postpone, done, re-plan).
+A block's colour is the **client's**, else the **company's** (activities to do no longer have a colour of their own).
+Tapping an activity, to do or not, opens its dialog (§6), with the actions of its state.
 
 **Planning from the agenda**: in Day and Week tap a free slot: a new to-do
 planned at that time opens (half-hour steps). "Add" at the top does the same
@@ -723,91 +742,82 @@ for the day shown (today: the next half hour; other days: 09:00).
 
 ### Report
 ![The day's report](img/report.png)
+<!-- screenshot to retake: Report with the absences counted apart -->
 
 One day's report: the **total** (rounded work and travel), one line per
-activity with exact → rounded work, travel and pause; export starts from here
-too. With the tag filter only the activities with that tag remain and the
+activity with exact → rounded work, travel and pause, and the **absences counted apart** (by kind: Absence, Holiday, Leave, Sick leave); export starts from here
+too. The CSV also has the absence rows and the `absence_min` and `absence_kind` columns. With the tag filter only the activities with that tag remain and the
 total is their sum. Export has a **Tag** field
 too (only the activities with that tag; the other interchange sections are
 not filtered).
 
 ---
 
-## 8. To-dos
+## 8. To-dos, priority and Bin
 
-To-dos, imported from a management system or created by hand (the
-**"To-dos"** tab of the bottom bar → "Add", or from the Agenda): title, client (or company), **planned
-date** with an optional **time**, due date and time, priority (1 = highest),
-notes, references (one per line).
+A *To do* is an **activity in the To do state**: imported from a management system or created by hand (the **To do** button of
+the Home, the **"To-dos"** tab of the bottom bar → "Add", or the Agenda). When you start it, it becomes Work or Travel and,
+at the end, Done or Incomplete: it is always the same activity, with the same dialog (§6).
+
+The "To do" dialog has: **Company**, **Client**, **Description**, planned **Date**, **Time** (with an optional duration),
+**Due date** (with time), **Priority**; under "More information": **Notes**, **References** (one per line) and **Planned
+segments**.
 
 ![To-dos with the quick filters](img/todos.png)
+<!-- screenshot to retake: "To-dos" tab with state names (To do, Planned, Late...), priority names, state and priority filters, Bin chip -->
 
-**Planned absences.** When planning is on, "Add" offers **Absence** besides
-**To-do**: a day (or several, with "Until"), whole-day or from–to, an
-optional label and a **colour**. It follows the to-do policies (edit, delete,
-done) and is drawn in the Agenda as a block in that colour, red by default:
-over the working hours of each day it covers, or the whole day when none are
-set. It sends no reminders, is never overdue and stays visible once done.
-Any to-do can take a colour, which then replaces the company's in the Agenda.
-The absences recorded from the day-start prompt ("Absent today", "Late
-entry") are the same thing: done absences.
+**States.** An activity to do is **To do** (no dates), **Planned** (a date, a time or a due date) or **Late** (§1). The "To-dos"
+list shows the states, the priority names, the **state and priority filters** and the **Bin** chip. Planning is separate from
+the due date: replanning does not change the management system's due date; but if you save a plan later than the due date,
+the app asks whether to align them: "Align the due date" copies the planned day, "Keep" leaves everything as it is. While you
+fill in the form, under the due date a red "It will show as late…" appears with the "Align the due date" button. It applies on
+the same day too, if the planned start is after the due time: aligning removes the due time.
+- **Priority**: **None, Low, Medium, High, Urgent, Emergency** (0 to 5), in a drop-down. It replaces P1…P5 of 0.9: old values
+  were converted (P1 → Emergency … P5 → Low). A management system with another scale is converted by its plugin.
+- **Date only**: the item is for the whole day; in the Agenda it sits in the band above the grid, in the calendar it is an
+  all-day event, has no reminder and is "Late" from the next day.
+- **Time**: tapping the field opens the grid; a **tap** and OK set only the **start**, a **drag** (or two taps) sets **start
+  and end**. The planned segment is drawn dashed and never counts in the totals.
+- **At the end of working hours**, if one or more activities planned for today have not been worked on, a single
+  notification arrives with the list and **"Replan to …"**, which moves them to the next working day keeping the time.
+- **Reminder**: 15 minutes before the planned time the notification "Title at HH:MM" arrives with "Start activity",
+  "Postpone 30 min" and "Replan" (opens the dialog). It arrives out of hours and on days off too; it goes away if the
+  activity is started, ticked, replanned, deleted or if the block has passed.
+- Tapping an item opens the dialog (§6), with **Start**, **Postpone**, **"Remove the plan"** (the item stays, with no date or
+  reminder), **Done** (ticks it, recording no time), **Delete**. An item ticked by mistake goes back with **"Put back to do"**.
+- After "done", "postponed", "Delete", "Restore" or "Remove the plan", a message with **"Undo"** appears at the bottom for a
+  few seconds.
+- An imported item that was deleted is not restored by the next management-system sync.
 
-States: **open** (no plan) → **planned** (a date) → **done**. The plan is
-separate from the due date: re-planning does not change the management
-system's due date; but saving a plan after the due date asks whether to
-align them (0.7.5): "Align the due date" copies the planned day,
-"Keep it" leaves both as they are. Already while editing (0.7.6), a red
-"It will show as overdue…" under the due date offers "Align the due date".
-It also holds on the same day when the planned start is after the due time:
-aligning then drops the due time. A tap outside the question goes back to
-the to-do without saving.
-- **Date only**: the to-do counts for the whole day; in the Agenda it sits in
-  the strip above the grid, in the calendar it is an all-day event, it has no
-  reminder and is "overdue" from the next day.
-- **Time**: tapping the field opens the grid; a **tap** and OK set the
-  **start** only (a moment, no length), a **drag** (or two taps) sets **start
-  and end**.
-- **At the end of the working hours**, if one or more to-dos planned for
-  today were not worked on (no activity started from them), one notification
-  lists them with **"Re-plan on …"**, which moves them to the next working
-  day keeping their time.
-- **Reminder**: 15 minutes before the planned time the "Title at HH:MM"
-  notification comes, with "Start activity", "Postpone 30 min" (moves the
-  plan 30 minutes from the planned time or, if that has passed, from now; the
-  reminder comes again before the new time) and "Re-plan" (opens the to-do).
-  It also comes outside working hours and on days off; it goes away when the
-  to-do is started, done, re-planned or its block is over (for a moment
-  without length, an hour after its start).
-- On Home, the **To-dos** tab shows those due or planned within the chosen
-  period (24 h by default, see above), overdue ones included; "overdue" marks those still open after their
-  planned block or after the due date (after the due time, or from the next
-  day when the due date has no time).
-- **Ignore** a to-do (gesture or "Ignore") instead of deleting it: it stays at
-  the bottom of the "To-dos" list, struck through, without reminders or
-  calendar event; on Home it shows only on the day you ignored it. Another
-  drag restores it. An import never restores it.
-- Tapping a to-do: its **State** ("Open", "Done", "Ignored": tap the one
-  you want), "Start activity", "Postpone", **"Remove the plan"** (the
-  to-do stays, with no date and no reminder), **"Edit"** (also to re-plan
-  it) and, for to-dos created by
-  hand, **"Delete"** (imported ones are ignored, or the next import would
-  bring them back).
-- After "done", "open again", "ignored", "restored", "postponed", "Remove
-  the plan" or a change of **State**, a message with **"Undo"** shows at the
-  bottom for a few seconds and puts the to-do back as it was (0.7.8; not
-  for the activity commands).
-- A to-do may have several activities (e.g. a job over several days).
+**Bin.** Instead of "Ignored": **Delete** moves the activity (to do, closed or absence) to the **Bin** ("Bin" chip in the
+"To-dos" tab): it disappears from the Home, Agenda, reports, exports and calendar, and gets no reminders. From the Bin:
+**Restore** puts it back where it was; **Delete permanently** removes it for good (asks for confirmation; if it has
+attachments they must be removed first).
+
+**Assigned by the server.** A manager can assign a *To do* activity; while it is still To do it can be reassigned, then you
+carry it forward (§ Sync with ActivityTrack Web).
 
 ---
 
-## 9. Day start, absences, days off
+## 9. Absences and days off
 
-- 15 minutes after working hours begin, if nothing was started, **"No
-  activity today"** comes: "Absent today", "Late entry…" (asks the time) or
-  "Start activity".
-- It does not come on **national holidays** (Easter Monday included, 4
-  October from 2026) nor on **days off** ("Master data" → "Days off": date and
-  note, e.g. the patron saint or holidays).
+**Absence** (Home button) records or plans an absence, which is an activity of kind Absence (state **Absence**, fuchsia). The
+dialog asks for:
+- the **kind**: **Absence**, **Holiday**, **Leave**, **Sick leave**;
+- the **company** (optional: empty applies to every company);
+- **From** and **To** (days; empty "To" = the same day);
+- **From time / To time** (optional): with times it is an hourly **leave**, one segment per day with those times; without
+  them, the app creates **one segment for each working day** in the range, following the working hours (with the lunch
+  break in the middle if set) and skipping **days off** (public holidays and the days set in Master data);
+- the **notes**.
+
+You can plan **holidays in the future** too. In the Agenda absences are fuchsia blocks; in reports they are counted **apart**
+(by kind), not added to work, travel and pause. They are opened, edited and deleted (Bin) like any activity.
+
+- 15 minutes after the start of working hours, if you have started nothing, **"No activity today"** arrives: "Absent today"
+  (records an absence), "Late arrival…" (asks the time) or "Start activity".
+- It does not arrive on **national holidays** (Easter Monday included, 4 October from 2026) nor on **days off** ("Master
+  data" → "Days off": date and note, e.g. the patron saint or holidays).
 
 ---
 
@@ -926,17 +936,19 @@ a network. Without a network the changes wait and leave when the connection
 is back. There are no push notifications: a change made on the web arrives
 within 15 minutes, at once with the app open.
 
-**Versions.** App and server stay compatible with the two previous versions
-of each other. When the server no longer accepts this version of the app,
+**Versions.** From 1.0 the sync requires **the server and every device to be on 1.0**: an older app receives
+"Update the app to sync" and does not sync until updated (local changes are not lost). After the upgrade the first sync
+**realigns** the data with the server, and changes not yet synced are kept and pushed. Afterwards app and server stay
+compatible with the two previous versions of each other. When the server no longer accepts this version of the app,
 or the app is newer than the server, the sync stops: a notification and the
 Sync page say what to update (the app, or the server through the
 administrator). The data stay on the phone and sync as soon as the versions
 match again. Attachment files download on Wi-Fi, or when you open the
 attachment. GPS positions stay on the phone: km and times travel.
 
-**Assigned to-dos.** A manager (or an administrator) can create a *To-do*
+**Assigned activities.** A manager (or an administrator) can create a *To do* activity
 on the web and assign it to you: it reaches the phone like your own, you
-work it and close it as usual. Reassigned to someone else, it leaves your
+start it and close it as usual. While it is still To do the manager can reassign it: if so, it leaves your
 phone at the next sync.
 
 ![Settings → Sync](img/sync.png)
@@ -1017,9 +1029,9 @@ another trade ("Site" instead of "Client").
   rounding mode and minimum, and the choices the screens remember such as
   the Home period and State, the Agenda view, the list orders; locked they
   stay greyed with the padlock, hidden they disappear outside Settings
-  too), let activities start from to-dos only, create
+  too), let activities start only from planned or assigned *To do* activities (`plannedOnly`, formerly `todosOnly`, still read), create
   companies, clients and contacts by import only, force the language.
-- **Without companies**: with the company field hidden, clients and to-dos
+- **Without companies**: with the company field hidden, clients and *To do* activities
   have no company and the Companies menu disappears (fit for a freelancer).
 - Every key is in `docs/POLICY.md`, with an example in
   `docs/samples/policy-example.json`.
@@ -1063,8 +1075,8 @@ Settings → "Calendar":
 
 Every activity becomes one event per day, from its start: title "Client –
 Description", the description holds rounded times, km, references and notes.
-Planned open to-dos become "tentative" events (Client – Title) up to a year
-ahead; once done they leave the calendar. The description's last line carries
+Planned *To do* activities become "tentative" events (Client – Description) up to a year
+ahead; once started or done the event becomes the activity's (or leaves the calendar). The description's last line carries
 hashtags per kind of time: `#lavoro`, `#viaggio`, `#pausa`, `#pianificata`,
 always in Italian whatever the phone language (search them in the calendar
 app), followed by the activity's tags. Events are **private**: people sharing
@@ -1090,8 +1102,8 @@ days" goes further back.
 - **"To-dos" widget (4×2, 0.7.4)** — the next planned to-dos (the overdue
   one first, its time in red), each with **▶**: when the to-do has a client
   the activity starts at once with its data, without opening the app, and
-  the activities running are suspended (resumable with one tap; paused ones
-  stay as they are); otherwise ▶ opens "New activity" to pick one. The started row shows
+  without concurrent activities the running ones become Suspended (resumable with one tap; paused ones
+  are stopped); otherwise ▶ opens "New activity" to pick one. The started row shows
   **Pause** and **Stop**; done to-dos leave the widget; when the rows do not
   fit, the widget scrolls. How far to look ahead (24 h default, 3, 7 or 30
   days; the overdue always in) is in Settings → "Display" → "To-dos
@@ -1102,6 +1114,7 @@ days" goes further back.
   "Expense".
 
 ![The 4×2 widgets on the home screen: current activity and planned to-dos](img/widgets.png)
+<!-- screenshot to retake: widgets without Suspend, "To-dos" widget with the new state icons -->
 
 ---
 
@@ -1116,6 +1129,7 @@ title shows a dot (•) and leaving asks first ("Leave without saving",
 §17.
 
 ![Settings](img/settings.png)
+<!-- screenshot to retake: Settings (Reports now has "Save rounded values"; Gestures without Suspend) -->
 
 | Section | Item | Default |
 |---|---|---|
@@ -1254,6 +1268,7 @@ of the phone language. Default: Italian.
 | Work rounding | mode, quantum (1, 5, 15, 30 or 60 min) and minimum | up with tolerance, 15 min |
 | Travel rounding | same | up, 5 min |
 | Pause rounding | same | down, 5 min, minimum 5 |
+| Save rounded values | the buttons (start, switch, stop, reopen) record rounded times: start down, stop up, switch to the nearest multiple; times typed by hand stay exact; only with "Editable times"; the policy can fix it | off |
 
 Rounding modes:
 - **up with tolerance**: rounds up only beyond a third of the quantum (15
@@ -1308,11 +1323,11 @@ check (**"Check now"**) stays optional but offers no download.
 ### Gestures
 For activities and to-dos, what a left and a right drag offer (also nothing)
 and whether a long drag runs the first action at once. Defaults: activities
-left Pause / Resume, right Stop or Suspend; to-dos left Start, right Postpone
-or Ignore; long drag on.
+running activities left Pause / Resume, right Stop; to-dos left Start or Done, right Postpone or Delete; closed
+ones right Reopen; long drag on. Suspend is gone.
 
 ### Settings kept by the screens
-The to-do company filter, the period (24 h, 7 days, 30 days, all), "Ignored"
+The to-do company filter, the period (24 h, 7 days, 30 days, all), State, Priority
 and the order of every master-data list are set in the screens themselves and
 stay until you change them.
 
@@ -1327,8 +1342,8 @@ stay until you change them.
 | Site | label, coordinates, radius, address | of a company or a client; used to propose client and company and to detect arrival |
 | Role | name | proposed by quick picks, chosen on the activity |
 | Quick pick | text, proposed role, company (optional) | fills the description |
-| Activity | client, company, role, description, locality, place, notes, state, planned end | has segments, expenses, attachments, references, tags; may come from a to-do |
-| Segment | kind (work, travel, pause), start, end, km, source (tracked or by hand), description (pauses) | of an activity; location samples belong to segments |
+| Activity | kind (activity or absence), state, client, company, role, description, locality, notes, plan, due date, priority (None … Emergency), management-system key | has segments, expenses, attachments, references, tags; to do, running, closed or deleted |
+| Segment | kind (work, travel, pause, absence), planned or real, start, end, km, source (tracked or by hand), description (pauses) | of an activity; location samples belong to segments |
 | Expense | amount, description, receipt | of an activity |
 | Attachment | photo, voice note, file | of an activity, in the data folder |
 | External reference | ticket, URL, code | of an activity |
@@ -1337,69 +1352,67 @@ stay until you change them.
 | Consumable | description, unit, unit cost, company | proposed in the material lines |
 | Material line | description, quantity, unit, unit cost | of an activity |
 | Call | contact, direction, start, end | of a contact and its client |
-| To-do | title, client, plan, duration, due date, priority, notes, references, state | of a company (and a client); gives activities |
 | Place | home or other, coordinates | home ends return travels |
-| Working hours, lunch break, days off, absences | per day | drive reminders and summaries |
+| Working hours, lunch break, days off | per day | drive reminders and summaries |
 
 ## 19. Activity states
 
 ![Activity states](diagrams/entry-states.svg)
 
-| State | Entered with | Left with |
-|---|---|---|
-| Running | start; Work or Travel from suspended | Suspend, Stop, mode change |
-| Suspended | Suspend (not from pause); Reopen | Work / Travel (resumes), Stop |
-| Details missing | Stop without client or description (or started from a to-do and left unanswered) | Complete, Reopen |
-| Closed | Complete; Stop with client and description | Reopen |
+The activity has three **stored states** (To do, Running, Closed) plus being **Deleted** (in the Bin) or of kind
+**Absence**; from these, the open segment and the dates the app derives the **displayed state** (§1, §20).
 
-While running an activity has a **mode**: every change closes the open
-segment and opens a new one.
+| Stored state | Entered by | Left by |
+|---|---|---|
+| To do | creation with "To do"; "Put back to do" | Start (becomes Running), Done (tick), Delete |
+| Running | Start; Work or Travel from a closed one (Reopen); creation with Work "Now" / "Already started" or Travel | Stop (Closed), Delete; mode change |
+| Closed | Stop; creation with Work "Past"; tick; Absence | Reopen (Running), Put back to do (only without segments), Delete |
+| Deleted | Delete | Restore, Delete permanently |
+
+While running, the activity has a **mode**: every change closes the open segment and opens a new one.
 
 ![Modes of a running activity](diagrams/modes.svg)
 
 Rules:
-- an activity never starts in pause; it cannot be suspended from pause;
-- several activities can run together, each with its own pauses;
+- an activity does not start paused; from a pause you go back to Work or Travel, or to what was open before;
+- from Work to Travel the app asks whether the work activity is over (§5);
+- several activities can run together, each with its own pauses; without concurrent ones (policy) the others become
+  *Suspended* when one starts;
 - an activity under a minute, stopped from the app, can be discarded;
-- a segment added or edited lasts at least a minute and lies in the past;
-  over other segments of the same activity it is saved after a
-  confirmation, which shortens them.
+- an added or edited segment lasts at least a minute and lies in the past (the end of the last segment up to 60 minutes
+  ahead with editable times; absences even further); over other segments of the same activity it is saved after a
+  confirmation, which shortens them;
+- on start the planned segments are replaced by the real ones.
 
-## 20. To-do states
+## 20. Displayed states
 
-![To-do states](diagrams/todo-states.svg)
+Every activity shows **one state**: the first that applies, in the order of the table in §1: **Deleted**, **Absence**,
+**Late**, **Planned**, **To do**, **Work**, **Travel**, **Pause**, **Suspended**, **Done**, **Incomplete**.
 
-Each to-do shows one state, in this order: **done**, **ignored** (chosen by
-hand on the to-do), **overdue**, **planned** (from its dates), **open**. A
-done to-do is no longer "planned" or "overdue", even with a date.
+An activity to do is **late** when the due date has passed (after the due time, or from the next day when the due date has no
+time), or when all its planned segments are over, or — without segments — when the planned block has passed (a whole-day plan
+from the next day). The same rule applies on the phone, the web and the PC.
 
-A to-do is **overdue** when its planned block is over or its due date has
-passed (after the due time, or from the next day when the due date has no
-time). An ignored to-do gets no reminders, stays out of the calendar and an
-import never restores it.
+A closed one is **Done** if it has no real segments (a ticked item) or if it has a client, at least one work segment and all the
+fields its management system requires; otherwise it is **Incomplete**.
 
 ## 21. Flows
 
 ### Start
-1. Company and client proposed: from the site you are at (within its
-   radius), otherwise the company of today's last activity; a client picked
-   from the widget, a shortcut or a to-do wins.
-2. Description and role: from the last activity on the same client in the
-   last 30 days, until you change them.
-3. With "Times freely editable": **Now** (no times), **Already started**
-   (the start only; a time still to come asks whether to plan, start now or
-   from yesterday) or **Past** (date, start and end: recorded stopped).
-4. Running activities: for each the app asks what to do (close, suspend,
-   leave; travelling "is the travel over?"). A **Past** activity asks
-   nothing.
+1. Company and client suggested: from the site you are in (within the radius), else the company of today's last activity; a
+   client chosen from the widget, a shortcut or a *To do* activity takes precedence.
+2. Description and role: from the last activity on the same client in the last 30 days, until you change them.
+3. With "Editable times": **Now** (no time), **Already started** (only the start; a time still to come asks whether to plan,
+   start now or from yesterday) or **Past** (date, start and end: recorded closed).
+4. Activities already running: for each the app asks what to do (close, leave; for a travel "is the travel over?"); without
+   concurrent ones they become Suspended. A **Past** activity asks nothing. **Travel** from Work asks "Have you completed the
+   work activity?".
 
-### Stop and completion
+### Stop
+![Stop](diagrams/stop-flow.svg)
 
-![Stop and completion](diagrams/stop-flow.svg)
-
-From the app Stop opens the closing sheet (§6). Stop from the notification,
-the widget or the quick tile stops at once, without questions; the same
-check (closed or details missing) applies there too.
+From the app Stop offers, when needed, the end and the return trip (§6). Stop from the notification, the widget or the quick
+tile stops at once, with no questions; the closing is still Done or Incomplete by the same rules.
 
 ### Reminders
 One alarm at a time, set on the nearest reminder; confirm and pause reminders
@@ -1438,12 +1451,13 @@ never go below 10 minutes (Android limits alarms in Doze).
 ### Calendar
 One event per activity and day, from its start (a running activity ends
 "now"). Every change re-syncs the last 14 days; "Sync 90 days" goes further
-back. Planned open to-dos are tentative events up to a year ahead. All events
+back. Planned *To do* activities are tentative events up to a year ahead. All events
 are private. Sync goes only from the app to the calendar.
 
 ### Import and export
-The generic format (JSON or XML) holds master data, to-dos, activities with
-segments, expenses, references and tags, absences and days off. Import
+The generic format (JSON or XML) holds master data, activities (to do and absences too) with
+segments, expenses, references and tags, and days off. It is **version 2** of the format; version 1 files (with to-dos
+apart) are still imported. Import
 recognises what it already has (codes and identifiers), creates no duplicates
 and on a conflict keeps the app's data, listing the conflict in the report.
 Activities running on another phone are not imported.

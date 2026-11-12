@@ -5,8 +5,8 @@ organisation's server; users of the app find everything in the ActivityTrack
 ## 1. What ActivityTrack Web is
 
 ActivityTrack Web is the organisation's server for the ActivityTrack app:
-- it keeps a **copy of every phone**, synced both ways: activities,
-  *To-dos*, master data, attachments;
+- it keeps a **copy of every phone**, synced both ways: activities
+  (including those to do and absences), master data, attachments;
 - it gives everyone the **same work from the browser**: Home, activities,
   Agenda, To-dos, reports;
 - it manages **users and profiles**, the **central master data** and the
@@ -16,6 +16,7 @@ One server serves one organisation. The phone works without a network too:
 the changes wait and leave when the network is back.
 
 ![The Home on the web: running activities, then the list with its filters](../img/home.png)
+<!-- screenshot to retake: web Home with the 1.0 states and no Suspend -->
 
 ## 2. Installation and updates
 
@@ -51,6 +52,16 @@ systemctl enable --now activitytrack-web.socket
 
 A web server (nginx or Apache) goes in front: the examples are in
 `/usr/share/activitytrack-web/deploy/`.
+
+**Upgrading to 1.0.** 1.0 changes the data model: the *To-do* is no longer a separate object but an activity in the
+"To do" state (see the app's *User manual*). The database converts **by itself** with `migrate`: items become activities
+in the To do state (or Done, if ticked), absences become activities of kind Absence, ignored items go to the Bin, priorities
+P1…P5 become Emergency…Low. The server's **backups** of earlier versions (SQLite file or PostgreSQL dump) are restored as
+usual: the conversion runs with the migrations. **Sync requires the server and every device to be on 1.0**: an older app
+gets the error `upgrade_required` ("Update the app to sync") and waits. Update **the server first**, then phones and PCs.
+At the first sync after the upgrade every device realigns with the server, but **changes not yet synced are kept and
+pushed**. If a phone has data the server has never seen, it arrives; as a last resort the phone's data can be reimported
+on the server.
 
 **Updating.** With the package, install the new `.deb`: the database is
 updated and the service restarts by itself. With the archive or the clone,
@@ -257,21 +268,51 @@ Some settings count on the web too:
   the times.
 - **Free tags** (`tagsFreeText`) off: on the web only the master-data tags
   can be chosen.
-- The **To-dos** or **Planning** feature off removes the *To-dos* from the
+- The **To-dos** or **Planning** feature off removes the activities in the *To do* state from the
   Home and the planning from the Agenda.
+- **Activities only from planned ones** (`plannedOnly`, formerly `todosOnly`: the old name is still read): activities
+  start only from a planned or assigned To do activity.
+- **Save rounded values** (`roundStoredTimes`): the start, switch, stop and reopen buttons record rounded times; only with
+  editable times; times typed by hand stay exact.
 
 ## 8. Working on the web
 
 Everyone finds their own work on the web, as in the app.
-- **Home**: the running activities with their commands (Pause, Travel,
-  Suspend, Stop), then one list of *To-dos* and stopped activities, with
-  the filters period, state, company and tag.
-- **Activities** and the **activity sheet**: details, times (segments),
-  expenses, attachments, tags.
-- **Agenda**: day, week and month; a click on a free slot plans a *To-do*
-  at that time.
+- **Home**: the running activities with their commands (Pause, Work, Travel, Stop; there is no Suspend any more), then
+  one list of all the activities in their **states**, with the filters period, state, company and tag.
+- **States.** Every activity shows one of eleven states, with icon and colour (the same as in the app):
+
+  | State | Icon | Colour |
+  |---|---|---|
+  | To do | check box | white |
+  | Planned | clock | grey |
+  | Late | **!** | brown |
+  | Work | ▶ | green |
+  | Travel | car | blue |
+  | Pause | ⏸ | yellow |
+  | Suspended | moon | orange |
+  | Done | ✓ | greenish |
+  | Incomplete | ■ | reddish |
+  | Absence | dot | fuchsia |
+  | Deleted | bin | grey |
+
+  *Suspended* appears only when another activity starts and concurrent ones are not allowed; *Incomplete* is a closed
+  activity without a client or a work segment (fixed like any other: there is no "Complete" step). "Late" uses a single
+  rule, on the Home as on the work page.
+- **Activities** and the **activity sheet**: state ("In <state> since"), the state's actions, details, times (segments,
+  planned ones too), expenses, attachments, place, tags. **Reopen** is split into **Work** and **Travel** and always asks
+  for confirmation; **"Put back to do"** removes the tick from an item ticked by mistake (no real segments). Stopping an
+  activity with an outbound trip and work can add the **return trip**. **Priority** has the names None, Low, Medium, High,
+  Urgent, Emergency.
+- **Cestino** (Bin): the deleted activities, with **Restore** and **Delete permanently** (instead of "Ignored").
+- **Absences**: the form asks the kind (Absence, Holiday, Leave, Sick leave), the company (optional: empty = all), from day
+  to day and optional times (a leave); without times one segment is created per working day, skipping days off. Future
+  holidays can be planned too.
+- **Agenda**: day, week and month; a click on a free slot plans a To do
+  activity at that time (planned segments are dashed, absences fuchsia; the colour is the client's, else the company's).
 
 ![Agenda: the week](../img/agenda.png)
+<!-- screenshot to retake: Agenda week with dashed planned segments, fuchsia absences, client/company colours -->
 
 **Dates and times.** In the forms dates and times are typed in the format
 chosen in the preferences, or picked with the button at the right of the
@@ -306,16 +347,18 @@ language. The buttons, labels and messages are translated; what you type
 
 ![Preferences](../img/preferences.png)
 
-**Assigned to-dos.** A manager, or an administrator, creates a to-do and
-picks **"Assegnata a"** (assigned to): the to-do becomes the chosen
-person's and reaches their phones. Reassigned, it leaves the phones of
+**Assigned to-dos.** A manager, or an administrator, creates a To do activity and
+picks **"Assegnata a"** (assigned to): it becomes the chosen
+person's and reaches their phones. While it is still in the To do state it can be reassigned: it then leaves the phones of
 whoever had it. The assignee sees "Assegnata da …" (assigned by) and works
 it as their own; the manager follows it on the *Da fare* page with
 **Persona → "Tutto il team"** (the whole team).
 
 ![The team's to-dos](../img/todos.png)
+<!-- screenshot to retake: To-dos page with displayed states, priority names, Bin link -->
 
 ![An assigned to-do](../img/todo.png)
+<!-- screenshot to retake: an assigned activity in the new detail page (state, actions, priority names) -->
 
 **Checks after a sync.** When two phones changed the same activity and its
 segments overlap, the activity is marked **"To check"**. With times locked by
@@ -326,14 +369,17 @@ shows on the phone as "Not synced", with the reason.
 ## 9. Reports
 
 ![Report](../img/report.png)
+<!-- screenshot to retake: Report with the Assenze section -->
 
 The **Report** shows the totals by company and client over a period, with
 the times **rounded** as in the app and, in small, the recorded ones. Below
 is the detail day by day. An activity over several days counts in each,
 except for the night carry-over.
 
+**Absences** are counted apart, by kind (Absence, Holiday, Leave, Sick leave), in an *Assenze* section.
+
 **CSV** exports one row per activity and day, with the recorded and the
-rounded minutes. Managers and administrators filter by person; a reader
+rounded minutes; absence segments have rows of their own and there is an `absence_min` column. Managers and administrators filter by person; a reader
 only sees the closed activities of their companies.
 
 ## 10. Security and backups
@@ -369,6 +415,7 @@ With PostgreSQL, use `pg_dump activitytrack`.
 | The app's code is always "non valido" (not valid) | the phone's or the server's clock is wrong: sync it (NTP) |
 | A user no longer syncs | deactivated, or the phone was revoked (Users → their sheet) |
 | Attachments do not open on the web | with `offload = nginx` or `apache` the web server needs the example's configuration |
+| A phone or PC says "Update the app to sync" | the server is on 1.0 and the device is not: update the app or Desktop to 1.0 |
 | A change from the web does not arrive at once | it arrives within 15 minutes; opening the app brings it at once |
 | Different times on the phone and the web | the phone's own rounding: set it in the policy (§7) |
 | The site does not answer after an update | `systemctl status activitytrack-web.socket activitytrack-web.service`, and the log with `journalctl -u activitytrack-web` |

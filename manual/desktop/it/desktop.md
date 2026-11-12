@@ -1,6 +1,6 @@
 Versione 0.9.9 (novembre 2026). ActivityTrack Desktop è l'app per il PC
 di ActivityTrack. Sta nell'area di notifica, vicino all'orologio, e tiene a un
-clic le attività in corso e i *Da fare*. Così un'attività, anche breve, si
+clic le attività in corso e quelle da fare. Così un'attività, anche breve, si
 registra dalla tastiera, senza prendere il telefono.
 
 ## 1. Cosa serve
@@ -85,12 +85,24 @@ associazione revocata, versioni incompatibili).
 - **Clic**: apre o chiude la finestra.
 - **Clic centrale**: mette in pausa o riprende l'attività al lavoro.
 - **Menu** (clic destro): per ogni attività in corso i suoi comandi
-  (Pausa, Viaggio, Sospendi, Stop, Modifica…); **"Nuova attività…"**;
-  **"Avvia Da fare ▸"** con quelli in ritardo e di oggi; **"Nuovo Da fare…"**;
+  (Pausa, Lavoro, Viaggio, Stop, Modifica…); **"Nuova attività…"**;
+  **"Avvia Da fare ▸"** con quelle in ritardo e di oggi; **"Nuovo Da fare…"**; **"Nuova assenza…"**;
   lo stato della sincronizzazione; **"Esci"**.
 
 Chiudere la finestra la nasconde soltanto: ActivityTrack resta nell'area di
 notifica fino a **"Esci"**.
+
+**Novità della 1.0.** Il *Da fare* non è più una cosa a parte: è un'attività nello stato **Da fare**, e una sola
+attività va dalla pianificazione alla chiusura. Gli stati mostrati sono undici (§7); non c'è più **Sospendi** (un'attività
+diventa *Sospesa* da sola solo quando ne parte un'altra e le contemporanee non sono ammesse), né il foglio "Completa
+l'attività" (una chiusa senza cliente o lavoro è **Incompleta** e si corregge come le altre), né **Ignorate** (c'è il
+**Cestino**); le priorità hanno un nome (Nessuna … Emergenza). Ci sono le **assenze** (§6). Lo stesso vale per il telefono e
+il web.
+
+**Aggiornamento alla 1.0.** I dati si convertono da soli, e i backup del server di versioni precedenti si ripristinano. La
+sincronizzazione richiede che **il server e tutti i dispositivi siano alla 1.0**: un Desktop più vecchio dice "Aggiorna
+l'app per sincronizzare"; aggiorna prima il server. Dopo l'aggiornamento la prima sincronizzazione riallinea i dati, e le
+modifiche non ancora sincronizzate restano e vengono inviate.
 
 ## 5. La finestra
 
@@ -100,6 +112,7 @@ La finestra ha l'aspetto dell'app: a sinistra la barra verde con **Home**,
 problema. È chiara o scura come il sistema.
 
 ![La Home](../img/home.png)
+<!-- screenshot to retake: Home 1.0 with the header buttons Da fare/Lavoro/Viaggio/Assenza, state pill, no Sospendi -->
 
 La **Home** è quella del telefono:
 
@@ -107,18 +120,20 @@ La **Home** è quella del telefono:
   descrizione, lo stato con l'ora (**"In lavoro dalle 07:46"**), i totali di
   lavoro e viaggio, a destra il tempo del tratto in corso e i colori dei tag.
   Sotto, i pulsanti tondi con il nome: **Pausa** o **Riprendi**, **Viaggio**,
-  **Sospendi**, **Stop**. Un clic sulla scheda apre l'attività;
+  **Stop**. Sulla scheda, lo stato è una **pastiglia** con icona e colore e, a destra, il totale. Un clic sulla scheda apre
+  l'attività;
 - sotto, le **schede piccole** delle altre attività in corso o sospese: una
   riga con lo stato e gli orari, e il pulsante tondo che la riprende o la
   mette in pausa. Un clic la porta nella scheda grande;
-- quando non c'è niente in corso, la scheda grande ha **Avvia** e
-  **Viaggio**;
-- poi i filtri e la lista dei *Da fare* e delle attività chiuse (§7).
+- l'intestazione della Home (e, quando non c'è niente in corso, la scheda vuota) ha quattro pulsanti: **Da fare**,
+  **Lavoro**, **Viaggio** (parte subito, anche senza cliente) e **Assenza**;
+- poi i filtri e la lista di tutte le attività nei loro stati (§7).
 
 La striscia colorata a sinistra di ogni scheda è il colore dell'azienda (o
 del cliente) scelto sul web o sul telefono.
 
 ![La Home con il tema scuro](../img/home-dark.png)
+<!-- screenshot to retake: dark Home with the 1.0 layout -->
 
 ### Scorciatoie da tastiera
 
@@ -128,9 +143,9 @@ pulsanti le ricordano.
 | Tasti | Cosa fa |
 |---|---|
 | **Ctrl+N** | Nuova attività (inserimento rapido) |
-| **Ctrl+P** | Pausa dell'attività al lavoro o in viaggio; se nessuna lo è, riprende quella in pausa o l'ultima sospesa |
-| **Ctrl+T** | Stop dell'attività della scheda grande; se mancano i dettagli apre "Completa l'attività" |
-| **Ctrl+D** | Nuovo *Da fare* |
+| **Ctrl+P** | Pausa dell'attività al lavoro o in viaggio; se nessuna lo è, riprende quella in pausa |
+| **Ctrl+T** | Stop dell'attività della scheda grande (chiede il viaggio di ritorno, se serve) |
+| **Ctrl+D** | Nuovo *Da fare* (attività nello stato Da fare) |
 | **Ctrl+F** | Cerca nella lista |
 | **Ctrl+1**, **Ctrl+2**, **Ctrl+3** | Home, Da fare, Impostazioni |
 | **F5** | Sincronizza ora |
@@ -147,31 +162,44 @@ programma: §10.
 ### Nuova attività
 
 ![Nuova attività](../img/quick.png)
+<!-- screenshot to retake: quick entry 1.0 with the modes Adesso / Già iniziata / Passata -->
 
-**"Nuova attività"** (dal menu, dalla Home o con **Ctrl+N**) apre
-l'inserimento rapido, sopra le altre finestre:
+**"Nuova attività"** (dal menu, dalla Home con **Lavoro** o con **Ctrl+N**) apre l'inserimento rapido, sopra le altre finestre:
 
 - **Descrizione** su più righe;
 - **Cliente**: si sceglie dall'elenco o si scrive. Un nome nuovo diventa
   un'anagrafica personale, se la policy lo consente;
 - **Tag**, separati da virgole;
 - **Lavoro** o **Viaggio**;
-- **Adesso** o **"Già fatta"**: un'attività finita, con inizio e fine;
-- le **attività in corso**: lasciarle in corso, sospenderle o fermarle.
+- **Adesso**, **Già iniziata** (solo l'inizio, con le scorciatoie 15 / 30 / 60 minuti fa: l'attività resta in corso) o
+  **Passata** (giorno, inizio e fine: registrata già chiusa);
+- le **attività in corso**: lasciarle in corso o fermarle (senza contemporanee la nuova mette da parte le altre, che
+  diventano *Sospese*).
 
-**Ctrl+Invio** avvia. **"Altri campi…"** passa al modulo completo con quanto
-già scritto.
+**Ctrl+Invio** avvia. **"Altri campi…"** passa al modulo completo con quanto già scritto.
 
-Il modulo completo si apre anche dal menu **⋯** della Home, **"Modulo
-completo…"**.
+Il pulsante **Viaggio** della Home fa partire subito un viaggio anonimo; se stai lavorando chiede prima **"Hai completato
+l'attività lavorativa?"**: **Sì** chiude l'attività e ne avvia una nuova di viaggio, **No** fa il viaggio nella stessa
+attività.
+
+Il modulo completo si apre anche dal menu **⋯** della Home, **"Modulo completo…"**.
+
+#### Assenza
+
+**"Assenza"** (Home o menu) chiede il **tipo** (Assenza, Ferie, Permesso, Malattia), l'**azienda** (facoltativa: vuota =
+tutte), **dal / al** giorno e gli **orari** facoltativi (un permesso). Senza orari si crea uno spezzone per ogni giorno
+lavorativo, secondo l'orario di lavoro e saltando i giorni liberi; si possono pianificare ferie future. Le assenze sono
+contate a parte nei report.
 
 ### Il modulo completo
 
 ![Modulo completo](../img/entry.png)
+<!-- screenshot to retake: activity form/detail 1.0 with the state pill, total and action buttons -->
 
 Azienda, cliente, ruolo, scelta rapida, descrizione, località, note e tag,
 secondo la policy (che può rinominarli, nasconderli o renderli obbligatori).
-Per un'attività esistente mostra anche i **tempi**: ogni tratto (lavoro,
+Per un'attività esistente la scheda ha in cima lo **stato** (pastiglia "In <stato> dalle", il totale di lavoro e i pulsanti
+dello stato: Avvia, Pausa, Stop, Riapri, Ripristina…). **Riapri** chiede sempre conferma. Mostra anche i **tempi**: ogni tratto (lavoro,
 viaggio, pausa) si può modificare o eliminare, e se ne aggiunge uno nuovo,
 quando la policy lo permette. Due tratti sovrapposti segnano l'attività
 **"da verificare"**.
@@ -193,44 +221,59 @@ griglia (es. 09:37).
 
 ![La griglia degli orari](../img/grid.png)
 
-### Stop e completamento
+### Stop e chiusura
 
-**Stop** (o **Ctrl+T**) chiude subito l'attività se ha cliente e descrizione. Altrimenti, o
-se viene da un *Da fare*, chiede quello che manca:
+**Stop** (o **Ctrl+T**) chiude subito l'attività: non c'è più il foglio "Completa l'attività". Se l'attività ha un viaggio di
+andata seguito da lavoro, senza un viaggio dopo l'ultimo lavoro, chiede: **Avvia viaggio di ritorno**, **Termina l'attività**
+o **Termina l'attività ed aggiungi il viaggio di ritorno** (uguale all'andata per durata e km, partenza e arrivo scambiati;
+solo con gli orari modificabili). Con gli orari modificabili la fine può essere fino a 60 minuti nel futuro; se un'altra
+attività parte prima, la fine si porta indietro con un avviso.
 
-![Completa l'attività](../img/stop.png)
+Una chiusa con cliente, almeno un tratto di lavoro e i campi obbligatori è **Fatta**; altrimenti è **Incompleta** e si
+corregge aprendola, come ogni altra.
 
-**"Chiudi l'attività"** la completa (senza descrizione chiede conferma);
-**"Più tardi"** la lascia tra i **"Dettagli mancanti"** della Home.
+## 7. I Da fare e gli stati
 
-## 7. I Da fare
+Un *Da fare* è un'**attività nello stato Da fare**: quando la avvii diventa Lavoro o Viaggio e, alla fine, Fatta o Incompleta.
 
-Sotto le attività in corso la Home ha un'unica lista, come l'app: **In
-ritardo**, **Dettagli mancanti**, **Oggi**, **Prossimi giorni**, **Giorni
-precedenti**, **Senza data**, **Ignorate**. I filtri **periodo** (Oggi, 24 h,
-3 gg…), **stato** (Da fare, Dettagli mancanti, Fatte, Ignorate), **azienda**
-e **tag** sono pulsanti con il loro menu, colorati quando non sono quelli
-iniziali, e restano memorizzati; **Cerca** (Ctrl+F) restringe la lista alle
+Sotto le attività in corso la Home ha un'unica lista, come l'app: **In ritardo**, **Oggi**, **Prossimi giorni**, **Giorni
+precedenti**, **Senza data**. I filtri **periodo** (Oggi, 24 h, 3 gg…), **stato**, **azienda** e **tag** sono pulsanti con il
+loro menu, colorati quando non sono quelli iniziali, e restano memorizzati; **Cerca** (Ctrl+F) restringe la lista alle
 righe che contengono le parole scritte.
 
-Ogni riga ha a sinistra il segno del suo stato: **!** in ritardo,
-l'orologio se pianificata, il cerchio se aperta, la matita se mancano i
-dettagli, il quadrato se chiusa, la spunta se fatta. Un *Da fare* ha i
-pulsanti tondi **Avvia** (un'attività con i suoi dati) e **Fatto** e, nel
-menu **⋯**, **Posticipa**, **Ignora** e **Modifica…**; un clic sulla riga lo
-apre. Un'attività con i dettagli mancanti ha **Completa…**.
+Ogni riga ha a sinistra l'icona del suo **stato**, undici in tutto:
+
+| Stato | Icona | Colore |
+|---|---|---|
+| Da fare | casella | bianco |
+| Pianificata | orologio | grigio |
+| In ritardo | **!** | marrone |
+| Lavoro | ▶ | verde |
+| Viaggio | auto | blu |
+| Pausa | ⏸ | giallo |
+| Sospesa | luna | arancione |
+| Fatta | ✓ | verdino |
+| Incompleta | ■ | rossiccio |
+| Assenza | punto | fucsia |
+| Eliminata | cestino | grigio |
+
+Un'attività da fare ha i pulsanti tondi **Avvia** e **Fatto** e, nel menu **⋯**, **Posticipa**, **Elimina** e **Modifica…**; una
+spuntata per errore (senza tratti) torna indietro con **"Rimetti da fare"**; un clic sulla riga la apre. Un'attività
+**Incompleta** si apre e si corregge come le altre.
 
 ![La sezione Da fare](../img/todos.png)
+<!-- screenshot to retake: Da fare section with state names, priority names, Cestino -->
 
-La sezione **Da fare** (Ctrl+2) li mostra tutti, per scadenza e
-pianificazione, con **"Anche le fatte"**, **Ignorate**, l'azienda e la
-ricerca; **"Nuovo Da fare"** (o **Ctrl+D**) ne crea uno.
+La sezione **Da fare** (Ctrl+2) le mostra tutte, per scadenza e pianificazione, con **"Anche le fatte"**, il **Cestino**,
+l'azienda e la ricerca; **"Nuovo Da fare"** (o **Ctrl+D**) ne crea una. **Elimina** sposta l'attività nel **Cestino**, da dove
+**Ripristina** la rimette a posto ed **Elimina definitivamente** la cancella.
 
 ![Da fare](../img/todo.png)
+<!-- screenshot to retake: new "Da fare" form with priority names (Nessuna … Emergenza) -->
 
-Il modulo ha titolo, azienda, cliente, note, riferimenti (ticket, link: uno
-per riga), **scadenza**, **pianificazione** (giorno, ora, durata) e
-**priorità**. Un *Da fare* del gestionale non si elimina: si ignora.
+Il modulo ha azienda, cliente, descrizione, note, riferimenti (ticket, link: uno per riga), **scadenza**, **pianificazione**
+(giorno, ora, durata) e **priorità** (Nessuna, Bassa, Media, Alta, Urgenza, Emergenza; al posto di P1…P5). Una voce del
+gestionale eliminata non torna con il prossimo import.
 
 ## 8. I promemoria
 
@@ -290,8 +333,8 @@ finestra di ActivityTrack chiusa:
 | Tasti | Cosa fanno |
 |---|---|
 | **Ctrl+Alt+A** | apre in primo piano la finestra della nuova attività |
-| **Ctrl+Alt+P** | mette in pausa l'attività al lavoro o in viaggio (la più recente); se non ce n'è, riprende quella in pausa, altrimenti l'ultima sospesa |
-| **Ctrl+Alt+S** | ferma l'attività in corso; se mancano i dettagli apre in primo piano la scheda per completarla |
+| **Ctrl+Alt+P** | mette in pausa l'attività al lavoro o in viaggio (la più recente); se non ce n'è, riprende quella in pausa |
+| **Ctrl+Alt+S** | ferma l'attività in corso (chiede il viaggio di ritorno, se serve) |
 
 Quando le attività candidate sono più d'una (attività contemporanee), una
 piccola finestra chiede quale. Pausa, ripresa e stop si confermano con una
@@ -331,9 +374,8 @@ nell'area di notifica ed esegue il comando. Su Windows il programma è
 ## 11. La policy sul PC
 
 Il PC riceve la stessa policy del telefono e applica le chiavi che lo
-riguardano: funzioni (attività, viaggi, Da fare, pianificazione, ignorare ed
-eliminare), campi (nomi, obbligatori, nascosti, sola lettura), tempi
-modificabili, tag liberi, attività solo dai *Da fare*, anagrafiche solo
+riguardano: funzioni (attività, viaggi, Da fare, pianificazione, eliminare e ripristinare), campi (nomi, obbligatori, nascosti, sola lettura), tempi
+modificabili, tag liberi, attività solo da quelle pianificate o assegnate (`plannedOnly`, prima `todosOnly`), anagrafiche solo
 centrali, intervalli dei promemoria, aggiornamenti. Le chiavi solo del
 telefono (posizione, chiamate, widget…) non lo riguardano.
 
@@ -347,6 +389,7 @@ telefono (posizione, chiamate, widget…) non lo riguardano.
 | "Codice scaduto o già usato" | Il collegamento vale 10 minuti e una volta: creane un altro sul web |
 | "Il certificato del server non è valido" | Il server ha un certificato autofirmato: usa il collegamento appena creato, che contiene la sua chiave |
 | "Il server ha revocato l'associazione" | Associa di nuovo il PC dal web: i dati restano |
+| "Aggiorna l'app per sincronizzare" | Il server è alla 1.0 e il PC no: aggiorna ActivityTrack Desktop |
 | "Il server non accetta più questa versione" | Aggiorna ActivityTrack Desktop (Impostazioni → Generale, "Controlla ora") |
 | "Va aggiornato il server" | Avvisa l'amministratore di ActivityTrack Web |
 | Un'attività fatta sul telefono non compare | Arriva entro 30 secondi; **F5** ("Sincronizza") la porta subito |
