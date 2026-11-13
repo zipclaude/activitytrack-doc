@@ -1,3 +1,11 @@
+activitytrack-doc (1.0.0~alfa-2-1) unstable; urgency=medium
+
+  * ALPHA pre-release of 1.0 (tag v1.0.0-alfa-2).
+  * App manual: screenshots retaken for 1.0 (Italian complete; English
+    without widgets, settings, client calls and contacts).
+
+ -- ActivityTrack contributors <noreply@activitytrack.invalid>  Fri, 13 Nov 2026 01:55:10 +0000
+
 activitytrack-doc (1.0.0~alfa-1-1) unstable; urgency=medium
 
   * ALPHA pre-release of 1.0 (tag v1.0.0-alfa-1). Synchronisation requires the

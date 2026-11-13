@@ -1,4 +1,4 @@
-Versione 1.0.0-alfa-1 (novembre 2026). ActivityTrack Desktop è l'app per il PC
+Versione 1.0.0-alfa-2 (novembre 2026). ActivityTrack Desktop è l'app per il PC
 di ActivityTrack. Sta nell'area di notifica, vicino all'orologio, e tiene a un
 clic le attività in corso e quelle da fare. Così un'attività, anche breve, si
 registra dalla tastiera, senza prendere il telefono.
