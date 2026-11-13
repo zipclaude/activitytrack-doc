@@ -20,7 +20,6 @@ Un *Da fare* è un'attività nello stato "Da fare": quando la avvii diventa Lavo
 Incompleta (§ stati nel *Manuale*).
 
 ![Home](img/home.png)
-<!-- screenshot to retake: Home 1.0 with the four buttons Da fare/Lavoro/Viaggio/Assenza -->
 
 In "Lavoro" scegli **Adesso / Già iniziata / Passata**, poi il **cliente** (scrivi per cercare), la **descrizione** (o una
 scelta rapida; anche dettata col microfono) e il **ruolo**. "Già iniziata"
@@ -29,7 +28,6 @@ verde dice cosa farà: "Avvia adesso", "Avvia dalle 09:15", "Registra
 09:15–10:40". "Altre informazioni" apre tratti, note e riferimenti.
 
 ![Nuova attività](img/start.png)
-<!-- screenshot to retake: "Nuova attività" 1.0 (Adesso/Già iniziata/Passata, Altre informazioni, buttons Lavoro/Viaggio) -->
 
 ## 3. Durante il lavoro
 - I pulsanti del riquadro (e della notifica), con il nome sotto: **▶ Lavoro**,
@@ -52,7 +50,6 @@ una chiusa chiede sempre conferma. Toccando qualunque attività si apre la sched
 tratti (pulsante Lavoro · Viaggio · Pausa), spese, allegati, località, note e tag.
 
 ![Scheda attività](img/entry.png)
-<!-- screenshot to retake: activity detail dialog 1.0 -->
 
 ## 5. Consultare
 - **Agenda**: lista, giorno, settimana, mese; ricerca e filtro per tag.

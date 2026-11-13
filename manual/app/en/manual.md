@@ -354,10 +354,8 @@ From a tab other than Home, Back returns to Home.
   moved back (§6).
 
 ![Home: a running activity, the others below, the list with filters](img/home.png)
-<!-- screenshot to retake: Home with the 1.0 layout (four buttons To do/Work/Travel/Absence top right, no Suspend, list rows with state icons, no "Ignored" group) -->
 
 ![Home, the list with the Done ones too](img/home-closed.png)
-<!-- screenshot to retake: Home list with Done/Incomplete rows, new state icons and colours -->
 
 ### Gestures (dragging the cards)
 Every card can be dragged left or right (Home, Agenda list, "To-dos" tab). A short drag shows the buttons, to tap; a
@@ -485,7 +483,6 @@ Four buttons, in the "No activity running" panel of the Home or, with an activit
   HH:MM", "Record HH:MM–HH:MM").
 
 ![New activity](img/start.png)
-<!-- screenshot to retake: "New activity" with the 1.0 dialog (Now/Already started/Past, "More information", green Work / blue Travel buttons) -->
 
 **Travel** — starts at once, as an anonymous activity (no client or description, which you add later in the detail
 dialog). If you are working the app first asks "Have you completed the work activity?" (§5).
@@ -673,7 +670,6 @@ hand stay exact.
 
 ### The activity dialog
 ![An activity's dialog](img/entry.png)
-<!-- screenshot to retake: activity detail dialog 1.0 (state pill "In <state> since" with total, timeline, action buttons, segments with Work·Travel·Pause split button, Place, no "Complete" button) -->
 
 Tapping any activity (running, to do, closed, absence, deleted) opens the same dialog; from the top:
 - the **state** in the Home's style ("In Work since 09:06", with icon and colour) and, on the right, the **total work
@@ -727,7 +723,6 @@ on the right the period's reported total).
   for activities to do; tapping a day opens the Day view.
 
 ![Agenda: Day view (two fingers change the scale)](img/agenda-day.png)
-<!-- screenshot to retake: Agenda day view with dashed planned segments, fuchsia absences and colours from client/company -->
 
 **Tag filter**: the "All tags ▾" chip next to the modes (shown when the
 period has tagged activities) shows only the activities with that tag;
@@ -742,7 +737,6 @@ for the day shown (today: the next half hour; other days: 09:00).
 
 ### Report
 ![The day's report](img/report.png)
-<!-- screenshot to retake: Report with the absences counted apart -->
 
 One day's report: the **total** (rounded work and travel), one line per
 activity with exact → rounded work, travel and pause, and the **absences counted apart** (by kind: Absence, Holiday, Leave, Sick leave); export starts from here
@@ -764,7 +758,6 @@ The "To do" dialog has: **Company**, **Client**, **Description**, planned **Date
 segments**.
 
 ![To-dos with the quick filters](img/todos.png)
-<!-- screenshot to retake: "To-dos" tab with state names (To do, Planned, Late...), priority names, state and priority filters, Bin chip -->
 
 **States.** An activity to do is **To do** (no dates), **Planned** (a date, a time or a due date) or **Late** (§1). The "To-dos"
 list shows the states, the priority names, the **state and priority filters** and the **Bin** chip. Planning is separate from

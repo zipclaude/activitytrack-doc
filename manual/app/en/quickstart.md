@@ -19,7 +19,6 @@ A *To do* is an activity in the "To do" state: when you start it, it becomes Wor
 Incomplete (states: see the *User manual*).
 
 ![Home](img/home.png)
-<!-- screenshot to retake: Home 1.0 with the four buttons To do/Work/Travel/Absence -->
 
 In "Work" pick **Now / Already started / Past**, then the **client** (type to search), the **description** (or a quick pick;
 also dictated with the microphone) and the **role**. "Already started" asks
@@ -28,7 +27,6 @@ what it will do: "Start now", "Start from 09:15", "Record 09:15–10:40". "More 
 and references.
 
 ![New activity](img/start.png)
-<!-- screenshot to retake: "New activity" 1.0 (Now/Already started/Past, More information, buttons Work/Travel) -->
 
 ## 3. While working
 - The card (and notification) buttons, with their names underneath:
@@ -52,7 +50,6 @@ activity opens its dialog: state, timeline, actions, segments (Work · Travel ·
 place, notes and tags.
 
 ![Activity screen](img/entry.png)
-<!-- screenshot to retake: activity detail dialog 1.0 -->
 
 ## 5. Consulting
 - **Agenda**: list, day, week, month; search and tag filter.

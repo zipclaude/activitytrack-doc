@@ -361,10 +361,8 @@ Da una scheda diversa dalla Home, il tasto Indietro torna alla Home.
   è stata anticipata (§6).
 
 ![Home: un'attività in corso, le altre sotto, la lista con i filtri](img/home.png)
-<!-- screenshot to retake: Home with the 1.0 layout (four buttons Da fare/Lavoro/Viaggio/Assenza top right, no Sospendi, list rows with state icons, no "Ignorate" group) -->
 
 ![Home, la lista con anche le Fatte](img/home-closed.png)
-<!-- screenshot to retake: Home list with Fatte/Incomplete rows, new state icons and colours -->
 
 ### Gesti (trascinare i riquadri)
 Ogni riquadro si trascina a sinistra o a destra (Home, lista dell'Agenda,
@@ -499,7 +497,6 @@ Quattro pulsanti, nel riquadro "Nessuna attività in corso" della Home o, con un
   HH:MM", "Registra HH:MM–HH:MM").
 
 ![Nuova attività](img/start.png)
-<!-- screenshot to retake: "Nuova attività" with the 1.0 dialog (Adesso/Già iniziata/Passata, "Altre informazioni", green Lavoro / blue Viaggio buttons) -->
 
 **Viaggio** — parte subito, come attività anonima (senza cliente e descrizione, che si indicano dopo, nella scheda).
 Se stai lavorando l'app chiede prima "Hai completato l'attività lavorativa?" (§5).
@@ -691,7 +688,6 @@ al multiplo più vicino, ognuno sul quanto della regola del tratto (§1). Gli or
 
 ### La scheda dell'attività
 ![Scheda di un'attività](img/entry.png)
-<!-- screenshot to retake: activity detail dialog 1.0 (state pill "In <stato> dalle" with total, timeline, action buttons, segments with Lavoro·Viaggio·Pausa split button, Località, no "Completa" button) -->
 
 Toccando qualunque attività (in corso, da fare, chiusa, assenza, eliminata) si apre la stessa scheda; dall'alto:
 - lo **stato** nello stile della Home ("In Lavoro dalle 09:06", con icona e colore) e, a destra, il **tempo di
@@ -746,7 +742,6 @@ oggi; a destra il totale rendicontato del periodo).
   azienda e uno per le attività da fare; toccando un giorno si apre la vista Giorno.
 
 ![Agenda: vista Giorno (la scala si regola con due dita)](img/agenda-day.png)
-<!-- screenshot to retake: Agenda day view with dashed planned segments, fuchsia absences and colours from client/company -->
 
 **Filtro per tag**: il chip "Tutti i tag ▾" accanto alle modalità (compare
 quando nel periodo ci sono attività con tag) mostra solo le attività con quel
@@ -762,7 +757,6 @@ prossima mezz'ora; altri giorni: le 09:00).
 
 ### Report
 ![Report del giorno](img/report.png)
-<!-- screenshot to retake: Report with the absences counted apart -->
 
 Il report di un giorno: il **totale** (lavoro e viaggio arrotondati), una
 riga per attività con lavoro, viaggio e pausa reali → arrotondati, e le **assenze contate a parte** (per tipo: Assenza, Ferie, Permesso, Malattia); da qui
@@ -784,7 +778,6 @@ facoltativa), **Scadenza** (con ora), **Priorità**; sotto "Altre informazioni":
 riga) e **Tratti pianificati**.
 
 ![Da fare con i filtri rapidi](img/todos.png)
-<!-- screenshot to retake: "Da fare" tab with state names (Da fare, Pianificata, In ritardo...), priority names, state and priority filters, Cestino chip -->
 
 **Stati.** Una voce da fare è **Da fare** (senza date), **Pianificata** (una data, un orario o una scadenza) o **In
 ritardo** (§1). Nell'elenco della scheda "Da fare" compaiono gli stati, i nomi delle priorità, i **filtri per stato
@@ -1157,7 +1150,6 @@ calendario vengono sovrascritte. Gli ultimi 14 giorni si aggiornano da soli;
 - **Scorciatoie** (pressione lunga sull'icona) — i 4 clienti più recenti e "Spesa".
 
 ![I widget 4×2 sullo schermo home: attività in corso e Da fare](img/widgets.png)
-<!-- screenshot to retake: widgets without Sospendi, "Da fare" widget with the new state icons -->
 
 ---
 
@@ -1172,7 +1164,6 @@ titolo della sezione mostra un pallino (•) e uscire chiede conferma
 spiegato nella Parte II, §17.
 
 ![Impostazioni](img/settings.png)
-<!-- screenshot to retake: Settings (Rendicontazione now has "Salva i valori arrotondati"; Gesti without Sospendi) -->
 
 | Sezione | Voce | Predefinito |
 |---|---|---|
