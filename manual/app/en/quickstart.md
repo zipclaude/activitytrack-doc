@@ -1,4 +1,4 @@
-Version 1.0.0-alfa-2 · for everyday use; the *User manual* explains everything else.
+Version 1.0.0-beta-1 · for everyday use; the *User manual* explains everything else.
 
 ## 1. First time
 1. Install `ActivityTrack-<version>.apk` from the GitLab *Releases*.
@@ -44,7 +44,7 @@ and references.
 ## 4. Stopping
 **⏹ Stop** closes the activity. If you made an outbound trip and work with no return, the app offers: **Start return
 trip**, **End the activity**, **End the activity and add the return trip** (a copy of the outbound). With editable times you
-can give the end up to 60 minutes in the future. With a client, work and the required fields the activity is **Done**,
+can give the end up to 24 hours in the future. With a client, work and the required fields the activity is **Done**,
 otherwise **Incomplete**: tap it, fix and "Save". Reopening a closed one always asks for confirmation. Tapping any
 activity opens its dialog: state, timeline, actions, segments (Work · Travel · Pause button), expenses, attachments,
 place, notes and tags.

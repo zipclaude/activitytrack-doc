@@ -1,3 +1,11 @@
+activitytrack-doc (1.0.0~beta-1-1) unstable; urgency=medium
+
+  * BETA pre-release of 1.0 (tag v1.0.0-beta-1).
+  * Manuals: closing in the future up to 24 hours (was 60 minutes); the
+    desktop manual describes the notices of a command and of the sync.
+
+ -- ActivityTrack contributors <noreply@activitytrack.invalid>  Fri, 13 Nov 2026 18:18:00 +0000
+
 activitytrack-doc (1.0.0~alfa-2-1) unstable; urgency=medium
 
   * ALPHA pre-release of 1.0 (tag v1.0.0-alfa-2).

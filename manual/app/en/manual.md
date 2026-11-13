@@ -1,4 +1,4 @@
-Version 1.0.0-alfa-2 (November 2026). Please report any difference between this
+Version 1.0.0-beta-1 (November 2026). Please report any difference between this
 manual and the app. The *Quick start* sums up daily use in a few pages; this
 manual covers everything: **Part I** how to use the app, **Part II** the
 reference (settings, entities, states, flows).
@@ -20,7 +20,7 @@ reference (settings, entities, states, flows).
   (§9); they can also be planned ahead.
 - **Travel while working**: the app asks "Have you completed the work activity?" (§5). Stopping an activity with an
   outbound trip and work offers the **return trip** (§6).
-- **Closing in the future** up to 60 minutes and the **"Save rounded values"** switch in Reports settings (§6, §17).
+- **Closing in the future** up to 24 hours and the **"Save rounded values"** switch in Reports settings (§6, §17).
 - Reopening a closed activity always asks for confirmation; **"Put back to do"** undoes a tick given by mistake.
 - Reports count absences apart; the CSV has the absence rows and the `absence_min` and `absence_kind` columns.
 - Policy: `todosOnly` is now `plannedOnly` (the old name is still read). Interchange version 2 (version 1 files are
@@ -636,9 +636,9 @@ Calls with unknown numbers are ignored.
 ## 6. Stopping and editing
 
 **Stop** from the app (button or drag) closes the activity:
-- with "Editable times" you can give the **End**: empty = now; otherwise the activity closes at that time, even **up to 60
-  minutes in the future** (useful to stop just before a planned break). If another activity starts before that time, the
-  end of the first is **moved back** to the start of the new one, with a notice. Beyond 60 minutes, or without "Editable
+- with "Editable times" you can give the **End**: empty = now; otherwise the activity closes at that time, even **up to 24
+  hours in the future** (useful to stop just before a planned break). If another activity starts before that time, the
+  end of the first is **moved back** to the start of the new one, with a notice. Beyond 24 hours, or without "Editable
   times", the end cannot be in the future;
 - if the activity lasted **under a minute** (no attachments or expenses), a notice with **"Discard"**: it probably started
   by mistake;
@@ -1372,7 +1372,7 @@ Rules:
 - several activities can run together, each with its own pauses; without concurrent ones (policy) the others become
   *Suspended* when one starts;
 - an activity under a minute, stopped from the app, can be discarded;
-- an added or edited segment lasts at least a minute and lies in the past (the end of the last segment up to 60 minutes
+- an added or edited segment lasts at least a minute and lies in the past (the end of the last segment up to 24 hours
   ahead with editable times; absences even further); over other segments of the same activity it is saved after a
   confirmation, which shortens them;
 - on start the planned segments are replaced by the real ones.

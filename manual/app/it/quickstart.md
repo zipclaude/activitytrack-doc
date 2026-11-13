@@ -1,4 +1,4 @@
-Versione 1.0.0-alfa-2 · per l'uso di tutti i giorni; il *Manuale* spiega tutto il
+Versione 1.0.0-beta-1 · per l'uso di tutti i giorni; il *Manuale* spiega tutto il
 resto.
 
 ## 1. Prima volta
@@ -44,7 +44,7 @@ verde dice cosa farà: "Avvia adesso", "Avvia dalle 09:15", "Registra
 ## 4. Fermare
 **⏹ Stop** chiude l'attività. Se avevi fatto andata e lavoro senza ritorno, l'app offre: **Avvia viaggio di
 ritorno**, **Termina l'attività**, **Termina l'attività ed aggiungi il viaggio di ritorno** (copia dell'andata).
-Con gli orari modificabili puoi indicare la fine fino a 60 minuti nel futuro. Se cliente, lavoro e campi
+Con gli orari modificabili puoi indicare la fine fino a 24 ore nel futuro. Se cliente, lavoro e campi
 obbligatori ci sono l'attività è **Fatta**, altrimenti **Incompleta**: toccala, correggi e "Salva". Riaprire
 una chiusa chiede sempre conferma. Toccando qualunque attività si apre la scheda: stato, linea del tempo, azioni,
 tratti (pulsante Lavoro · Viaggio · Pausa), spese, allegati, località, note e tag.

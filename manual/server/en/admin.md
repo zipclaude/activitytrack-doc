@@ -1,4 +1,4 @@
-Version 1.0.0-alfa-2 (November 2026). For whoever installs and runs the
+Version 1.0.0-beta-1 (November 2026). For whoever installs and runs the
 organisation's server; users of the app find everything in the ActivityTrack
 *User manual*.
 

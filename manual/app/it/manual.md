@@ -1,4 +1,4 @@
-Versione 1.0.0-alfa-2 (novembre 2026). Segnalare ogni differenza tra questo manuale
+Versione 1.0.0-beta-1 (novembre 2026). Segnalare ogni differenza tra questo manuale
 e l'app. La *Guida rapida* riassume in poche pagine l'uso quotidiano; questo
 manuale descrive tutto: la **Parte I** l'uso, la **Parte II** il riferimento
 (impostazioni, entità, stati, flussi).
@@ -21,7 +21,7 @@ manuale descrive tutto: la **Parte I** l'uso, la **Parte II** il riferimento
   lavorativo (§9); anche pianificate in anticipo.
 - **Viaggio durante il lavoro**: l'app chiede "Hai completato l'attività lavorativa?" (§5). Allo Stop di
   un'attività con andata e lavoro, l'offerta del **viaggio di ritorno** (§6).
-- **Chiusura nel futuro** fino a 60 minuti e interruttore **"Salva i valori arrotondati"** in Rendicontazione (§6, §17).
+- **Chiusura nel futuro** fino a 24 ore e interruttore **"Salva i valori arrotondati"** in Rendicontazione (§6, §17).
 - Riaprire un'attività chiusa chiede sempre conferma; **"Rimetti da fare"** annulla la spunta data per errore.
 - Nei report le assenze sono contate a parte; il CSV ha le righe delle assenze e le colonne `absence_min` e `absence_kind`.
 - Policy: `todosOnly` si chiama ora `plannedOnly` (il vecchio nome è ancora letto). Interscambio versione 2 (i file
@@ -655,9 +655,9 @@ Le chiamate con numeri sconosciuti vengono ignorate.
 
 **Stop** dall'app (pulsante o trascinamento) chiude l'attività:
 - con "Orari modificabili" puoi indicare la **Fine**: vuoto = adesso; altrimenti l'attività si chiude a
-  quell'ora, anche **fino a 60 minuti nel futuro** (utile per fermarsi un attimo prima di una pausa programmata). Se
+  quell'ora, anche **fino a 24 ore nel futuro** (utile per fermarsi un attimo prima di una pausa programmata). Se
   nel frattempo parte un'altra attività prima di quell'ora, la fine della prima viene **anticipata** all'inizio
-  della nuova, con un avviso. Più in là di 60 minuti, o senza "Orari modificabili", la fine non può essere nel futuro;
+  della nuova, con un avviso. Più in là di 24 ore, o senza "Orari modificabili", la fine non può essere nel futuro;
 - se l'attività è durata **meno di un minuto** (senza allegati né spese), un avviso con **"Scarta"**: probabilmente
   era partita per errore;
 - **"Stop rapido"** ferma subito senza guardare il resto; **"Annulla"** lascia tutto com'era.
@@ -1416,7 +1416,7 @@ Regole:
 - più attività possono essere in corso insieme, ognuna con le sue pause; senza contemporanee (policy) le altre
   diventano *Sospese* quando una parte;
 - un'attività sotto il minuto, fermata dall'app, può essere scartata;
-- un tratto aggiunto o modificato dura almeno un minuto e sta nel passato (la fine dell'ultimo tratto, fino a 60 minuti
+- un tratto aggiunto o modificato dura almeno un minuto e sta nel passato (la fine dell'ultimo tratto, fino a 24 ore
   avanti con gli orari modificabili; le assenze anche più avanti); sopra altri tratti della stessa attività viene salvato
   dopo una conferma, che li accorcia;
 - all'avvio i tratti pianificati vengono sostituiti da quelli veri.

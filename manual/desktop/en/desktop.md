@@ -1,4 +1,4 @@
-Version 1.0.0-alfa-2 (November 2026). ActivityTrack Desktop is the PC app of
+Version 1.0.0-beta-1 (November 2026). ActivityTrack Desktop is the PC app of
 ActivityTrack. It lives in the notification area, next to the clock, and keeps
 the running activities and those to do a click away. So an activity, even a
 short one, goes in from the keyboard instead of the phone.
@@ -226,8 +226,9 @@ length, the **hatched** cells are taken by other activities of that day.
 outbound travel followed by work, and no travel after its last work, it asks: **Avvia viaggio di ritorno** (start the return
 trip), **Termina l'attività** (end the activity) or **Termina l'attività ed aggiungi il viaggio di ritorno** (end it and add
 the return trip: the same duration and km as the outbound, start and arrival swapped; only with editable times). With
-editable times the end may lie up to 60 minutes in the future; if another activity starts earlier, the end is moved back
-with a notice.
+editable times the end may lie up to 24 hours in the future; if another activity starts earlier, the end is moved back
+with a notice (a return trip not begun yet is removed). The notices of a command come as a notification; those of the sync
+(a change not applied after the realignment) stay in the sync state until **Nascondi gli avvisi** is pressed in its panel.
 
 A closed activity with a client, at least one work segment and the required fields is **Done**; otherwise it is
 **Incomplete** and is fixed by opening it, like any other.

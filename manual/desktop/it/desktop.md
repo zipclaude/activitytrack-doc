@@ -1,4 +1,4 @@
-Versione 1.0.0-alfa-2 (novembre 2026). ActivityTrack Desktop è l'app per il PC
+Versione 1.0.0-beta-1 (novembre 2026). ActivityTrack Desktop è l'app per il PC
 di ActivityTrack. Sta nell'area di notifica, vicino all'orologio, e tiene a un
 clic le attività in corso e quelle da fare. Così un'attività, anche breve, si
 registra dalla tastiera, senza prendere il telefono.
@@ -222,8 +222,10 @@ griglia (es. 09:37).
 **Stop** (o **Ctrl+T**) chiude subito l'attività: non c'è più il foglio "Completa l'attività". Se l'attività ha un viaggio di
 andata seguito da lavoro, senza un viaggio dopo l'ultimo lavoro, chiede: **Avvia viaggio di ritorno**, **Termina l'attività**
 o **Termina l'attività ed aggiungi il viaggio di ritorno** (uguale all'andata per durata e km, partenza e arrivo scambiati;
-solo con gli orari modificabili). Con gli orari modificabili la fine può essere fino a 60 minuti nel futuro; se un'altra
-attività parte prima, la fine si porta indietro con un avviso.
+solo con gli orari modificabili). Con gli orari modificabili la fine può essere fino a 24 ore nel futuro; se un'altra
+attività parte prima, la fine si porta indietro con un avviso (un viaggio di ritorno non ancora iniziato viene rimosso). Gli avvisi di un
+comando arrivano come notifica; quelli della sincronizzazione (una modifica non applicata dopo il riallineamento) restano nello
+stato della sincronizzazione finché non si preme **Nascondi gli avvisi** nel suo pannello.
 
 Una chiusa con cliente, almeno un tratto di lavoro e i campi obbligatori è **Fatta**; altrimenti è **Incompleta** e si
 corregge aprendola, come ogni altra.
