@@ -59,3 +59,11 @@ scripts/check-manual.sh v0.9.10                          # on release: VERSION, 
 - English for the sources of scripts and packaging; the manuals follow their language (it/en).
 - No secrets, tokens or personal data: the repository is public.
 - Commits end with the `Co-Authored-By:` line naming the model actually used.
+
+## 5. GitHub backup
+
+GitLab is the primary; github.com/zipclaude/activitytrack-doc is meant as a backup that can build, package and
+release the documentation on its own if GitLab is unavailable. `.github/workflows/ci.yml` mirrors `.gitlab-ci.yml`:
+**keep them in step**. Nothing runs on its own there either: "Run workflow" on a branch or tag, or a push to
+`ghtest/*` to try a change. `secret_detection` stays GitLab-only (GitHub's secret scanning does that job).
+Written before the repository existed on GitHub: not yet run there.
