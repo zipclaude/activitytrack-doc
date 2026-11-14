@@ -2,7 +2,8 @@
 
 The paid shared Windows runners of GitLab run the jobs `windows`, `windows-exe` and
 `windows-installer` of cli, tui and desktop: the only jobs that start the packaged executables.
-They run for **stable tags** only. A local Windows 11 machine does the same for free, and checks a
+They run for **stable tags** only (pre-releases are tried on GitHub's Windows runners, free: see
+`workflow.md`, beta releases). A local Windows 11 machine does the same for free, and checks a
 real client system (the shared runners are Windows Server). This is the plan; nothing of it is
 installed yet.
 

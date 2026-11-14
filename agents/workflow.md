@@ -21,7 +21,8 @@ Tags `v*` are protected. Nobody pushes to `main` or `next` directly.
 2. Merge request `next` → `main`, merged **fast-forward only** (the projects have the
    merge method `ff`: no merge commit; every merge request is rebased before it is merged). After it, `main` and `next` are the same commit.
 3. Tag `vX.Y.Z` on `main`. The full pipeline runs on the owner's command, Windows jobs
-   included (they are the only ones that run the packaged executables).
+   included (on a stable tag, GitLab's own paid Windows runners start the packaged executables;
+   a pre-release has them tried on GitHub, see below).
 4. Right after the release, **merge `main` into `next`** (not a rebase: `next` is shared).
    It is a no-op except where CI commits to `main` after a tag, beta or stable (the app's
    `Update manifest for vX.Y.Z [skip ci]`, the file the installed apps read at
@@ -43,10 +44,38 @@ named in `.gitlab/lib-ref`), then cli, tui, desktop, web, app, and the documenta
 - In Debian packages the version is written `X.Y.Z~beta-N-1`: the CI turns the tag's first hyphen
   into a tilde (a hyphen would sort after the release, the tilde before it) and the changelog adds
   the Debian revision `-1`.
-- Prerequisite: the unit tests and the **Wine** jobs of the local runner pass. The paid
-  Windows pipeline is not required. The Windows executables of a beta are built under
-  Wine and are **not started** there (Wine cannot run a PyInstaller bundle): the release
-  notes say so.
+- Prerequisite: the unit tests and the **Wine** tests (`windows-wine`) of the owner's runner pass.
+  The paid Windows runners of GitLab are not used: the real Windows jobs of a pre-release (any
+  suffix: `-alfa-N`, `-beta-N`) run on **GitHub**, free (activitytrack/activitytrack-doc#1):
+  1. The tag is pushed on GitLab; the push mirror brings it to the GitHub backup in seconds, and
+     there the workflow starts by itself (`on: push: tags: ["v*-*"]`, from the tagged commit's
+     file). It runs the Windows tests, the real `windows-exe` of cli and tui (built and started)
+     and the desktop's `windows-installer` (installed, tried, uninstalled), and, when everything
+     is green, publishes the GitHub pre-release with all the files and `SHA256SUMS`.
+  2. The GitLab tag pipeline (started by hand, as always) has the job `windows-github` (stage
+     package, starts at once): `.gitlab/github-windows-gate.sh` polls the public GitHub API
+     without a token for the run of the tag's commit, fails if it is red or does not appear
+     within 15 minutes (the message says where to look), and downloads the Windows files of the
+     GitHub release, checked against its `SHA256SUMS`.
+  3. GitLab's `release` (next stage) publishes them under the same names as a stable release
+     (`…-windows.zip`, `ActivityTrackDesktop-…-setup.exe`), so the app's manifest gets
+     `cli-windows`, `tui-windows` and `desktop-windows` for pre-releases too. The library has no
+     Windows file: there the job is only the gate.
+  Re-running a GitLab pipeline after GitHub finished passes at once; a GitHub re-run replaces
+  the files of its release. Nothing to configure: an optional masked project variable
+  `GITHUB_TOKEN_RO` (a read-only token) only raises GitHub's limit of 60 requests/hour per IP.
+  **GitHub down**: a maintainer sets the project variable `WINDOWS_GATE=skip` (Settings → CI/CD
+  → Variables; pipeline variables are refused in these projects), runs the tag pipeline again and
+  removes the variable. cli and tui then take the old Wine executable (`windows-wine-exe`, built,
+  **not started**: Wine cannot run a PyInstaller bundle), the desktop goes without the installer,
+  and the notes of each release say the Windows check was skipped.
+- Stable tags are unchanged: GitLab's own paid Windows jobs. The same gate could replace them:
+  widen the GitHub trigger to every `v*` tag, run `windows-github` on stable tags too and drop
+  (or put behind a variable) `windows`, `windows-exe` and `windows-installer` in the four
+  `.gitlab-ci.yml`. To weigh first: the backup would then publish its GitHub release before
+  GitLab's, the stable release would depend on GitHub's availability (the `WINDOWS_GATE=skip`
+  fallback would ship an untried Wine build), and both run Windows Server, not the users'
+  Windows 11 (see `windows-runner.md`).
 
 ### Security patches
 
@@ -73,8 +102,9 @@ named in `.gitlab/lib-ref`), then cli, tui, desktop, web, app, and the documenta
 - App: `./gradlew --offline -q :core:domain:test :core:data:testDebugUnitTest :app:compileDebugKotlin`
 - Server: `manage.py test` in a Django 4.2 virtual environment.
 - Python repositories: `python3 -m unittest discover -s tests -t .`
-- Windows code paths: the `windows-wine` jobs on the local runner, then (before a stable
-  release) the full Windows pipeline on the shared runners or on the owner's Windows 11 VM.
+- Windows code paths: the `windows-wine` jobs on the local runner, or a push of a branch
+  `ghtest/<name>` to the GitHub backup (real Windows, free, no tag needed); before a stable
+  release, the full Windows pipeline on the shared runners or on the owner's Windows 11 VM.
 
 ## Rules that do not bend
 
