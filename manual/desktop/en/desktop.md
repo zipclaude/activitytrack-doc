@@ -319,7 +319,9 @@ the other device.
 - **language**: in the **"Lingua"** (language) group you choose **"Lingua del sistema"** (system language, the default) or
   Italiano, English, Deutsch or Español, each in its own name. The choice holds **from the next start** of ActivityTrack,
   and the panel says so. If the policy sets the language (`ui.language`) the choice is greyed, with the hint
-  **"Impostato dalla policy"** (set by the policy), and the policy's language is used;
+  **"Impostato dalla policy"** (set by the policy), and the policy's language is used. The language is, in this order: the policy, the choice made here, the system's
+  language, English (never Italian by default). The same choice is read by the **command line** and the **terminal
+  interface** (`activitytrack`, `activitytrack-tui`) too, which use the same data (§1);
 - **dates and times**: the date format, European (31/12/2026), American
   (12/31/2026) or ISO (2026-12-31), and the time format, 24 hours (18:30) or
   12 hours (6:30 PM). The command line and the terminal follow them too, as
@@ -385,7 +387,7 @@ program is `ActivityTrack.exe` in the installation folder
 The PC gets the phone's policy and applies the keys that concern it: features
 (activities, travels, to-dos, planning, deleting and restoring), fields (names,
 required, hidden, read-only), editable times, free tags, activities only from
-planned or assigned ones (`plannedOnly`, formerly `todosOnly`), central master data only, reminder intervals, updates. The
+planned or assigned ones (`plannedOnly`, formerly `todosOnly`), central master data only, reminder intervals, updates, language (`ui.language`). The
 phone-only keys (location, calls, widgets…) do not concern it.
 
 ## 12. Common problems

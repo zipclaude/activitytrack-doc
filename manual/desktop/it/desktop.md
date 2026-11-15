@@ -313,7 +313,9 @@ sull'altro dispositivo.
 - **lingua**: nel gruppo **"Lingua"** si sceglie **"Lingua del sistema"** (predefinita) oppure Italiano, English, Deutsch o
   Español, ciascuna con il proprio nome. La scelta vale **dal prossimo avvio** di ActivityTrack, e il pannello lo dice.
   Se la policy fissa la lingua (`ui.language`) la scelta è grigia, con il suggerimento **"Impostato dalla policy"**, e
-  vale quella della policy;
+  vale quella della policy. La lingua è, nell'ordine: la policy, la scelta fatta qui, la lingua del sistema, l'inglese (mai
+  l'italiano per mancanza d'altro). La stessa scelta è letta anche dalla **riga di comando** e dal **terminale**
+  (`activitytrack`, `activitytrack-tui`), che usano gli stessi dati (§1);
 - **date e orari**: il formato delle date, europeo (31/12/2026), americano
   (12/31/2026) o ISO (2026-12-31), e degli orari, 24 ore (18:30) o 12 ore
   (6:30 PM). Valgono anche per la riga di comando e il terminale, come le
@@ -382,7 +384,7 @@ nell'area di notifica ed esegue il comando. Su Windows il programma è
 Il PC riceve la stessa policy del telefono e applica le chiavi che lo
 riguardano: funzioni (attività, viaggi, Da fare, pianificazione, eliminare e ripristinare), campi (nomi, obbligatori, nascosti, sola lettura), tempi
 modificabili, tag liberi, attività solo da quelle pianificate o assegnate (`plannedOnly`, prima `todosOnly`), anagrafiche solo
-centrali, intervalli dei promemoria, aggiornamenti. Le chiavi solo del
+centrali, intervalli dei promemoria, aggiornamenti, lingua (`ui.language`). Le chiavi solo del
 telefono (posizione, chiamate, widget…) non lo riguardano.
 
 ## 12. Problemi comuni

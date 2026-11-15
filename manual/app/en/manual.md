@@ -241,8 +241,11 @@ reference (settings, entities, states, flows).
 **In 0.6.3**: overlapping segments resolved on confirm, deleting an activity
 and hand-made to-dos, menu icons.
 
-Names in quotes are the labels of the English interface; the app also speaks
-Italian, German and Spanish.
+Names in quotes are the labels of the English interface. The app speaks English, Italian, German and Spanish: by default
+it follows the phone's language, and if the phone's is one the app does not know it uses **English**. It is changed in
+Settings → "Display" → **"Language"** (**System default**, Italiano, English, Deutsch, Español); if a policy fixes the
+language (`ui.language`) the item is locked, with the padlock, and the policy's language is used; when the policy goes,
+the user's choice is back.
 
 ---
 
@@ -1128,6 +1131,7 @@ title shows a dot (•) and leaving asks first ("Leave without saving",
 | Section | Item | Default |
 |---|---|---|
 | Display | Normal / Compact | Normal |
+| | Language | System default |
 | | To-dos widget: window | 24 h |
 | Times | Times freely editable: start and end chosen when starting and stopping, segments editable and deletable (off: times as recorded; "+ Travel" and "+ Pause" stay) | on |
 | Calls | Recognise incoming / outgoing calls | off |
@@ -1197,6 +1201,7 @@ to the nearest limit.
 | Item | Effect | Default |
 |---|---|---|
 | Normal / Compact | Compact: text at 88 %, tighter cards and buttons. | Normal |
+| Language | **System default** (the phone's language; English if the app does not know it), Italiano, English, Deutsch or Español, each in its own name. A policy (`ui.language`) fixes and locks it (padlock). | System default |
 | To-dos widget: window | How far the like-named widget looks ahead: 24 h, 3, 7 or 30 days; overdue to-dos are always included. A policy can lock it (padlock). | 24 h |
 | Free tags too | On: any tag can be typed. Off: only the master data's tags; free ones already on activities stay. Policy: `tagsFreeText`. | On |
 

@@ -104,8 +104,10 @@ Il menu a sinistra (sul telefono, la barra in basso) contiene **Home**,
 **Dispositivi**; per gli amministratori anche **Policy** e **Utenti**. In
 fondo c'è il proprio nome: un clic apre **"Cambia password"**.
 
-L'interfaccia web parla **italiano, inglese, tedesco e spagnolo** (la lingua si sceglie nelle Preferenze, §8); gli
-schermi del manuale la mostrano in italiano.
+L'interfaccia web parla **italiano, inglese, tedesco e spagnolo**. La lingua è, nell'ordine: quella imposta dalla policy
+(`ui.language`, §7), altrimenti la scelta fatta nelle Preferenze (§8), altrimenti quella del browser; se il browser ne
+chiede una che il server non ha, le pagine sono in **inglese** (mai in italiano). Gli schermi del manuale la mostrano in
+italiano.
 
 ## 4. Utenti e profili
 
@@ -269,6 +271,9 @@ Alcune impostazioni valgono anche sul web:
 - **Orari modificabili** (`editableTimes`) bloccato su "no": sul web
   l'utente può solo aggiungere viaggi e pause; gli orari li corregge un
   amministratore o il suo responsabile.
+- **Lingua** (`ui.language`: `it`, `en`, `de` o `es`): fissa anche la lingua delle pagine web per gli utenti a cui si
+  applica la policy, come per le app; nelle Preferenze i pulsanti della lingua sono allora disabilitati, con la
+  scritta "Impostato dalla policy".
 - **Tag liberi** (`tagsFreeText`) spento: sul web si scelgono solo i tag
   dell'anagrafica.
 - La funzione **Da fare** o **Pianificazione** spenta toglie le attività *Da
@@ -356,7 +361,8 @@ telefono: *Altro → Preferenze*), ognuno sceglie:
 Le preferenze sono dell'utente: valgono su ogni browser con cui accede.
 
 La **lingua** (italiano, inglese, tedesco o spagnolo) si sceglie nella stessa pagina e vale per il
-browser in uso; finché non la scegli, le pagine seguono la lingua del browser. I pulsanti, le etichette, i messaggi e le
+browser in uso; finché non la scegli, le pagine seguono la lingua del browser, o l'inglese se il server non ha quella del
+browser. Se la policy fissa la lingua (§7) i pulsanti sono disabilitati e la pagina dice "Impostato dalla policy". I pulsanti, le etichette, i messaggi e le
 email sono tradotti; ciò che scrivi (nomi, note) resta com'è.
 
 ![Preferenze](../img/preferences.png)

@@ -101,8 +101,9 @@ The menu on the left (on a phone, the bar at the bottom) has **Home**,
 also have **Policy** and **Utenti** (Users). At the bottom is one's own
 name: a click opens **"Cambia password"** (change password).
 
-The web interface comes in **Italian, English, German and Spanish** (the language is chosen in the Preferences, §8);
-the screenshots show it in Italian, and the names of the pages and buttons in this manual are the Italian ones, with
+The web interface comes in **Italian, English, German and Spanish**. The language is, in this order: the one set by the
+policy (`ui.language`, §7), else the choice made in the Preferences (§8), else the browser's; if the browser asks for one
+the server does not have, the pages are in **English** (never Italian). The screenshots show it in Italian, and the names of the pages and buttons in this manual are the Italian ones, with
 the English in brackets.
 
 ## 4. Users and profiles
@@ -267,6 +268,9 @@ Some settings count on the web too:
 - **Editable times** (`editableTimes`) locked to "no": on the web the user
   only adds travels and pauses; an administrator or their manager fixes
   the times.
+- **Language** (`ui.language`: `it`, `en`, `de` or `es`): also fixes the language of the web pages for the users the
+  policy applies to, as for the apps; in the Preferences the language buttons are then disabled, with the note
+  "Impostato dalla policy" (set by the policy).
 - **Free tags** (`tagsFreeText`) off: on the web only the master-data tags
   can be chosen.
 - The **To-dos** or **Planning** feature off removes the activities in the *To do* state from the
@@ -355,7 +359,8 @@ with.
 
 The **language** (Italian, English, German or Spanish) is chosen on the same page and holds for
 the browser in use; until you choose one, the pages follow the browser's
-language. The buttons, labels, messages and emails are translated; what you type
+language, or English if the server does not have it. If the policy fixes the language (§7) the buttons are disabled and
+the page says "Impostato dalla policy". The buttons, labels, messages and emails are translated; what you type
 (names, notes) stays as written.
 
 ![Preferences](../img/preferences.png)

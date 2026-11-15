@@ -248,8 +248,11 @@ aggiornamenti)
 **Nella 0.6.3**: tratti sovrapposti risolti con una conferma, eliminazione di
 un'attività e delle voci *Da fare* create a mano, icone nei menu.
 
-I nomi tra virgolette sono le voci dell'interfaccia in italiano; con il
-telefono in un'altra lingua l'app usa inglese, tedesco o spagnolo.
+I nomi tra virgolette sono le voci dell'interfaccia in italiano. L'app parla italiano, inglese, tedesco e spagnolo: di
+base segue la lingua del telefono, e se il telefono ne ha una che l'app non conosce usa l'**inglese**. Si cambia in
+Impostazioni → "Visualizzazione" → **"Lingua"** (**Predefinita del sistema**, Italiano, English, Deutsch, Español); se
+una policy fissa la lingua (`ui.language`) la voce è bloccata, con il lucchetto, e vale quella della policy; tolta la
+policy, torna la scelta dell'utente.
 
 ---
 
@@ -1170,6 +1173,7 @@ spiegato nella Parte II, §17.
 | Sezione | Voce | Predefinito |
 |---|---|---|
 | Visualizzazione | Normale / Compatta | Normale |
+| | Lingua | Predefinita del sistema |
 | | Widget «Da fare»: intervallo | 24 h |
 | Orari | Orari modificabili liberamente: inizio e fine scelti all'avvio e allo stop, tratti modificabili ed eliminabili (spento: orari come registrati; "+ Viaggio" e "+ Pausa" restano) | acceso |
 | Chiamate | Riconosci le chiamate in entrata / in uscita | spenti |
@@ -1239,6 +1243,7 @@ riportati al limite più vicino.
 | Voce | Effetto | Predefinito |
 |---|---|---|
 | Normale / Compatta | Compatta: testo all'88 %, riquadri e pulsanti più stretti. | Normale |
+| Lingua | **Predefinita del sistema** (la lingua del telefono; l'inglese se l'app non la conosce), Italiano, English, Deutsch o Español, ciascuna con il proprio nome. Una policy (`ui.language`) la fissa e la blocca (lucchetto). | Predefinita del sistema |
 | Widget «Da fare»: intervallo | Quanto guardare avanti nel widget omonimo: 24 h, 3, 7 o 30 giorni; le voci in ritardo sono sempre incluse. Una policy può fissarla (con lucchetto). | 24 h |
 | Anche tag liberi | Acceso: si può scrivere qualsiasi tag. Spento: solo i tag dell'anagrafica; quelli liberi già sulle attività restano. Policy: `tagsFreeText`. | Acceso |
 
