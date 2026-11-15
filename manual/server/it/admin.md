@@ -305,7 +305,8 @@ spagnolo scritte altrove le conserva anche se la salvi dal web.
 Ognuno trova sul web il proprio lavoro, come nell'app.
 - **Home**: le attività in corso con i comandi (Pausa, Lavoro, Viaggio, Stop; non c'è più Sospendi), poi una lista
   unica di tutte le attività nei loro **stati**, con i filtri periodo, stato, azienda e tag. I gruppi
-  della lista, con **Stato → "Tutti"**, seguono il tempo: **In ritardo**, **Dettagli mancanti**, **Oggi**, **Prossimi
+  della lista, con **Stato → "Tutti"**, seguono il tempo: **In ritardo**, **Dettagli mancanti** (le attività *Incomplete*, se
+  il filtro Stato le comprende e ce ne sono; nell'app il gruppo si chiama "Incompleta"), **Oggi**, **Prossimi
   giorni**, **Senza data**, **Giorni precedenti** (le Da fare senza data stanno quindi tra i giorni a venire e quelli
   passati, non dopo le Fatte).
 - **Viaggio.** Il pulsante della Home apre un modulo: la **persona** (se stessi o, per un responsabile o un

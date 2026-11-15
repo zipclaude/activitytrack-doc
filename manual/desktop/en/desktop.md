@@ -3,7 +3,8 @@ ActivityTrack. It lives in the notification area, next to the clock, and keeps
 the running activities and those to do a click away. So an activity, even a
 short one, goes in from the keyboard instead of the phone.
 
-The interface is in Italian; the screenshots show it as it is.
+The interface comes in Italian, English, German and Spanish (§9); the screenshots show it in Italian, and the names of
+its buttons and pages in this manual are the Italian ones, with the English in brackets.
 
 ## 1. What it needs
 
@@ -243,8 +244,9 @@ A closed activity with a client, at least one work segment and the required fiel
 A *To-do* is an **activity in the To do state**: when you start it, it becomes Work or Travel and, at the end, Done or
 Incomplete.
 
-Below the running activities the Home has one list, as the app: **In ritardo** (late), **Dettagli mancanti**
-(missing details: the incomplete ones), **Oggi** (today), **Prossimi giorni** (next days), **Senza data** (no date),
+Below the running activities the Home has one list, in the app's order: **In ritardo** (late), **Dettagli mancanti**
+(details missing: the activities in the *Incompleta* state, a group the app calls "Incomplete"; it is there when the
+state filter includes "Dettagli mancanti", as it does at the start, and there are any), **Oggi** (today), **Prossimi giorni** (next days), **Senza data** (no date),
 **Giorni precedenti** (earlier days): the to-dos without a date sit between the next days and the earlier ones, not after
 the done ones. The filters **period** (Oggi, 24 h, 3 gg…),
 **state**, **company** and **tag** are buttons with their menu, coloured when they are not the initial ones, and are
@@ -320,8 +322,8 @@ the other device.
   Italiano, English, Deutsch or Español, each in its own name. The choice holds **from the next start** of ActivityTrack,
   and the panel says so. If the policy sets the language (`ui.language`) the choice is greyed, with the hint
   **"Impostato dalla policy"** (set by the policy), and the policy's language is used. If the policy has `ui.language` with a value that is not a supported language (`it`,
-  `en`, `de`, `es`), the language is **forced to English**: the choice is greyed, shows English and says "Forced to
-  English by a policy with an invalid value"; the saved choice is not lost and comes back when the policy changes. The
+  `en`, `de`, `es`), the language is **forced to English**: the choice is greyed, shows English and says **"Lingua forzata
+  sull'inglese da una policy con un valore errato"** (forced to English by a policy with an invalid value); the saved choice is not lost and comes back when the policy changes. The
   language is, in this order: the policy, the choice made here, the system's
   language, English (never Italian by default). The same choice is read by the **command line** and the **terminal
   interface** (`activitytrack`, `activitytrack-tui`) too, which use the same data (§1);

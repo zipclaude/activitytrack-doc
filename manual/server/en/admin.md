@@ -303,7 +303,8 @@ written elsewhere keeps them when you save it from the web.
 Everyone finds their own work on the web, as in the app.
 - **Home**: the running activities with their commands (Pause, Work, Travel, Stop; there is no Suspend any more), then
   one list of all the activities in their **states**, with the filters period, state, company and tag. The groups of the
-  list, with **State → "All"**, follow the time: **In ritardo** (Late), **Dettagli mancanti** (Missing details),
+  list, with **State → "All"**, follow the time: **In ritardo** (Late), **Dettagli mancanti** (Details missing: the *Incomplete*
+  activities, when the State filter includes them and there are any; the app calls this group "Incomplete"),
   **Oggi** (Today), **Prossimi giorni** (Next days), **Senza data** (Without a date), **Giorni precedenti** (Previous
   days): the to-dos without a date sit between the next days and the previous ones, not after the done ones.
 - **Viaggio** (Travel). The Home's button opens a form: the **person** (oneself or, for a manager or an administrator, a

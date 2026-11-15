@@ -239,8 +239,9 @@ corregge aprendola, come ogni altra.
 
 Un *Da fare* è un'**attività nello stato Da fare**: quando la avvii diventa Lavoro o Viaggio e, alla fine, Fatta o Incompleta.
 
-Sotto le attività in corso la Home ha un'unica lista, come l'app: **In ritardo**, **Dettagli mancanti**
-(le incomplete), **Oggi**, **Prossimi giorni**, **Senza data**, **Giorni precedenti**: i Da fare senza data stanno tra i
+Sotto le attività in corso la Home ha un'unica lista, nell'ordine dell'app: **In ritardo**, **Dettagli mancanti**
+(le attività nello stato *Incompleta*, gruppo che l'app chiama "Incompleta"; c'è quando il filtro di stato comprende
+"Dettagli mancanti", come all'inizio, e ce ne sono), **Oggi**, **Prossimi giorni**, **Senza data**, **Giorni precedenti**: i Da fare senza data stanno tra i
 giorni a venire e quelli passati, non dopo le fatte. I filtri **periodo** (Oggi, 24 h, 3 gg…), **stato**, **azienda** e **tag** sono pulsanti con il
 loro menu, colorati quando non sono quelli iniziali, e restano memorizzati; **Cerca** (Ctrl+F) restringe la lista alle
 righe che contengono le parole scritte.
