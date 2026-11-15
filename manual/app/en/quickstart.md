@@ -1,4 +1,4 @@
-Version 1.0.0-beta-1 · for everyday use; the *User manual* explains everything else.
+Version 1.0.0-beta-2 · for everyday use; the *User manual* explains everything else.
 
 ## 1. First time
 1. Install `ActivityTrack-<version>.apk` from the GitLab *Releases*.

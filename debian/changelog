@@ -1,3 +1,9 @@
+activitytrack-doc (1.0.0~beta-2-1) unstable; urgency=medium
+
+  * BETA pre-release of 1.0 (tag v1.0.0-beta-2).
+
+ -- ActivityTrack contributors <noreply@activitytrack.invalid>  Sun, 15 Nov 2026 03:18:29 +0000
+
 activitytrack-doc (1.0.0~beta-1-1) unstable; urgency=medium
 
   * BETA pre-release of 1.0 (tag v1.0.0-beta-1).

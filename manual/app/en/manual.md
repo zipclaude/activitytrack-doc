@@ -1,4 +1,4 @@
-Version 1.0.0-beta-1 (November 2026). Please report any difference between this
+Version 1.0.0-beta-2 (November 2026). Please report any difference between this
 manual and the app. The *Quick start* sums up daily use in a few pages; this
 manual covers everything: **Part I** how to use the app, **Part II** the
 reference (settings, entities, states, flows).

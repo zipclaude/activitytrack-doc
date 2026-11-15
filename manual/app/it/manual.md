@@ -1,4 +1,4 @@
-Versione 1.0.0-beta-1 (novembre 2026). Segnalare ogni differenza tra questo manuale
+Versione 1.0.0-beta-2 (novembre 2026). Segnalare ogni differenza tra questo manuale
 e l'app. La *Guida rapida* riassume in poche pagine l'uso quotidiano; questo
 manuale descrive tutto: la **Parte I** l'uso, la **Parte II** il riferimento
 (impostazioni, entità, stati, flussi).
