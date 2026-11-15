@@ -99,10 +99,13 @@ vale una volta al posto del codice, se si perde il telefono o la posta.
 Dopo 5 codici sbagliati si ricomincia dalla password. I telefoni associati
 non cambiano: sincronizzano con il loro token.
 
-Il menu a sinistra (sul telefono, la barra in basso) contiene **Home**,
-**Da fare**, **Cestino**, **Agenda**, **Report**, **Attività**, **Anagrafiche** e
-**Dispositivi**; per gli amministratori anche **Policy** e **Utenti**. In
-fondo c'è il proprio nome: un clic apre **"Cambia password"**.
+Il menu a sinistra contiene **Home**, **Da fare**, **Agenda**, **Report**, **Attività**, **Cestino**, **Anagrafiche** e
+**Dispositivi**; per gli amministratori anche **Policy** e **Utenti**. **Report** e **Anagrafiche** sono **rami** che
+si aprono e si chiudono: sotto **Report** ci sono **Riepilogativo** e **Dettaglio attività**, sotto **Anagrafiche**
+**Aziende**, **Clienti**, **Ruoli**, **Tag**, **Scelte rapide** e **Materiali**; il ramo della pagina in cui ti trovi è
+aperto, con la voce corrente evidenziata, e si apre anche dalla tastiera (Invio o Spazio). Sul telefono c'è la barra in
+basso (Home, Da fare, Agenda, Report, Altro) e le due pagine hanno le stesse voci come schede in alto. In fondo c'è il
+proprio nome: un clic apre **"Cambia password"**.
 
 L'interfaccia web parla **italiano, inglese, tedesco e spagnolo**. La lingua è, nell'ordine: quella imposta dalla policy
 (`ui.language`, §7), altrimenti la scelta fatta nelle Preferenze (§8), altrimenti quella del browser; se il browser ne
@@ -232,7 +235,8 @@ Aziende, clienti, ruoli, tag, scelte rapide e materiali sono **centrali**
 (le vedono tutti; le modificano amministratori e responsabili) o
 **personali** (di un utente, se la policy lo consente). L'app e il web
 mostrano quale è quale. Aziende, clienti e tag hanno un **colore** facoltativo,
-scelto tra quelli dell'app, anche dal web.
+scelto tra quelli dell'app, anche dal web. Nel menu a sinistra **Anagrafiche** è un ramo con una voce per ciascuna
+(Aziende, Clienti, Ruoli, Tag, Scelte rapide, Materiali), le stesse delle schede della pagina.
 
 Se sul telefono e sul server c'è un'anagrafica con lo stesso nome,
 diventano una sola alla prima sincronizzazione, con i dati del server. Per i
@@ -277,6 +281,11 @@ Alcune impostazioni valgono anche sul web:
   applica la policy, come per le app; nelle Preferenze i pulsanti della lingua sono allora disabilitati, con la
   scritta "Impostato dalla policy" (con un valore errato: "Lingua forzata sull'inglese da una policy con un valore
   errato").
+- **Esportazione** (funzione `export`, formati `export.formats`, comportamento `exportMaxDays`): valgono anche per i
+  report del web e per il CSV (§9): senza la funzione non ci sono esportazioni, i formati sono quelli elencati (tutti e
+  tre se non ne elenca), e un periodo più lungo di `exportMaxDays` giorni (366 se manca) non si esporta.
+- **Viaggi** (funzione `travel`) e **Origine delle attività** (`entries.source`, "solo da pianificate"): valgono anche per
+  il viaggio avviato dal web (§8).
 - **Tag liberi** (`tagsFreeText`) spento: sul web si scelgono solo i tag
   dell'anagrafica.
 - La funzione **Da fare** o **Pianificazione** spenta toglie le attività *Da
@@ -299,6 +308,12 @@ Ognuno trova sul web il proprio lavoro, come nell'app.
   della lista, con **Stato → "Tutti"**, seguono il tempo: **In ritardo**, **Dettagli mancanti**, **Oggi**, **Prossimi
   giorni**, **Senza data**, **Giorni precedenti** (le Da fare senza data stanno quindi tra i giorni a venire e quelli
   passati, non dopo le Fatte).
+- **Viaggio.** Il pulsante della Home apre un modulo: la **persona** (se stessi o, per un responsabile o un
+  amministratore, una persona del team), **a che cosa serve** (una voce Da fare di quella persona, un cliente, un'azienda
+  o una descrizione: almeno una) e **quando** (adesso, da un'ora, oppure già fatto, con inizio e fine). Dal web un viaggio
+  non è mai anonimo. Per un'altra persona si registra solo un viaggio **già fatto**: uno in corso metterebbe da parte le
+  attività che ha aperte sul telefono. Valgono le regole della policy della persona: la funzione Viaggi, "attività solo da
+  pianificate" (`entries.source`: serve una voce Da fare) e gli orari bloccati (niente orari scelti).
 - **Stati.** Ogni attività mostra uno di undici stati, con icona e colore (gli stessi dell'app):
 
   | Stato | Icona | Colore |
@@ -323,6 +338,13 @@ Ognuno trova sul web il proprio lavoro, come nell'app.
   chiede sempre conferma; **"Rimetti da fare"** toglie la spunta a una voce spuntata per errore (senza tratti reali).
   Allo Stop di un'attività con andata e lavoro si può aggiungere il **viaggio di ritorno**. La **priorità** ha i nomi
   Nessuna, Bassa, Media, Alta, Urgenza, Emergenza.
+- **Attività, l'elenco.** **"Ordina per"** offre Data (per giorno, come prima), Ora di inizio, Azienda, Cliente, Durata,
+  Stato e, per chi vede più persone, Persona, con una direzione (anche nell'indirizzo, `?sort=` e `&dir=`); gli ordini
+  diversi dalla data sono un'unica lista in cui ogni riga dice il suo giorno, e ciò che non ha valore resta in fondo in
+  entrambe le direzioni. Ogni riga (e quelle della Home) ha un'icona per ogni tipo di allegato (**Foto**, **Nota vocale**,
+  **Scontrino**, **File**), con il numero se sono più d'uno, e, se ci sono tratti di viaggio, il tempo di viaggio e i km
+  (quelli dichiarati, altrimenti quelli stimati). Il periodo comprende anche le attività registrate **dopo** per un giorno
+  passato (il modulo "Passata").
 - **Cestino**: le attività eliminate, con **Ripristina** ed **Elimina definitivamente** (al posto di "Ignorate").
 - **Assenze**: il modulo chiede il tipo (Assenza, Ferie, Permesso, Malattia), l'azienda (facoltativa: vuota = tutte),
   dal giorno al giorno e gli orari facoltativi (un permesso); senza orari si crea uno spezzone per ogni giorno
@@ -395,16 +417,32 @@ telefono come "Non sincronizzati", con il motivo.
 
 ![Report](../img/report.png)
 
-Il **Report** mostra i totali per azienda e cliente in un periodo, con i
-tempi **arrotondati** come nell'app e, in piccolo, quelli registrati. Sotto
-c'è il dettaglio giorno per giorno. Un'attività a cavallo di più giorni
-conta in ciascuno, salvo lo scavalco notturno.
+I **Report** sono due, voci del menu (schede sul telefono), con gli stessi filtri (periodo, azienda, persona):
+- **Riepilogativo**: i totali per azienda e cliente in un periodo (attività, lavoro, viaggio, pause, spese; il tempo
+  **rendicontato** e i km a richiesta), con i tempi **arrotondati** come nell'app e, in piccolo, quelli registrati.
+  Un'attività a cavallo di più giorni conta in ciascuno, salvo lo scavalco notturno. Le **assenze** sono contate a
+  parte, per tipo (Assenza, Ferie, Permesso, Malattia), in una sezione *Assenze*.
+- **Dettaglio attività**: una riga per **attività e giorno** (come la riga del report dell'app, quindi le righe sommano
+  al riepilogo e sono arrotondate con le stesse regole), più le righe delle **assenze** dei giorni: data, orario,
+  persona, azienda, cliente, ruolo, attività, località, tag, lavoro, viaggio, pause, rendicontato, km, spese, allegati,
+  stato. Km, spese e allegati stanno sulla prima riga dell'attività nel periodo.
 
-Le **assenze** sono contate a parte, per tipo (Assenza, Ferie, Permesso, Malattia), in una sezione *Assenze*.
+**Colonne.** Un clic sull'intestazione di una colonna ordina la tabella, e un secondo clic inverte l'ordine (anche
+nell'indirizzo: `?sort=` e `&dir=`); le righe senza valore restano in fondo. Il menu **"Colonne"** mostra o nasconde le
+colonne: la scelta resta per tutta la sessione di accesso, e **"Colonne predefinite"** la azzera.
 
-**CSV** esporta una riga per attività e giorno, con i minuti registrati e
-quelli arrotondati; gli spezzoni di assenza hanno righe proprie e c'è la colonna `absence_min`. Responsabili e amministratori filtrano per persona; un
-lettore vede solo le attività chiuse delle sue aziende.
+**Esportare.** La tabella **così com'è** (filtri, ordine, colonne visibili) si scarica in **CSV** (punto e virgola, con il
+BOM per i fogli di calcolo; il testo libero che sembrerebbe una formula è protetto), **XML** o **JSON**, con valori
+semplici (date ISO, orari a 24 ore, durate in minuti, importi in euro) e l'unità nell'intestazione; gli indirizzi sono
+`/report/esporta/summary.csv`, `/report/esporta/detail.json` e simili. Decide la **policy** (§7): la funzione di esportazione, i formati
+consentiti e il periodo massimo (`exportMaxDays`); se non consente, la pagina lo dice. Sul Dettaglio resta **"CSV
+completo"**: una riga per attività e giorno con tutte le colonne, i minuti registrati e quelli arrotondati; gli spezzoni
+di assenza hanno righe proprie e c'è la colonna `absence_min`.
+
+**Stampa / PDF** stampa la pagina con un foglio di stile apposito (senza menu, filtri e schede, con l'intestazione della
+tabella ripetuta, e con l'ordine e le colonne scelti); per il PDF si usa la stampa del browser.
+
+Responsabili e amministratori filtrano per persona; un lettore vede solo le attività chiuse delle sue aziende.
 
 ## 10. Sicurezza e backup
 

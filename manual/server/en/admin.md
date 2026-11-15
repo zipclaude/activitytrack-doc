@@ -95,10 +95,14 @@ of the code, when the phone or the mailbox is lost. After 5 wrong codes the
 login starts again from the password. Paired phones are not concerned: they
 sync with their token.
 
-The menu on the left (on a phone, the bar at the bottom) has **Home**,
-**Da fare** (To-dos), **Agenda**, **Report**, **Attività** (Activities),
-**Anagrafiche** (Master data) and **Dispositivi** (Devices); administrators
-also have **Policy** and **Utenti** (Users). At the bottom is one's own
+The menu on the left has **Home**, **Da fare** (To-dos), **Agenda**, **Report**, **Attività** (Activities), **Cestino**
+(Bin), **Anagrafiche** (Master data) and **Dispositivi** (Devices); administrators also have **Policy** and **Utenti**
+(Users). **Report** and **Anagrafiche** are **branches** that open and close: under **Report** are **Riepilogativo**
+(Summary) and **Dettaglio attività** (Activity detail), under **Anagrafiche** **Aziende** (Companies), **Clienti**
+(Clients), **Ruoli** (Roles), **Tag**, **Scelte rapide** (Quick choices) and **Materiali** (Materials); the branch of the
+page you are on is open, with the current entry marked, and it can also be opened from the keyboard (Enter or Space). On
+a phone there is the bar at the bottom (Home, Da fare, Agenda, Report, Altro) and the two pages have the same entries as
+tabs at the top. At the bottom is one's own
 name: a click opens **"Cambia password"** (change password).
 
 The web interface comes in **Italian, English, German and Spanish**. The language is, in this order: the one set by the
@@ -230,7 +234,8 @@ Companies, clients, roles, tags, quick choices and materials are
 **central** (everyone sees them; administrators and managers change them)
 or **personal** (a user's own, when the policy allows it). The app and the
 web show which is which. Companies, clients and tags have an optional
-**colour**, chosen among the app's, from the web too.
+**colour**, chosen among the app's, from the web too. In the menu on the left **Anagrafiche** is a branch with an entry
+for each (Companies, Clients, Roles, Tags, Quick choices, Materials), the same as the tabs of the page.
 
 When the phone and the server have master data with the same name, they
 become one at the first sync, with the server's data. For tags the text
@@ -274,6 +279,11 @@ Some settings count on the web too:
   policy applies to, as for the apps; in the Preferences the language buttons are then disabled, with the note
   "Impostato dalla policy" (set by the policy); with a wrong value: "Lingua forzata sull'inglese da una policy con un
   valore errato" (forced to English by a policy with an invalid value).
+- **Export** (feature `export`, formats `export.formats`, behaviour `exportMaxDays`): they hold for the web reports and
+  the CSV too (§9): without the feature there are no exports, the formats are the ones listed (all three if it lists
+  none), and a period longer than `exportMaxDays` days (366 when missing) is not exported.
+- **Travel** (feature `travel`) and **Source of activities** (`entries.source`, "only from planned ones"): they also
+  hold for the trip started from the web (§8).
 - **Free tags** (`tagsFreeText`) off: on the web only the master-data tags
   can be chosen.
 - The **To-dos** or **Planning** feature off removes the activities in the *To do* state from the
@@ -296,6 +306,12 @@ Everyone finds their own work on the web, as in the app.
   list, with **State → "All"**, follow the time: **In ritardo** (Late), **Dettagli mancanti** (Missing details),
   **Oggi** (Today), **Prossimi giorni** (Next days), **Senza data** (Without a date), **Giorni precedenti** (Previous
   days): the to-dos without a date sit between the next days and the previous ones, not after the done ones.
+- **Viaggio** (Travel). The Home's button opens a form: the **person** (oneself or, for a manager or an administrator, a
+  person of the team), **what the trip is for** (a To do of that person, a client, a company or a description: at least
+  one) and **when** (now, from a time, or already made, with start and end). From the web a trip is never anonymous. For
+  someone else only a trip **already made** is recorded: a running one would set aside the activities they have open on
+  their phone. The rules of the person's policy hold: the Travel feature, "activities only from planned ones"
+  (`entries.source`: a To do is required) and locked times (no times can be chosen).
 - **States.** Every activity shows one of eleven states, with icon and colour (the same as in the app):
 
   | State | Icon | Colour |
@@ -320,6 +336,14 @@ Everyone finds their own work on the web, as in the app.
   for confirmation; **"Put back to do"** removes the tick from an item ticked by mistake (no real segments). Stopping an
   activity with an outbound trip and work can add the **return trip**. **Priority** has the names None, Low, Medium, High,
   Urgent, Emergency.
+- **Activities, the list.** **"Ordina per"** (sort by) offers Data (date: by day, as before), Ora di inizio (start time),
+  Azienda (company), Cliente (client), Durata (duration), Stato (state) and, for those who see several people, Persona
+  (person), with a direction (also in the address, `?sort=` and `&dir=`); the orders other than the date are one list
+  where every row says its day, and what has no value stays last in both directions. Every row (and those of the Home)
+  has an icon for each type of attachment (**Foto** photo, **Nota vocale** voice note, **Scontrino** receipt, **File**),
+  with the number when there are several, and, when there are travel segments, the travel time and the km (the declared
+  ones, else the estimated). The period also includes the activities recorded **later** for a past day (the "Passata"
+  form).
 - **Cestino** (Bin): the deleted activities, with **Restore** and **Delete permanently** (instead of "Ignored").
 - **Absences**: the form asks the kind (Absence, Holiday, Leave, Sick leave), the company (optional: empty = all), from day
   to day and optional times (a leave); without times one segment is created per working day, skipping days off. Future
@@ -393,16 +417,32 @@ shows on the phone as "Not synced", with the reason.
 
 ![Report](../img/report.png)
 
-The **Report** shows the totals by company and client over a period, with
-the times **rounded** as in the app and, in small, the recorded ones. Below
-is the detail day by day. An activity over several days counts in each,
-except for the night carry-over.
+There are two **Reports**, entries of the menu (tabs on a phone), with the same filters (period, company, person):
+- **Riepilogativo** (Summary): the totals by company and client over a period (activities, work, travel, pauses,
+  expenses; the **reported** time and the km on request), with the times **rounded** as in the app and, in small, the
+  recorded ones. An activity over several days counts in each, except for the night carry-over. **Absences** are
+  counted apart, by kind (Absence, Holiday, Leave, Sick leave), in an *Assenze* section.
+- **Dettaglio attività** (Activity detail): one row per **activity and day** (like the app's report line, so the rows
+  add up to the summary and are rounded by the same rules), plus the rows of the days' **absences**: date, time,
+  person, company, client, role, activity, place, tags, work, travel, pauses, reported, km, expenses, attachments,
+  state. Km, expenses and attachments are on the activity's first row in the period.
 
-**Absences** are counted apart, by kind (Absence, Holiday, Leave, Sick leave), in an *Assenze* section.
+**Columns.** A click on a column's head sorts the table, and a second click reverses the order (also in the address:
+`?sort=` and `&dir=`); rows without a value stay last. The **"Colonne"** (columns) menu shows or hides columns: the
+choice is kept for the whole login session, and **"Colonne predefinite"** (default columns) resets it.
 
-**CSV** exports one row per activity and day, with the recorded and the
-rounded minutes; absence segments have rows of their own and there is an `absence_min` column. Managers and administrators filter by person; a reader
-only sees the closed activities of their companies.
+**Exporting.** The table **as shown** (filters, sort, visible columns) downloads as **CSV** (semicolon, with the byte
+order mark spreadsheets want; free text that would read as a formula is guarded), **XML** or **JSON**, with plain values
+(ISO dates, 24-hour times, durations in minutes, amounts in euros) and the unit in the head; the addresses are
+`/report/esporta/summary.csv`, `/report/esporta/detail.json` and so on. The **policy** (§7) decides: the export feature,
+the allowed formats and the longest period (`exportMaxDays`); when it does not allow, the page says so. On the detail
+the **"CSV completo"** (full CSV) stays: one row per activity and day with all the columns, the recorded and the rounded
+minutes; absence segments have rows of their own and there is an `absence_min` column.
+
+**Stampa / PDF** (print / PDF) prints the page with a print style sheet (no menu, filters or tabs, the table's head
+repeated, the chosen sort and columns kept); for a PDF use the browser's print.
+
+Managers and administrators filter by person; a reader only sees the closed activities of their companies.
 
 ## 10. Security and backups
 
