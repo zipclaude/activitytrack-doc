@@ -319,7 +319,10 @@ the other device.
 - **language**: in the **"Lingua"** (language) group you choose **"Lingua del sistema"** (system language, the default) or
   Italiano, English, Deutsch or Español, each in its own name. The choice holds **from the next start** of ActivityTrack,
   and the panel says so. If the policy sets the language (`ui.language`) the choice is greyed, with the hint
-  **"Impostato dalla policy"** (set by the policy), and the policy's language is used. The language is, in this order: the policy, the choice made here, the system's
+  **"Impostato dalla policy"** (set by the policy), and the policy's language is used. If the policy has `ui.language` with a value that is not a supported language (`it`,
+  `en`, `de`, `es`), the language is **forced to English**: the choice is greyed, shows English and says "Forced to
+  English by a policy with an invalid value"; the saved choice is not lost and comes back when the policy changes. The
+  language is, in this order: the policy, the choice made here, the system's
   language, English (never Italian by default). The same choice is read by the **command line** and the **terminal
   interface** (`activitytrack`, `activitytrack-tui`) too, which use the same data (§1);
 - **dates and times**: the date format, European (31/12/2026), American
@@ -387,7 +390,8 @@ program is `ActivityTrack.exe` in the installation folder
 The PC gets the phone's policy and applies the keys that concern it: features
 (activities, travels, to-dos, planning, deleting and restoring), fields (names,
 required, hidden, read-only), editable times, free tags, activities only from
-planned or assigned ones (`plannedOnly`, formerly `todosOnly`), central master data only, reminder intervals, updates, language (`ui.language`). The
+planned or assigned ones (`plannedOnly`, formerly `todosOnly`), central master data only, reminder intervals, updates, language (`ui.language`: only `it`, `en`, `de`, `es`; another value does not invalidate the policy, but forces
+English). The
 phone-only keys (location, calls, widgets…) do not concern it.
 
 ## 12. Common problems

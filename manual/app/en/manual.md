@@ -245,7 +245,10 @@ Names in quotes are the labels of the English interface. The app speaks English,
 it follows the phone's language, and if the phone's is one the app does not know it uses **English**. It is changed in
 Settings → "Display" → **"Language"** (**System default**, Italiano, English, Deutsch, Español); if a policy fixes the
 language (`ui.language`) the item is locked, with the padlock, and the policy's language is used; when the policy goes,
-the user's choice is back.
+the user's choice is back. If `ui.language` is there but is not a supported language (`it`, `en`, `de`, `es`), the policy
+stays valid and only loses that field: the language is **forced to English**, over the user's choice and the system's
+language; the item is locked, shows English and says "Forced to English by a policy with an invalid value". A missing or
+null `ui.language` forces nothing.
 
 ---
 
@@ -1201,7 +1204,7 @@ to the nearest limit.
 | Item | Effect | Default |
 |---|---|---|
 | Normal / Compact | Compact: text at 88 %, tighter cards and buttons. | Normal |
-| Language | **System default** (the phone's language; English if the app does not know it), Italiano, English, Deutsch or Español, each in its own name. A policy (`ui.language`) fixes and locks it (padlock). | System default |
+| Language | **System default** (the phone's language; English if the app does not know it), Italiano, English, Deutsch or Español, each in its own name. A policy (`ui.language`) fixes and locks it (padlock); with an unsupported value the language is English and the item says so. | System default |
 | To-dos widget: window | How far the like-named widget looks ahead: 24 h, 3, 7 or 30 days; overdue to-dos are always included. A policy can lock it (padlock). | 24 h |
 | Free tags too | On: any tag can be typed. Off: only the master data's tags; free ones already on activities stay. Policy: `tagsFreeText`. | On |
 

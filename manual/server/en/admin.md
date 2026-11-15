@@ -103,7 +103,8 @@ name: a click opens **"Cambia password"** (change password).
 
 The web interface comes in **Italian, English, German and Spanish**. The language is, in this order: the one set by the
 policy (`ui.language`, §7), else the choice made in the Preferences (§8), else the browser's; if the browser asks for one
-the server does not have, the pages are in **English** (never Italian). The screenshots show it in Italian, and the names of the pages and buttons in this manual are the Italian ones, with
+the server does not have, the pages are in **English** (never Italian). A policy with an unsupported `ui.language` (an imported or old policy)
+forces English, over the choice and the browser. The screenshots show it in Italian, and the names of the pages and buttons in this manual are the Italian ones, with
 the English in brackets.
 
 ## 4. Users and profiles
@@ -268,9 +269,11 @@ Some settings count on the web too:
 - **Editable times** (`editableTimes`) locked to "no": on the web the user
   only adds travels and pauses; an administrator or their manager fixes
   the times.
-- **Language** (`ui.language`: `it`, `en`, `de` or `es`): also fixes the language of the web pages for the users the
+- **Language** (`ui.language`: only `it`, `en`, `de` or `es`; the editor refuses another value with an error, and an
+  imported or old policy with another value makes the pages of its users English): also fixes the language of the web pages for the users the
   policy applies to, as for the apps; in the Preferences the language buttons are then disabled, with the note
-  "Impostato dalla policy" (set by the policy).
+  "Impostato dalla policy" (set by the policy); with a wrong value: "Lingua forzata sull'inglese da una policy con un
+  valore errato" (forced to English by a policy with an invalid value).
 - **Free tags** (`tagsFreeText`) off: on the web only the master-data tags
   can be chosen.
 - The **To-dos** or **Planning** feature off removes the activities in the *To do* state from the
@@ -360,7 +363,8 @@ with.
 The **language** (Italian, English, German or Spanish) is chosen on the same page and holds for
 the browser in use; until you choose one, the pages follow the browser's
 language, or English if the server does not have it. If the policy fixes the language (§7) the buttons are disabled and
-the page says "Impostato dalla policy". The buttons, labels, messages and emails are translated; what you type
+the page says "Impostato dalla policy"; with a wrong value it says "Lingua forzata sull'inglese da una policy con un
+valore errato" and the pages are English. The buttons, labels, messages and emails are translated; what you type
 (names, notes) stays as written.
 
 ![Preferences](../img/preferences.png)

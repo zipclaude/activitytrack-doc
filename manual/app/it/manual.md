@@ -252,7 +252,10 @@ I nomi tra virgolette sono le voci dell'interfaccia in italiano. L'app parla ita
 base segue la lingua del telefono, e se il telefono ne ha una che l'app non conosce usa l'**inglese**. Si cambia in
 Impostazioni → "Visualizzazione" → **"Lingua"** (**Predefinita del sistema**, Italiano, English, Deutsch, Español); se
 una policy fissa la lingua (`ui.language`) la voce è bloccata, con il lucchetto, e vale quella della policy; tolta la
-policy, torna la scelta dell'utente.
+policy, torna la scelta dell'utente. Se `ui.language` c'è ma non è una lingua supportata (`it`, `en`, `de`, `es`), la
+policy resta valida e perde solo quel campo: la lingua è **forzata sull'inglese**, sopra la scelta dell'utente e la lingua
+del sistema; la voce è bloccata, mostra English e dice "Lingua forzata sull'inglese da una policy con un valore errato".
+Un `ui.language` assente o nullo non impone nulla.
 
 ---
 
@@ -1243,7 +1246,7 @@ riportati al limite più vicino.
 | Voce | Effetto | Predefinito |
 |---|---|---|
 | Normale / Compatta | Compatta: testo all'88 %, riquadri e pulsanti più stretti. | Normale |
-| Lingua | **Predefinita del sistema** (la lingua del telefono; l'inglese se l'app non la conosce), Italiano, English, Deutsch o Español, ciascuna con il proprio nome. Una policy (`ui.language`) la fissa e la blocca (lucchetto). | Predefinita del sistema |
+| Lingua | **Predefinita del sistema** (la lingua del telefono; l'inglese se l'app non la conosce), Italiano, English, Deutsch o Español, ciascuna con il proprio nome. Una policy (`ui.language`) la fissa e la blocca (lucchetto); con un valore non supportato la lingua è l'inglese e la voce lo dice. | Predefinita del sistema |
 | Widget «Da fare»: intervallo | Quanto guardare avanti nel widget omonimo: 24 h, 3, 7 o 30 giorni; le voci in ritardo sono sempre incluse. Una policy può fissarla (con lucchetto). | 24 h |
 | Anche tag liberi | Acceso: si può scrivere qualsiasi tag. Spento: solo i tag dell'anagrafica; quelli liberi già sulle attività restano. Policy: `tagsFreeText`. | Acceso |
 
