@@ -342,8 +342,9 @@ From a tab other than Home, Back returns to Home.
   "from–to (duration)" (e.g. "11:00–11:45 (0:45)") and a button to resume it or pause it. Tapping it moves the activity
   to the big card.
 - At the bottom **one list** of all the activities, in their states: each row has the coloured state icon (§1) on the
-  left, the title, "client · state" and the time on the right; done or incomplete rows are dimmed. The groups:
-  **Late**, **Today**, **Next days**, **Earlier**, **Without a date**.
+  left, the title, "client · state" and the time on the right; done or incomplete rows are dimmed. The groups, in this order:
+  **Late**, **Incomplete** (when shown), **Today**, **Next days**, **Without a date**, **Earlier**: the list is a time line,
+  so what has no date sits between the next days and the past ones.
 - The filters, on one row: the **period** (**Today**, default, from the 06:00 boundary as in the reports; **24 h**,
   **3 d**, **7 d**, **30 d**, **All**: forward for activities to do, which stay when late; backward for what is done);
   then **State**, **Company** and **Tag**, grey while they are at their start value and coloured when you change them.

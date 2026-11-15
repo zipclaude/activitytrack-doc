@@ -101,7 +101,9 @@ The menu on the left (on a phone, the bar at the bottom) has **Home**,
 also have **Policy** and **Utenti** (Users). At the bottom is one's own
 name: a click opens **"Cambia password"** (change password).
 
-The web interface is in Italian; the screenshots show it as it is.
+The web interface comes in **Italian, English, German and Spanish** (the language is chosen in the Preferences, §8);
+the screenshots show it in Italian, and the names of the pages and buttons in this manual are the Italian ones, with
+the English in brackets.
 
 ## 4. Users and profiles
 
@@ -274,11 +276,19 @@ Some settings count on the web too:
 - **Save rounded values** (`roundStoredTimes`): the start, switch, stop and reopen buttons record rounded times; only with
   editable times; times typed by hand stay exact.
 
+**Field names.** In the **Campi** (Fields) table of the editor, the **"Etichetta per lingua"** (label per language) column has a box for every language
+of the apps: Italian, English, German and Spanish. The app shows the field's name in the phone's language; if there is no
+label for that language it uses the English one, then the app's own text. A policy with German or Spanish labels
+written elsewhere keeps them when you save it from the web.
+
 ## 8. Working on the web
 
 Everyone finds their own work on the web, as in the app.
 - **Home**: the running activities with their commands (Pause, Work, Travel, Stop; there is no Suspend any more), then
-  one list of all the activities in their **states**, with the filters period, state, company and tag.
+  one list of all the activities in their **states**, with the filters period, state, company and tag. The groups of the
+  list, with **State → "All"**, follow the time: **In ritardo** (Late), **Dettagli mancanti** (Missing details),
+  **Oggi** (Today), **Prossimi giorni** (Next days), **Senza data** (Without a date), **Giorni precedenti** (Previous
+  days): the to-dos without a date sit between the next days and the previous ones, not after the done ones.
 - **States.** Every activity shows one of eleven states, with icon and colour (the same as in the app):
 
   | State | Icon | Colour |
@@ -309,6 +319,11 @@ Everyone finds their own work on the web, as in the app.
   holidays can be planned too.
 - **Agenda**: day, week and month; a click on a free slot plans a To do
   activity at that time (planned segments are dashed, absences fuchsia; the colour is the client's, else the company's).
+  At the top of one's own agenda there are three buttons: **"Da fare"** (To do: the new To do activity of the day, when
+  planning and To-dos are on), **"Assenza"** (Absence: the absence form on the agenda's day, then back to the agenda) and
+  **"Già svolta"** (Already done), which opens the new-activity form on **"Passata"** (Past) with the times already
+  proposed: the hour ending at the last quarter of an hour that has passed if the day is today, else 09:00–10:00.
+  "Già svolta" is there only when the policy leaves the times editable (§7).
 
 ![Agenda: the week](../img/agenda.png)
 
@@ -338,9 +353,9 @@ the **client** and filters its list; a client chosen brings its company.
 The preferences are the user's: they hold on every browser they sign in
 with.
 
-The **language** (Italian or English) is chosen on the same page and holds for
+The **language** (Italian, English, German or Spanish) is chosen on the same page and holds for
 the browser in use; until you choose one, the pages follow the browser's
-language. The buttons, labels and messages are translated; what you type
+language. The buttons, labels, messages and emails are translated; what you type
 (names, notes) stays as written.
 
 ![Preferences](../img/preferences.png)
@@ -351,6 +366,9 @@ person's and reaches their phones. While it is still in the To do state it can b
 whoever had it. The assignee sees "Assegnata da …" (assigned by) and works
 it as their own; the manager follows it on the *Da fare* page with
 **Persona → "Tutto il team"** (the whole team).
+
+On the **Da fare** (To-dos) page the buttons **"Nuova voce"** (new item) and **"Nuova assenza"** (new absence) sit at the top
+right, side by side.
 
 ![The team's to-dos](../img/todos.png)
 

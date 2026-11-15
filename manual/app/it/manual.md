@@ -350,7 +350,9 @@ Da una scheda diversa dalla Home, il tasto Indietro torna alla Home.
   l'attività passa nel riquadro grande.
 - In basso **una sola lista** di tutte le attività, nei loro stati: ogni riga ha a sinistra l'icona colorata dello
   stato (§1), il titolo, "cliente · stato" e l'orario a destra; le righe fatte o incomplete sono attenuate. I
-  gruppi: **In ritardo**, **Oggi**, **Prossimi giorni**, **Giorni precedenti**, **Senza data**.
+  gruppi, in quest'ordine: **In ritardo**, **Incompleta** (quando mostrate), **Oggi**, **Prossimi giorni**, **Senza
+  data**, **Giorni precedenti**: la lista è una linea del tempo, quindi ciò che non ha data sta tra i giorni a venire e
+  quelli passati.
 - I filtri, su una riga: il **periodo** (**Oggi**, predefinito, dal confine delle 06:00 come nei report; **24 h**,
   **3 gg**, **7 gg**, **30 gg**, **Tutti**: in avanti per le attività da fare, che in ritardo restano sempre;
   all'indietro per ciò che è fatto); poi **Stato**, **Azienda** e **Tag**, grigi finché sono quelli di partenza e

@@ -215,6 +215,11 @@ l'intervallo e la durata, le caselle **tratteggiate** sono occupate da altre
 attività di quel giorno. **Orario esatto** con **Usa** prende i minuti fuori
 griglia (es. 09:37).
 
+Nel modulo **Nuovo Da fare** (§7) la griglia della **pianificazione** sceglie un **intervallo**: un solo clic su una casella
+dà il solo **inizio** (senza durata), trascinando, o cliccando due volte, si danno **inizio e fine** e la **durata** segue
+(è la differenza, e si legge nella casella accanto); un orario scritto in **Orario esatto** mantiene la durata che c'era.
+La griglia della **scadenza** sceglie invece un orario solo.
+
 ![La griglia degli orari](../img/grid.png)
 
 ### Stop e chiusura
@@ -234,8 +239,9 @@ corregge aprendola, come ogni altra.
 
 Un *Da fare* è un'**attività nello stato Da fare**: quando la avvii diventa Lavoro o Viaggio e, alla fine, Fatta o Incompleta.
 
-Sotto le attività in corso la Home ha un'unica lista, come l'app: **In ritardo**, **Oggi**, **Prossimi giorni**, **Giorni
-precedenti**, **Senza data**. I filtri **periodo** (Oggi, 24 h, 3 gg…), **stato**, **azienda** e **tag** sono pulsanti con il
+Sotto le attività in corso la Home ha un'unica lista, come l'app: **In ritardo**, **Dettagli mancanti**
+(le incomplete), **Oggi**, **Prossimi giorni**, **Senza data**, **Giorni precedenti**: i Da fare senza data stanno tra i
+giorni a venire e quelli passati, non dopo le fatte. I filtri **periodo** (Oggi, 24 h, 3 gg…), **stato**, **azienda** e **tag** sono pulsanti con il
 loro menu, colorati quando non sono quelli iniziali, e restano memorizzati; **Cerca** (Ctrl+F) restringe la lista alle
 righe che contengono le parole scritte.
 
@@ -304,6 +310,10 @@ sull'altro dispositivo.
 - **"Avvia ActivityTrack all'accesso"**: parte con la sessione, nascosto
   nell'area di notifica. Su Linux si accende al primo avvio; su Windows lo
   propone l'installazione;
+- **lingua**: nel gruppo **"Lingua"** si sceglie **"Lingua del sistema"** (predefinita) oppure Italiano, English, Deutsch o
+  Español, ciascuna con il proprio nome. La scelta vale **dal prossimo avvio** di ActivityTrack, e il pannello lo dice.
+  Se la policy fissa la lingua (`ui.language`) la scelta è grigia, con il suggerimento **"Impostato dalla policy"**, e
+  vale quella della policy;
 - **date e orari**: il formato delle date, europeo (31/12/2026), americano
   (12/31/2026) o ISO (2026-12-31), e degli orari, 24 ore (18:30) o 12 ore
   (6:30 PM). Valgono anche per la riga di comando e il terminale, come le

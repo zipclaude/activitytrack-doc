@@ -104,6 +104,9 @@ Il menu a sinistra (sul telefono, la barra in basso) contiene **Home**,
 **Dispositivi**; per gli amministratori anche **Policy** e **Utenti**. In
 fondo c'è il proprio nome: un clic apre **"Cambia password"**.
 
+L'interfaccia web parla **italiano, inglese, tedesco e spagnolo** (la lingua si sceglie nelle Preferenze, §8); gli
+schermi del manuale la mostrano in italiano.
+
 ## 4. Utenti e profili
 
 ![Utenti](../img/users.png)
@@ -275,11 +278,19 @@ Alcune impostazioni valgono anche sul web:
 - **Salva i valori arrotondati** (`roundStoredTimes`): i pulsanti di avvio, cambio, stop e riapri registrano orari
   arrotondati; vale solo con gli orari modificabili; gli orari scritti a mano restano esatti.
 
+**Nomi dei campi.** Nella tabella **Campi** dell'editor, la colonna **"Etichetta per lingua"** ha una casella per ogni
+lingua delle app: italiano, inglese, tedesco e spagnolo. L'app mostra il nome del campo nella lingua del telefono; se per
+quella lingua non c'è un'etichetta usa quella inglese, poi il testo dell'app. Una policy con etichette in tedesco o
+spagnolo scritte altrove le conserva anche se la salvi dal web.
+
 ## 8. Il lavoro sul web
 
 Ognuno trova sul web il proprio lavoro, come nell'app.
 - **Home**: le attività in corso con i comandi (Pausa, Lavoro, Viaggio, Stop; non c'è più Sospendi), poi una lista
-  unica di tutte le attività nei loro **stati**, con i filtri periodo, stato, azienda e tag.
+  unica di tutte le attività nei loro **stati**, con i filtri periodo, stato, azienda e tag. I gruppi
+  della lista, con **Stato → "Tutti"**, seguono il tempo: **In ritardo**, **Dettagli mancanti**, **Oggi**, **Prossimi
+  giorni**, **Senza data**, **Giorni precedenti** (le Da fare senza data stanno quindi tra i giorni a venire e quelli
+  passati, non dopo le Fatte).
 - **Stati.** Ogni attività mostra uno di undici stati, con icona e colore (gli stessi dell'app):
 
   | Stato | Icona | Colore |
@@ -310,7 +321,11 @@ Ognuno trova sul web il proprio lavoro, come nell'app.
   lavorativo, saltando i giorni liberi. Si possono pianificare anche ferie future.
 - **Agenda**: giorno, settimana e mese; un clic su uno spazio libero
   pianifica un'attività Da fare a quell'ora (i tratti pianificati sono tratteggiati, le assenze fucsia; il colore è
-  quello del cliente, altrimenti dell'azienda).
+  quello del cliente, altrimenti dell'azienda). In alto, nella propria agenda, tre pulsanti: **"Da fare"** (la nuova
+  attività Da fare del giorno, se pianificazione e Da fare sono attive), **"Assenza"** (il modulo dell'assenza sul
+  giorno dell'agenda, poi si torna all'agenda) e **"Già svolta"**, che apre il modulo della nuova attività su
+  **"Passata"** con orari già proposti: l'ora che finisce all'ultimo quarto d'ora trascorso se il giorno è oggi, altrimenti
+  09:00–10:00. "Già svolta" c'è solo quando la policy lascia gli orari modificabili (§7).
 
 ![Agenda: la settimana](../img/agenda.png)
 
@@ -340,8 +355,9 @@ telefono: *Altro → Preferenze*), ognuno sceglie:
 
 Le preferenze sono dell'utente: valgono su ogni browser con cui accede.
 
-La **lingua** (italiano o inglese) si sceglie nella stessa pagina e vale per il
-browser in uso; finché non la scegli, le pagine seguono la lingua del browser.
+La **lingua** (italiano, inglese, tedesco o spagnolo) si sceglie nella stessa pagina e vale per il
+browser in uso; finché non la scegli, le pagine seguono la lingua del browser. I pulsanti, le etichette, i messaggi e le
+email sono tradotti; ciò che scrivi (nomi, note) resta com'è.
 
 ![Preferenze](../img/preferences.png)
 
@@ -351,6 +367,8 @@ sui suoi telefoni. Finché è nello stato Da fare si può riassegnare: sparisce 
 Chi la riceve vede "Assegnata da …" e la lavora come le sue; il
 responsabile la segue nella pagina *Da fare* con **Persona → "Tutto il
 team"**.
+
+Nella pagina **Da fare** i pulsanti **"Nuova voce"** e **"Nuova assenza"** stanno in alto a destra, uno accanto all'altro.
 
 ![Da fare del team](../img/todos.png)
 

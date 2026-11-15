@@ -218,6 +218,11 @@ length, the **hatched** cells are taken by other activities of that day.
 **Orario esatto** (exact time) with **Usa** takes the minutes off the grid
 (e.g. 09:37).
 
+In the **Nuovo Da fare** (new to-do) form (§7) the grid of the **plan** picks an **interval**: a single click on one cell
+gives the **start** alone (no duration), dragging, or clicking twice, gives **start and end** and the **duration**
+follows (it is the difference, and shows in the box beside it); a time typed in **Orario esatto** keeps the duration
+there was. The grid of the **due date** picks a single time instead.
+
 ![The time grid](../img/grid.png)
 
 ### Stop and closing
@@ -238,8 +243,10 @@ A closed activity with a client, at least one work segment and the required fiel
 A *To-do* is an **activity in the To do state**: when you start it, it becomes Work or Travel and, at the end, Done or
 Incomplete.
 
-Below the running activities the Home has one list, as the app: **In ritardo** (late), **Oggi** (today), **Prossimi giorni**
-(next days), **Giorni precedenti** (earlier days), **Senza data** (no date). The filters **period** (Oggi, 24 h, 3 gg…),
+Below the running activities the Home has one list, as the app: **In ritardo** (late), **Dettagli mancanti**
+(missing details: the incomplete ones), **Oggi** (today), **Prossimi giorni** (next days), **Senza data** (no date),
+**Giorni precedenti** (earlier days): the to-dos without a date sit between the next days and the earlier ones, not after
+the done ones. The filters **period** (Oggi, 24 h, 3 gg…),
 **state**, **company** and **tag** are buttons with their menu, coloured when they are not the initial ones, and are
 remembered; **Cerca** (search, Ctrl+F) narrows the list to the rows with the words typed.
 
@@ -309,6 +316,10 @@ the other device.
 - **"Avvia ActivityTrack all'accesso"** (start at sign-in): it starts with the
   session, hidden in the notification area. On Linux it is switched on at the
   first start; on Windows the installer offers it;
+- **language**: in the **"Lingua"** (language) group you choose **"Lingua del sistema"** (system language, the default) or
+  Italiano, English, Deutsch or Español, each in its own name. The choice holds **from the next start** of ActivityTrack,
+  and the panel says so. If the policy sets the language (`ui.language`) the choice is greyed, with the hint
+  **"Impostato dalla policy"** (set by the policy), and the policy's language is used;
 - **dates and times**: the date format, European (31/12/2026), American
   (12/31/2026) or ISO (2026-12-31), and the time format, 24 hours (18:30) or
   12 hours (6:30 PM). The command line and the terminal follow them too, as
