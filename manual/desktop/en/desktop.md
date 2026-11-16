@@ -118,7 +118,7 @@ problem. It is light or dark as the system.
 The **Home** is the phone's:
 
 - at the top the **big card** of the latest activity: company, client and
-  description, the state with its time (**"In lavoro dalle 07:46"**, working
+  description, the state with its time (**"Lavoro dalle 07:46"**, working
   since), the work and travel totals, on the right the time of the running
   segment and the tags' colours. Below, the round buttons with their names:
   **Pausa** or **Riprendi** (pause, resume), **Viaggio** (travel),

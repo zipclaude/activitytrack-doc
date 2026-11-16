@@ -116,7 +116,7 @@ problema. È chiara o scura come il sistema.
 La **Home** è quella del telefono:
 
 - in alto la **scheda grande** dell'ultima attività: azienda, cliente e
-  descrizione, lo stato con l'ora (**"In lavoro dalle 07:46"**), i totali di
+  descrizione, lo stato con l'ora (**"Lavoro dalle 07:46"**), i totali di
   lavoro e viaggio, a destra il tempo del tratto in corso e i colori dei tag.
   Sotto, i pulsanti tondi con il nome: **Pausa** o **Riprendi**, **Viaggio**,
   **Stop**. Sulla scheda, lo stato è una **pastiglia** con icona e colore e, a destra, il totale. Un clic sulla scheda apre
