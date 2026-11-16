@@ -1,4 +1,4 @@
-Version 1.0.0-beta-2 (November 2026). Please report any difference between this
+Version 1.0.0-beta-3 (November 2026). Please report any difference between this
 manual and the app. The *Quick start* sums up daily use in a few pages; this
 manual covers everything: **Part I** how to use the app, **Part II** the
 reference (settings, entities, states, flows).
@@ -103,8 +103,8 @@ reference (settings, entities, states, flows).
 **New in 0.9.4-beta1** (tested on the debug phone)
 - Settings: the **"Save"** button stays above the keyboard while typing in a
   field (§14).
-- With ActivityTrack Web 0.9.4 the web page is called **Dispositivi**
-  (devices): besides phones, PCs with **ActivityTrack Desktop**, the app for
+- With ActivityTrack Web 0.9.4 the web page is called **Devices**
+  (it was "Phones"): besides phones, PCs with **ActivityTrack Desktop**, the app for
   the notification area of Linux and Windows, pair there too (§11).
 
 **New in 0.9.3** (tested on the debug phone, except the update check)
@@ -903,7 +903,7 @@ phone's data, shows it in the browser (also, read-only, to whoever does the
 accounting) and keeps the same user's phones in step. Without a server the
 app works as always.
 
-**Pairing the phone.** On the web: *Dispositivi* → **"Associa un dispositivo"**
+**Pairing the phone.** On the web: *Devices* → **"Pair a device"**
 (devices → pair a device; up to ActivityTrack Web 0.9.3: *Phones* → "Pair a
 phone") shows a QR code, valid for 10 minutes and for one use. In the app: Settings →
 **Sync** → **"Scan the QR code"** (the first time it asks for the camera

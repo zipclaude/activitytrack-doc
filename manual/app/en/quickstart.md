@@ -1,4 +1,4 @@
-Version 1.0.0-beta-2 · for everyday use; the *User manual* explains everything else.
+Version 1.0.0-beta-3 · for everyday use; the *User manual* explains everything else.
 
 ## 1. First time
 1. Install `ActivityTrack-<version>.apk` from the GitLab *Releases*.
@@ -10,7 +10,7 @@ Version 1.0.0-beta-2 · for everyday use; the *User manual* explains everything 
    **company**), or "Import from a file or a management system"; in More →
    Master data set the **working hours**.
 5. With an **ActivityTrack Web** server: Settings → Sync → "Scan the QR
-   code" shown on the web (*Dispositivi* → "Associa un dispositivo"); from
+   code" shown on the web (*Devices* → "Pair a device"); from
    then on the data stay in step by themselves.
 
 ## 2. Creating
