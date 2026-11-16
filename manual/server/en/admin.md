@@ -275,7 +275,8 @@ Some settings count on the web too:
   only adds travels and pauses; an administrator or their manager fixes
   the times.
 - **Language** (`ui.language`: only `it`, `en`, `de` or `es`; the editor refuses another value with an error, and an
-  imported or old policy with another value makes the pages of its users English): also fixes the language of the web pages for the users the
+  imported or old policy with another value of any type, even not a text, makes the pages of its users English and never
+  blocks them): also fixes the language of the web pages for the users the
   policy applies to, as for the apps; in the Preferences the language buttons are then disabled, with the note
   "Impostato dalla policy" (set by the policy); with a wrong value: "Lingua forzata sull'inglese da una policy con un
   valore errato" (forced to English by a policy with an invalid value).
@@ -303,13 +304,14 @@ written elsewhere keeps them when you save it from the web.
 Everyone finds their own work on the web, as in the app.
 - **Home**: the running activities with their commands (Pause, Work, Travel, Stop; there is no Suspend any more), then
   one list of all the activities in their **states**, with the filters period, state, company and tag. The groups of the
-  list, with **State → "All"**, follow the time: **In ritardo** (Late), **Dettagli mancanti** (Details missing: the *Incomplete*
-  activities, when the State filter includes them and there are any; the app calls this group "Incomplete"),
-  **Oggi** (Today), **Prossimi giorni** (Next days), **Senza data** (Without a date), **Giorni precedenti** (Previous
-  days): the to-dos without a date sit between the next days and the previous ones, not after the done ones.
+  list, with **State → "All"**, follow the time: **In ritardo** (Late), **Incompleta** (Incomplete: when the State filter
+  includes it, as it does at the start, and there are any),
+  **Oggi** (Today), **Prossimi giorni** (Next days), **Senza data** (Without a date), **Giorni precedenti**
+  (Earlier): the to-dos without a date sit between the next days and the previous ones, not after the done ones.
 - **Viaggio** (Travel). The Home's button opens a form: the **person** (oneself or, for a manager or an administrator, a
-  person of the team), **what the trip is for** (a To do of that person, a client, a company or a description: at least
-  one) and **when** (now, from a time, or already made, with start and end). From the web a trip is never anonymous. For
+  person of the team), the **company** and the **client**, all three required (a client goes with its company and
+  brings it; a linked To do brings its company and client; the description is optional; if the person sees no company,
+  or no client, at all, that one is not asked) and **when** (now, from a time, or already made, with start and end). From the web a trip is never anonymous. For
   someone else only a trip **already made** is recorded: a running one would set aside the activities they have open on
   their phone. The rules of the person's policy hold: the Travel feature, "activities only from planned ones"
   (`entries.source`: a To do is required) and locked times (no times can be chosen).
@@ -341,7 +343,7 @@ Everyone finds their own work on the web, as in the app.
   Azienda (company), Cliente (client), Durata (duration), Stato (state) and, for those who see several people, Persona
   (person), with a direction (also in the address, `?sort=` and `&dir=`); the orders other than the date are one list
   where every row says its day, and what has no value stays last in both directions. Every row (and those of the Home)
-  has an icon for each type of attachment (**Foto** photo, **Nota vocale** voice note, **Scontrino** receipt, **File**),
+  has an icon for each kind of attachment (**Foto** photo, **Nota vocale** voice note, **Scontrino** receipt, **File**),
   with the number when there are several, and, when there are travel segments, the travel time and the km (the declared
   ones, else the estimated). The period also includes the activities recorded **later** for a past day (the "Passata"
   form).
@@ -355,7 +357,7 @@ Everyone finds their own work on the web, as in the app.
   planning and To-dos are on), **"Assenza"** (Absence: the absence form on the agenda's day, then back to the agenda) and
   **"Già svolta"** (Already done), which opens the new-activity form on **"Passata"** (Past) with the times already
   proposed: the hour ending at the last quarter of an hour that has passed if the day is today, else 09:00–10:00.
-  "Già svolta" is there only when the policy leaves the times editable (§7).
+  "Già svolta" is there only for today and past days, and when the policy leaves the times editable (§7).
 
 ![Agenda: the week](../img/agenda.png)
 
@@ -426,18 +428,26 @@ There are two **Reports**, entries of the menu (tabs on a phone), with the same 
 - **Dettaglio attività** (Activity detail): one row per **activity and day** (like the app's report line, so the rows
   add up to the summary and are rounded by the same rules), plus the rows of the days' **absences**: date, time,
   person, company, client, role, activity, place, tags, work, travel, pauses, reported, km, expenses, attachments,
-  state. Km, expenses and attachments are on the activity's first row in the period.
+  state. Km, expenses and attachments are on the activity's first row in the period. A switch above the filters chooses
+  between **"Una riga per attività"** (one row per activity, the default) and **"Una riga per tratto"** (one row per
+  segment; `?rows=activity` or `segment`): a row for each work, travel, pause or absence segment, on the day it starts,
+  with its own start and end, kind, duration, km (travel) and note, and its activity's data. Here the minutes are the
+  **recorded** ones, not rounded, so the totals can differ from the summary's (the page says so). This view has its
+  own columns; sort, columns, exports and print follow the view shown.
+
+A period with no rows has no total row.
 
 **Columns.** A click on a column's head sorts the table, and a second click reverses the order (also in the address:
-`?sort=` and `&dir=`); rows without a value stay last. The **"Colonne"** (columns) menu shows or hides columns: the
-choice is kept for the whole login session, and **"Colonne predefinite"** (default columns) resets it.
+`?sort=` and `&dir=`); rows without a value stay last. The **"Colonne"** (columns) menu shows or hides columns.
+Columns, sort and the detail's view stay **with the user, permanently** (at every login and on every browser), for each
+report and view; **"Colonne predefinite"** (default columns) forgets the table's choice, sort included.
 
 **Exporting.** The table **as shown** (filters, sort, visible columns) downloads as **CSV** (semicolon, with the byte
 order mark spreadsheets want; free text that would read as a formula is guarded), **XML** or **JSON**, with plain values
 (ISO dates, 24-hour times, durations in minutes, amounts in euros) and the unit in the head; the addresses are
 `/report/esporta/summary.csv`, `/report/esporta/detail.json` and so on. The **policy** (§7) decides: the export feature,
 the allowed formats and the longest period (`exportMaxDays`); when it does not allow, the page says so. On the detail
-the **"CSV completo"** (full CSV) stays: one row per activity and day with all the columns, the recorded and the rounded
+the **"CSV completo"** (full CSV; semicolon and byte order mark, like the others) stays: one row per activity and day with all the columns, the recorded and the rounded
 minutes; absence segments have rows of their own and there is an `absence_min` column.
 
 **Stampa / PDF** (print / PDF) prints the page with a print style sheet (no menu, filters or tabs, the table's head

@@ -90,7 +90,7 @@ versions).
 - **Menu** (right click): each running activity's commands (Pausa, Viaggio,
   Lavoro, Stop, Modifica… — pause, work, travel, stop, edit);
   **"Nuova attività…"** (new activity); **"Avvia Da fare ▸"** (start a to-do)
-  with the overdue and today's ones; **"Nuovo Da fare…"** (new to-do); **"Nuova assenza…"** (new absence); the
+  with the late and today's ones; **"Nuovo Da fare…"** (new to-do); **"Nuova assenza…"** (new absence); the
   sync state; **"Esci"** (quit).
 
 Closing the window only hides it: ActivityTrack stays in the notification area
@@ -120,7 +120,7 @@ The **Home** is the phone's:
 - at the top the **big card** of the latest activity: company, client and
   description, the state with its time (**"In lavoro dalle 07:46"**, working
   since), the work and travel totals, on the right the time of the running
-  stretch and the tags' colours. Below, the round buttons with their names:
+  segment and the tags' colours. Below, the round buttons with their names:
   **Pausa** or **Riprendi** (pause, resume), **Viaggio** (travel),
   **Stop**. On the card the state is a **pill** with icon and colour and, on the right, the total. A click on the
   card opens the activity;
@@ -200,9 +200,9 @@ counted apart in the reports.
 Company, client, role, quick pick, description, locality, notes and tags, as
 the policy says (it may rename, hide or require them). For an existing
 activity the top shows the **state** (pill "In <state> since", the work total and the state's buttons: Start, Pause, Stop,
-Reopen, Restore…). **Reopen** always asks for confirmation. It also shows the **times**: each stretch (work, travel, pause) can
+Reopen, Restore…). **Reopen** always asks for confirmation. It also shows the **times**: each segment (work, travel, pause) can
 be changed or deleted, and a new one added, when the policy allows it. Two
-overlapping stretches mark the activity **"da verificare"** (to check).
+overlapping segments mark the activity **"da verificare"** (to check).
 
 The **company** comes before the **client** and filters its list; a known
 client chosen brings its company.
@@ -244,10 +244,9 @@ A closed activity with a client, at least one work segment and the required fiel
 A *To-do* is an **activity in the To do state**: when you start it, it becomes Work or Travel and, at the end, Done or
 Incomplete.
 
-Below the running activities the Home has one list, in the app's order: **In ritardo** (late), **Dettagli mancanti**
-(details missing: the activities in the *Incompleta* state, a group the app calls "Incomplete"; it is there when the
-state filter includes "Dettagli mancanti", as it does at the start, and there are any), **Oggi** (today), **Prossimi giorni** (next days), **Senza data** (no date),
-**Giorni precedenti** (earlier days): the to-dos without a date sit between the next days and the earlier ones, not after
+Below the running activities the Home has one list, as the app: **In ritardo** (late), **Incompleta** (incomplete: it is
+there when the state filter includes "Incompleta", as it does at the start, and there are any), **Oggi** (today),
+**Prossimi giorni** (next days), **Senza data** (without a date), **Giorni precedenti** (earlier): the to-dos without a date sit between the next days and the earlier ones, not after
 the done ones. The filters **period** (Oggi, 24 h, 3 gg…),
 **state**, **company** and **tag** are buttons with their menu, coloured when they are not the initial ones, and are
 remembered; **Cerca** (search, Ctrl+F) narrows the list to the rows with the words typed.

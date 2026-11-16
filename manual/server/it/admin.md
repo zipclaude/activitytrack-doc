@@ -277,7 +277,8 @@ Alcune impostazioni valgono anche sul web:
   l'utente può solo aggiungere viaggi e pause; gli orari li corregge un
   amministratore o il suo responsabile.
 - **Lingua** (`ui.language`: solo `it`, `en`, `de` o `es`; l'editor rifiuta un altro valore con un errore, e una policy
-  importata o vecchia con un altro valore rende inglesi le pagine dei suoi utenti): fissa anche la lingua delle pagine web per gli utenti a cui si
+  importata o vecchia con un altro valore di qualunque tipo, anche non un testo, rende inglesi le pagine dei suoi utenti senza mai
+  bloccarle): fissa anche la lingua delle pagine web per gli utenti a cui si
   applica la policy, come per le app; nelle Preferenze i pulsanti della lingua sono allora disabilitati, con la
   scritta "Impostato dalla policy" (con un valore errato: "Lingua forzata sull'inglese da una policy con un valore
   errato").
@@ -305,13 +306,14 @@ spagnolo scritte altrove le conserva anche se la salvi dal web.
 Ognuno trova sul web il proprio lavoro, come nell'app.
 - **Home**: le attività in corso con i comandi (Pausa, Lavoro, Viaggio, Stop; non c'è più Sospendi), poi una lista
   unica di tutte le attività nei loro **stati**, con i filtri periodo, stato, azienda e tag. I gruppi
-  della lista, con **Stato → "Tutti"**, seguono il tempo: **In ritardo**, **Dettagli mancanti** (le attività *Incomplete*, se
-  il filtro Stato le comprende e ce ne sono; nell'app il gruppo si chiama "Incompleta"), **Oggi**, **Prossimi
+  della lista, con **Stato → "Tutti"**, seguono il tempo: **In ritardo**, **Incompleta** (se il filtro Stato la
+  comprende, come all'inizio, e ce ne sono), **Oggi**, **Prossimi
   giorni**, **Senza data**, **Giorni precedenti** (le Da fare senza data stanno quindi tra i giorni a venire e quelli
   passati, non dopo le Fatte).
 - **Viaggio.** Il pulsante della Home apre un modulo: la **persona** (se stessi o, per un responsabile o un
-  amministratore, una persona del team), **a che cosa serve** (una voce Da fare di quella persona, un cliente, un'azienda
-  o una descrizione: almeno una) e **quando** (adesso, da un'ora, oppure già fatto, con inizio e fine). Dal web un viaggio
+  amministratore, una persona del team), l'**azienda** e il **cliente**, tutti e tre obbligatori (un
+  cliente va con la sua azienda e la porta con sé; una voce Da fare collegata porta azienda e cliente; la descrizione è
+  facoltativa; se la persona non vede nessuna azienda, o nessun cliente, quello non è chiesto) e **quando** (adesso, da un'ora, oppure già fatto, con inizio e fine). Dal web un viaggio
   non è mai anonimo. Per un'altra persona si registra solo un viaggio **già fatto**: uno in corso metterebbe da parte le
   attività che ha aperte sul telefono. Valgono le regole della policy della persona: la funzione Viaggi, "attività solo da
   pianificate" (`entries.source`: serve una voce Da fare) e gli orari bloccati (niente orari scelti).
@@ -356,7 +358,7 @@ Ognuno trova sul web il proprio lavoro, come nell'app.
   attività Da fare del giorno, se pianificazione e Da fare sono attive), **"Assenza"** (il modulo dell'assenza sul
   giorno dell'agenda, poi si torna all'agenda) e **"Già svolta"**, che apre il modulo della nuova attività su
   **"Passata"** con orari già proposti: l'ora che finisce all'ultimo quarto d'ora trascorso se il giorno è oggi, altrimenti
-  09:00–10:00. "Già svolta" c'è solo quando la policy lascia gli orari modificabili (§7).
+  09:00–10:00. "Già svolta" c'è solo per oggi e per i giorni passati, e quando la policy lascia gli orari modificabili (§7).
 
 ![Agenda: la settimana](../img/agenda.png)
 
@@ -426,18 +428,26 @@ I **Report** sono due, voci del menu (schede sul telefono), con gli stessi filtr
 - **Dettaglio attività**: una riga per **attività e giorno** (come la riga del report dell'app, quindi le righe sommano
   al riepilogo e sono arrotondate con le stesse regole), più le righe delle **assenze** dei giorni: data, orario,
   persona, azienda, cliente, ruolo, attività, località, tag, lavoro, viaggio, pause, rendicontato, km, spese, allegati,
-  stato. Km, spese e allegati stanno sulla prima riga dell'attività nel periodo.
+  stato. Km, spese e allegati stanno sulla prima riga dell'attività nel periodo. Un interruttore sopra i filtri sceglie
+  tra **"Una riga per attività"** (predefinito) e **"Una riga per tratto"** (`?rows=activity` o `segment`): una riga per
+  ogni tratto di lavoro, viaggio, pausa o assenza, nel giorno in cui inizia, con il suo inizio e la sua fine, il tipo, la
+  durata, i km (viaggio) e la nota, e i dati della sua attività. Qui i minuti sono quelli **registrati**, non
+  arrotondati, quindi i totali possono differire dal riepilogo (la pagina lo dice). Questa vista ha colonne proprie;
+  ordine, colonne, esportazioni e stampa seguono la vista mostrata.
+
+Un periodo senza righe non ha la riga del totale.
 
 **Colonne.** Un clic sull'intestazione di una colonna ordina la tabella, e un secondo clic inverte l'ordine (anche
 nell'indirizzo: `?sort=` e `&dir=`); le righe senza valore restano in fondo. Il menu **"Colonne"** mostra o nasconde le
-colonne: la scelta resta per tutta la sessione di accesso, e **"Colonne predefinite"** la azzera.
+colonne. Colonne, ordine e vista del dettaglio restano **dell'utente, in modo permanente** (a ogni accesso e su ogni
+browser), per ciascun report e vista; **"Colonne predefinite"** azzera la scelta della tabella, ordine compreso.
 
 **Esportare.** La tabella **così com'è** (filtri, ordine, colonne visibili) si scarica in **CSV** (punto e virgola, con il
 BOM per i fogli di calcolo; il testo libero che sembrerebbe una formula è protetto), **XML** o **JSON**, con valori
 semplici (date ISO, orari a 24 ore, durate in minuti, importi in euro) e l'unità nell'intestazione; gli indirizzi sono
 `/report/esporta/summary.csv`, `/report/esporta/detail.json` e simili. Decide la **policy** (§7): la funzione di esportazione, i formati
 consentiti e il periodo massimo (`exportMaxDays`); se non consente, la pagina lo dice. Sul Dettaglio resta **"CSV
-completo"**: una riga per attività e giorno con tutte le colonne, i minuti registrati e quelli arrotondati; gli spezzoni
+completo"** (punto e virgola e BOM, come gli altri): una riga per attività e giorno con tutte le colonne, i minuti registrati e quelli arrotondati; gli spezzoni
 di assenza hanno righe proprie e c'è la colonna `absence_min`.
 
 **Stampa / PDF** stampa la pagina con un foglio di stile apposito (senza menu, filtri e schede, con l'intestazione della
