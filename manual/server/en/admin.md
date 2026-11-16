@@ -82,7 +82,7 @@ Everyone logs in with the user name and password the administrator gave
 them. After 10 wrong attempts in a row from the same address, the login
 holds back for a few minutes.
 
-**Two-step login.** From **"Sicurezza dell'account"** (account security:
+**Two-step login.** From **"Account security"** (*"Sicurezza dell'account"*:
 one's name at the bottom of the menu) anyone may ask, after the password,
 for a 6-digit code:
 - from an **authenticator app** on the phone (Aegis, FreeOTP, Google
@@ -95,66 +95,66 @@ of the code, when the phone or the mailbox is lost. After 5 wrong codes the
 login starts again from the password. Paired phones are not concerned: they
 sync with their token.
 
-The menu on the left has **Home**, **Da fare** (To-dos), **Agenda**, **Report**, **Attività** (Activities), **Cestino**
-(Bin), **Anagrafiche** (Master data) and **Dispositivi** (Devices); administrators also have **Policy**, **Mappe** (Maps), **Aggiornamenti** (Updates) and **Utenti**
-(Users). **Report** and **Anagrafiche** are **branches** that open and close: under **Report** are **Riepilogativo**
-(Summary) and **Dettaglio attività** (Activity detail), under **Anagrafiche** **Aziende** (Companies), **Clienti**
-(Clients), **Ruoli** (Roles), **Tag**, **Scelte rapide** (Quick choices) and **Materiali** (Materials); the branch of the
+The menu on the left has **Home**, **To-dos** (*Da fare*), **Agenda**, **Report**, **Activities** (*Attività*), **Bin**
+(*Cestino*), **Master data** (*Anagrafiche*) and **Devices** (*Dispositivi*); administrators also have **Policy**, **Maps** (*Mappe*), **Updates** (*Aggiornamenti*) and **Users**
+(*Utenti*). **Report** and **Master data** are **branches** that open and close: under **Report** are **Summary**
+(*Riepilogativo*) and **Activity detail** (*Dettaglio attività*), under **Master data** **Companies** (*Aziende*), **Clients**
+(*Clienti*), **Roles** (*Ruoli*), **Tags** (*Tag*), **Quick picks** (*Scelte rapide*) and **Materials** (*Materiali*); the branch of the
 page you are on is open, with the current entry marked, and it can also be opened from the keyboard (Enter or Space). On
-a phone there is the bar at the bottom (Home, Da fare, Agenda, Report, Altro) and the two pages have the same entries as
+a phone there is the bar at the bottom (Home, To-dos, Agenda, Report, More; *Home, Da fare, Agenda, Report, Altro*) and the two pages have the same entries as
 tabs at the top. At the bottom is one's own
-name: a click opens **"Sicurezza dell'account"** (account security), which also has **"Cambia password"** (change password).
+name: a click opens **"Account security"**, which also has **"Change password"** (*"Cambia password"*).
 
 The web interface comes in **Italian, English, German and Spanish**. The language is, in this order: the one set by the
 policy (`ui.language`, §7), else the choice made in the Preferences (§8), else the browser's; if the browser asks for one
 the server does not have, the pages are in **English** (never Italian). A policy with an unsupported `ui.language` (an imported or old policy)
-forces English, over the choice and the browser. The screenshots show it in Italian, and the names of the pages and buttons in this manual are the Italian ones, with
-the English in brackets.
+forces English, over the choice and the browser. The screenshots show it in Italian, and the names of the pages and buttons in this manual are the English ones, with
+the Italian in brackets.
 
 ## 4. Users and profiles
 
 ![Users](../img/users.png)
 
-The **Users** page lists the people of the organisation. Search by name,
-user name or email, and filter by profile and state. **"Nuovo utente"**
-(new user) asks for a user name, name, profile and a password (at least 10
+The **Users** (*Utenti*) page lists the people of the organisation. Search by name,
+user name or email, and filter by profile and state. **"New user"**
+(*"Nuovo utente"*) asks for a user name, name, profile and a password (at least 10
 characters, not a common one, not like the name).
 
 | Profile | May |
 |---|---|
-| **Administrator** | everything: users, phones, policies, central master data, everyone's data |
-| **Manager** | central master data; reads their team's activities and those done for **their companies**, whoever did them; fixes their team's times; assigns *To-dos* to the team; the team's reports |
-| **User** | their own activities and *To-dos*, from the phone and the web; their personal master data, when the policy allows it |
-| **Company reader** | only the report of the **closed** activities of the companies given to them; no phone. Meant for a client's administration |
+| **Administrator** (*Amministratore*) | everything: users, phones, policies, central master data, everyone's data |
+| **Manager** (*Responsabile*) | central master data; reads their team's activities and those done for **their companies**, whoever did them; fixes their team's times; assigns *To-dos* to the team; the team's reports |
+| **User** (*Utente*) | their own activities and *To-dos*, from the phone and the web; their personal master data, when the policy allows it |
+| **Company reader** (*Lettore azienda*) | only the report of the **closed** activities of the companies given to them; no phone. Meant for a client's administration |
 
 ![A manager's sheet](../img/user.png)
 
 On a user's sheet:
-- **Team di (responsabile)**: the manager whose team they belong to.
-- **Aziende** (companies), for managers and readers only: for a manager,
+- **Team of (manager)** (*Team di (responsabile)*): the manager whose team they belong to.
+- **Companies** (*Aziende*), for managers and readers only: for a manager,
   the companies whose activities they all read; for a reader, those whose
   report they see.
-- **Attivo** (active): unticked, the user can no longer log in and their
+- **Active** (*Attivo*): unticked, the user can no longer log in and their
   devices stop syncing at once. The data stay.
-- **Dispositivi**: the paired phones and PCs, with their last sync and **"Revoca"**
-  (revoke).
-- **Policy dell'utente**: opens their own policy (§7).
-- **Nuova password**: the user is logged out of the web; the devices stay
+- **Devices** (*Dispositivi*): the paired phones and PCs, with their last sync and **"Revoke"**
+  (*"Revoca"*).
+- **User's policy** (*Policy dell'utente*): opens their own policy (§7).
+- **New password** (*Nuova password*): the user is logged out of the web; the devices stay
   paired.
 
 An administrator cannot drop their own profile nor deactivate themselves.
 Another administrator, or `activitytrack-web-manage createsuperuser`, helps
 when needed.
 
-At the bottom of the Users page, **"Verifica in due passaggi obbligatoria
-per"** (two-step login required for): nobody, administrators,
+At the bottom of the Users page, **"Two-step verification required for"**
+(*"Verifica in due passaggi obbligatoria per"*): nobody, administrators,
 administrators and managers, everyone. Whoever is concerned and has not
 turned it on can only do that at their first login. On a user's sheet,
-**"Azzera"** (reset) removes it for someone who lost their phone: they set
+**"Reset"** (*"Azzera"*) removes it for someone who lost their phone: they set
 it up again at the next login. The padlock 🔒 in the list marks who has it.
 
 Django's old administration stays reachable from the bottom of the Users
-page (**"amministrazione avanzata"**), for the organisation and raw data.
+page (**"advanced administration"**, *"amministrazione avanzata"*), for the organisation and raw data.
 Only users with the Administrator profile get in, through the normal login,
 with the two-step login and the hold on wrong attempts; it takes the theme
 and colour of their preferences.
@@ -163,16 +163,16 @@ and colour of their preferences.
 
 ![Devices](../img/phones.png)
 
-Each user pairs their phones and PCs from **Dispositivi** → **"Associa un
-dispositivo"**: a **QR code** appears, to be scanned in the app with
+Each user pairs their phones and PCs from **Devices** → **"Pair a device"**
+(*Dispositivi → "Associa un dispositivo"*): a **QR code** appears, to be scanned in the app with
 Settings → Sync → "Scan the QR code", and below it the link to paste in
 ActivityTrack Desktop on the PC. The code is good for 10 minutes and once;
 the page shows the device as soon as it is paired. A PC never sends to the
 management systems.
 
-- **Revoke**: the phone stops syncing at once and says the server revoked its pairing.
+- **Revoke** (*Revoca*): the phone stops syncing at once and says the server revoked its pairing.
   Its data stay on the phone and on the server. A new code pairs it again.
-- **Invia ai gestionali** (sends to the management systems): with several
+- **Sends to the management systems** (*Invia ai gestionali*): with several
   phones, only the chosen one sends the activities to the management
   systems (plugins); the others work as usual.
 
@@ -188,12 +188,12 @@ waits and leaves when the network is back.
 ### Offline maps for the phones
 
 The app's track map can use an **offline map**: a basic map (roads, rivers, lakes,
-borders, place names) kept on the phone, which works without a network. The **Mappe** page
+borders, place names) kept on the phone, which works without a network. The **Maps** (*Mappe*) page
 (admins only) prepares it:
 
-1. Tick **Rendi disponibili le mappe offline ai telefoni** (offer offline maps to the
-   phones). Off, the phones receive nothing and remove the maps they got from here.
-2. In **Aree** (areas) add the places you need: a **centre** (latitude and longitude), a
+1. Tick **Offer the offline maps to the phones** (*Rendi disponibili le mappe offline ai
+   telefoni*). Off, the phones receive nothing and remove the maps they got from here.
+2. In **Areas** (*Aree*) add the places you need: a **centre** (latitude and longitude), a
    **radius** (5-250 km) and a **zoom level**. As you type, the form tells how many tiles
    and how many MB the map will be. Or start from one of the 23 ready-made areas (a town
    and 100 km around it) and change it.
@@ -202,8 +202,8 @@ borders, place names) kept on the phone, which works without a network. The **Ma
    `settings.ini` (`[maps]`); a map above 48 MB is refused.
 4. On saving, the server prepares the map (some tens of seconds), reading the
    OpenStreetMap data in Protomaps' format: it must reach `build.protomaps.com`. The row
-   shows *in preparazione* (being prepared), then *pronta* (ready) or *non riuscita*
-   (failed, with the reason; the previous version stays on offer). **Aggiorna** prepares it again.
+   shows "being prepared" (*in preparazione*), then "ready" (*pronta*) or "failed"
+   (*non riuscita*, with the reason; the previous version stays on offer). **Update** (*Aggiorna*) prepares it again.
 
 The phones fetch the maps with the sync, on Wi-Fi (within 15 minutes, at once if the app
 is open) and remove those you remove. A phone without a server can have the same maps by
@@ -212,16 +212,16 @@ copying `.pmtiles` files into the `maps` folder of its data folder. Details and 
 
 ### Updates
 
-The **Aggiornamenti** page (admins only) tells the server where to look for new versions of
+The **Updates** (*Aggiornamenti*) page (admins only) tells the server where to look for new versions of
 ActivityTrack and whom to believe:
 
-- **Where to look**: the address of a signed manifest (by default the project's, on
+- **Where to look** (*Dove cercare*): the address of a signed manifest (by default the project's, on
   GitLab), the channels followed (`prod`, `beta`, `test`, `dev`), the hours between checks
-  (0 = never on its own). **Controlla ora** checks at once.
+  (0 = never on its own). **Check now** (*Controlla ora*) checks at once.
 - **Mirror**: on by default, the server keeps the packages and the devices download them
   from here; it always keeps at least the last two releases. Off, they download from the
   addresses in the manifest.
-- **Di chi ci si fida**: the server accepts a manifest signed with the app's key or with a
+- **Whom to trust** (*Di chi ci si fida*): the server accepts a manifest signed with the app's key or with a
   key whose fingerprint (SHA-256 of the certificate) you paste here. The server's own key,
   whose fingerprint is in the pairing QR code, signs what the phones and PCs receive: they
   see it at their first sync.
