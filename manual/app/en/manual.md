@@ -904,8 +904,7 @@ accounting) and keeps the same user's phones in step. Without a server the
 app works as always.
 
 **Pairing the phone.** On the web: *Devices* → **"Pair a device"**
-(devices → pair a device; up to ActivityTrack Web 0.9.3: *Phones* → "Pair a
-phone") shows a QR code, valid for 10 minutes and for one use. In the app: Settings →
+(up to ActivityTrack Web 0.9.3: *Phones* → "Pair a phone") shows a QR code, valid for 10 minutes and for one use. In the app: Settings →
 **Sync** → **"Scan the QR code"** (the first time it asks for the camera
 permission), or **"Paste the link"** if the code came as text. The phone
 asks **"Pair with this server?"**: if it was paired with another server,

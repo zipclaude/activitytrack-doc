@@ -53,9 +53,9 @@ has no notification area: ActivityTrack then stays open in a window.
 
 ![Pairing](../img/pair.png)
 
-1. On the web, open **Dispositivi → "Associa un dispositivo"** (Devices →
-   Pair a device; on ActivityTrack Web 0.9.3: **Telefoni → "Associa un
-   telefono"**, the link under "Non riesci a inquadrarlo?").
+1. On the web, open **Devices → "Pair a device"** (on ActivityTrack Web
+   0.9.3: **Telefoni → "Associa un telefono"**, the link under "Non riesci a
+   inquadrarlo?").
 2. Copy the **link** starting with `activitytrack://pair`.
 3. At the first start ActivityTrack opens **Impostazioni → Sincronizzazione**
    (settings → sync): **"Associa a un server…"** (pair with a server, on the
