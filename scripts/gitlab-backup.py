@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: 2026 Flavio Visentin <flavio-activitytrack@infraconsulting.it>
 #
 # On-demand backup of everything a GitLab group (and, if asked, the projects
 # owned by the token's user) holds. Standard library only; needs `git`.

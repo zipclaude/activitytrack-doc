@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: 2026 Flavio Visentin <flavio-activitytrack@infraconsulting.it>
 #
 # Graphviz sources of the manual's diagrams, one definition for every
 # language: python3 diagrams.py <lang> <outdir> writes <name>.dot files.

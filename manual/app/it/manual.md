@@ -341,7 +341,7 @@ separata, con dati e cartella propri (`ActivityTrackDbg`).
 | **Da fare** | tutte le attività da fare, con filtri per stato e priorità e il Cestino (§8) |
 | **Agenda** | consultazione: lista, giorno, settimana, mese |
 | **Report** | il report di un giorno: totale, righe per attività, esportazione |
-| **Altro** | "Importa / esporta", "Anagrafiche", "Impostazioni" (con "Gesti") |
+| **Altro** | "Importa / esporta", "Anagrafiche", "Impostazioni" (con "Gesti"), "Informazioni e licenze" (versione, licenza dell'app e dei componenti di altri autori) |
 
 Da una scheda diversa dalla Home, il tasto Indietro torna alla Home.
 

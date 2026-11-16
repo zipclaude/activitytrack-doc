@@ -1,0 +1,31 @@
+ActivityTrack documentation
+Copyright (C) 2026 Flavio Visentin <flavio-activitytrack@infraconsulting.it>
+
+Two licences apply in this repository.
+
+1. The documentation: the manuals, the guides and the brochure with their
+   images and diagrams (manual/, brochure/, the PDFs built from them) and the
+   instructions in agents/ are licensed under the Creative Commons
+   Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0).
+   Text: LICENSES/CC-BY-SA-4.0.txt
+   https://creativecommons.org/licenses/by-sa/4.0/
+
+   To give credit: "ActivityTrack documentation, (C) Flavio Visentin,
+   CC BY-SA 4.0, https://gitlab.com/activitytrack/activitytrack-doc".
+
+2. The software: the scripts that build and check the documentation
+   (scripts/, manual/app/diagrams/diagrams.py), the style sheets of the
+   manuals (manual/*/style.css), the container files
+   (agents/testvm/), the packaging (debian/) and the CI files are free
+   software under the GNU General Public License, version 3 or (at your
+   option) any later version, without any warranty.
+   Text: LICENSES/GPL-3.0-or-later.txt
+
+Each file that can carry a comment says which one applies in its
+SPDX-License-Identifier line; a file without that line follows the folder it
+is in, as above.
+
+Not covered by these licences: the screenshots of the maps show data
+(C) OpenStreetMap contributors (Open Database License); the brochure embeds
+the fonts Sora and Source Sans 3 (SIL Open Font License 1.1); the names and
+marks of the products the manuals mention belong to their owners.

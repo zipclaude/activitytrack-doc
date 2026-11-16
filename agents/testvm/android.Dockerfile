@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: 2026 Flavio Visentin <flavio-activitytrack@infraconsulting.it>
 # Android build image of the test VM runner (tag testvm): JDK 21 + SDK for compileSdk 37.
 # Built by hand on the VM, not in CI:  mkdir /tmp/b && cp android.Dockerfile /tmp/b/Dockerfile && docker build -t activitytrack/android:37 /tmp/b
 FROM eclipse-temurin:21-jdk

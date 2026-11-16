@@ -3,8 +3,22 @@ Upstream-Name: activitytrack
 Source: https://gitlab.com/activitytrack/activitytrack-doc
 
 Files: *
-Copyright: 2026 ActivityTrack contributors
+Copyright: 2026 Flavio Visentin <flavio-activitytrack@infraconsulting.it>
+License: CC-BY-SA-4.0
+Comment: The manuals, the guides, the brochure and their images: what the
+ package installs. The screenshots of the maps show data (C) OpenStreetMap
+ contributors (ODbL); the brochure embeds the fonts Sora and Source Sans 3
+ (SIL Open Font License 1.1).
+
+Files: scripts/* debian/* agents/testvm/* manual/app/diagrams/diagrams.py manual/*/style.css
+Copyright: 2026 Flavio Visentin <flavio-activitytrack@infraconsulting.it>
 License: GPL-3+
+
+License: CC-BY-SA-4.0
+ This work is licensed under the Creative Commons Attribution-ShareAlike 4.0
+ International License. To view a copy of this license, visit
+ https://creativecommons.org/licenses/by-sa/4.0/ or see the file
+ LICENSES/CC-BY-SA-4.0.txt of the source.
 
 License: GPL-3+
  This program is free software: you can redistribute it and/or modify it

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: 2026 Flavio Visentin <flavio-activitytrack@infraconsulting.it>
 # Python test image of the test VM runner (tag testvm): the Debian trixie packages the
 # unit tests of the six repositories need, so that the jobs do not run apt-get each time.
 # Built by hand on the VM, not in CI:

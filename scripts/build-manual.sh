@@ -1,5 +1,6 @@
 #!/bin/sh
 # SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: 2026 Flavio Visentin <flavio-activitytrack@infraconsulting.it>
 #
 # Builds the documentation of every ActivityTrack project as PDF, it and en:
 #   app      quick start, user manual and one guide per connector   (manual/app)
@@ -29,12 +30,22 @@ mkdir -p "$OUT"
 # style: inside every page, no relative path that the PDF browser may not follow
 style() { { echo "<style>"; cat "$1/style.css"; echo "</style>"; } > "$OUT/style-$2.html"; }
 
+# the licence of the manuals (CC BY-SA 4.0, issue #2), at the end of every one, in its language
+licence() {
+	case $1 in
+		it) t="Questo documento è distribuito con licenza Creative Commons Attribuzione - Condividi allo stesso modo 4.0 Internazionale (CC BY-SA 4.0)"; u=https://creativecommons.org/licenses/by-sa/4.0/deed.it ;;
+		*) t="This document is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)"; u=https://creativecommons.org/licenses/by-sa/4.0/ ;;
+	esac
+	printf '<p style="margin-top: 3em; font-size: 85%%">© 2026 Flavio Visentin. %s: <a href="%s">%s</a></p>\n' "$t" "$u" "$u" > "$OUT/licence-$1.html"
+}
+
 # html_pdf md-file html-file pdf-name title lang toc style   (toc: non-empty for a table of contents)
 html_pdf() {
 	toc=""
 	[ -n "$6" ] && toc="--toc --toc-depth=2"
 	# shellcheck disable=SC2086
-	pandoc -f gfm+implicit_figures "$1" -s $toc -H "$OUT/style-$7.html" \
+	licence "$5"
+	pandoc -f gfm+implicit_figures "$1" -s $toc -H "$OUT/style-$7.html" -A "$OUT/licence-$5.html" \
 		--metadata title="$4" --metadata subtitle="$VERSION" --metadata lang="$5" -o "$2"
 	"$CHROME" --headless --disable-gpu --no-sandbox --no-pdf-header-footer \
 		--print-to-pdf="$OUT/$3-$VERSION.pdf" "file://$PWD/$2" 2>/dev/null

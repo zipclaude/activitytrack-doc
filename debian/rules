@@ -1,4 +1,6 @@
 #!/usr/bin/make -f
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: 2026 Flavio Visentin <flavio-activitytrack@infraconsulting.it>
 # The PDFs are built beforehand (scripts/build-manual.sh, in the CI job "manual", which needs
 # a Chromium): the package only installs build/manual/*.pdf, sorted by language.
 D = debian/activitytrack-doc/usr/share/doc/activitytrack-doc

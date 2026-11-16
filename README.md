@@ -30,3 +30,16 @@ This repository follows the same branches and version numbers as the others
 `scripts/build-manual.sh` makes the PDFs (pandoc, graphviz, Chromium) into `build/manual`; the CI job
 `manual` does it on a merge request into `next`, and on a tag it publishes the PDFs and the Debian
 package `activitytrack-doc` (`/usr/share/doc/activitytrack-doc/{it,en}`). See `CLAUDE.md`.
+
+## License
+
+Copyright © 2026 Flavio Visentin <flavio-activitytrack@infraconsulting.it>.
+
+- The manuals, the guides, the brochure, their images and the instructions in `agents/` are under the
+  [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/)
+  (`CC-BY-SA-4.0`): you may share and adapt them, also commercially, giving credit and keeping the same licence.
+- The scripts, the style sheets, the packaging and the CI files are free software under the GNU General Public License,
+  version 3 or later (`GPL-3.0-or-later`), as the programs they document.
+
+[LICENSE](LICENSE) says which is which; the texts are in `LICENSES/`. Every built manual ends with its licence line
+(`scripts/build-manual.sh`), the brochure has it on its last page.

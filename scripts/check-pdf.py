@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: 2026 Flavio Visentin <flavio-activitytrack@infraconsulting.it>
 #
 # Release step (owner, issue #44): the screenshots in the manual PDFs take at
 # most a quarter of a page (half the width, half the height); a full-page

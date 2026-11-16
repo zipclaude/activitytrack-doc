@@ -1,5 +1,6 @@
 #!/bin/sh
 # SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: 2026 Flavio Visentin <flavio-activitytrack@infraconsulting.it>
 #
 # Builds the presentation brochure (owner, 2026-10-22): four A4 pages in
 # Italian, one fixed 794x1123 px block each, printed by Chromium.

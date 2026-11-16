@@ -335,7 +335,7 @@ test build installed from the PC: a separate app with its own data and folder
 | **To-dos** | all the activities to do, with state and priority filters and the Bin (§8) |
 | **Agenda** | consultation: list, day, week, month |
 | **Report** | one day's report: total, one line per activity, export |
-| **More** | "Import / export", "Master data", "Settings" (with "Gestures") |
+| **More** | "Import / export", "Master data", "Settings" (with "Gestures"), "About and licences" (version, licence of the app and of the components of other authors) |
 
 From a tab other than Home, Back returns to Home.
 

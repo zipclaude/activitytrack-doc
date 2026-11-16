@@ -58,6 +58,7 @@ scripts/check-manual.sh v0.9.10                          # on release: VERSION, 
 
 - English for the sources of scripts and packaging; the manuals follow their language (it/en).
 - No secrets, tokens or personal data: the repository is public.
+- The documents are CC BY-SA 4.0, the scripts GPL-3.0-or-later (`LICENSE`); a new script or style sheet starts with the two SPDX lines of the others.
 - Commits end with the `Co-Authored-By:` line naming the model actually used.
 
 ## 5. GitHub backup
