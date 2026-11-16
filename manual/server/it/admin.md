@@ -100,12 +100,12 @@ Dopo 5 codici sbagliati si ricomincia dalla password. I telefoni associati
 non cambiano: sincronizzano con il loro token.
 
 Il menu a sinistra contiene **Home**, **Da fare**, **Agenda**, **Report**, **Attività**, **Cestino**, **Anagrafiche** e
-**Dispositivi**; per gli amministratori anche **Policy** e **Utenti**. **Report** e **Anagrafiche** sono **rami** che
+**Dispositivi**; per gli amministratori anche **Policy**, **Mappe**, **Aggiornamenti** e **Utenti**. **Report** e **Anagrafiche** sono **rami** che
 si aprono e si chiudono: sotto **Report** ci sono **Riepilogativo** e **Dettaglio attività**, sotto **Anagrafiche**
 **Aziende**, **Clienti**, **Ruoli**, **Tag**, **Scelte rapide** e **Materiali**; il ramo della pagina in cui ti trovi è
 aperto, con la voce corrente evidenziata, e si apre anche dalla tastiera (Invio o Spazio). Sul telefono c'è la barra in
 basso (Home, Da fare, Agenda, Report, Altro) e le due pagine hanno le stesse voci come schede in alto. In fondo c'è il
-proprio nome: un clic apre **"Cambia password"**.
+proprio nome: un clic apre **"Sicurezza dell'account"**, dove c'è anche **"Cambia password"**.
 
 L'interfaccia web parla **italiano, inglese, tedesco e spagnolo**. La lingua è, nell'ordine: quella imposta dalla policy
 (`ui.language`, §7), altrimenti la scelta fatta nelle Preferenze (§8), altrimenti quella del browser; se il browser ne
@@ -317,6 +317,9 @@ Ognuno trova sul web il proprio lavoro, come nell'app.
   non è mai anonimo. Per un'altra persona si registra solo un viaggio **già fatto**: uno in corso metterebbe da parte le
   attività che ha aperte sul telefono. Valgono le regole della policy della persona: la funzione Viaggi, "attività solo da
   pianificate" (`entries.source`: serve una voce Da fare) e gli orari bloccati (niente orari scelti).
+
+  ![Il modulo del viaggio: un responsabile registra un viaggio già fatto di una persona del team](../img/trip.png)
+
 - **Stati.** Ogni attività mostra uno di undici stati, con icona e colore (gli stessi dell'app):
 
   | Stato | Icona | Colore |
@@ -348,6 +351,9 @@ Ognuno trova sul web il proprio lavoro, come nell'app.
   **Scontrino**, **File**), con il numero se sono più d'uno, e, se ci sono tratti di viaggio, il tempo di viaggio e i km
   (quelli dichiarati, altrimenti quelli stimati). Il periodo comprende anche le attività registrate **dopo** per un giorno
   passato (il modulo "Passata").
+
+  ![Attività: l'ordine, le icone degli allegati, il tempo di viaggio e i km](../img/activities.png)
+
 - **Cestino**: le attività eliminate, con **Ripristina** ed **Elimina definitivamente** (al posto di "Ignorate").
 - **Assenze**: il modulo chiede il tipo (Assenza, Ferie, Permesso, Malattia), l'azienda (facoltativa: vuota = tutte),
   dal giorno al giorno e gli orari facoltativi (un permesso); senza orari si crea uno spezzone per ogni giorno
@@ -374,7 +380,7 @@ esatto** accetta i minuti fuori griglia (es. 09:37). Nei moduli l'**azienda**
 viene prima del **cliente** e ne filtra l'elenco; scegliendo un cliente,
 l'azienda diventa la sua.
 
-![La griglia degli orari: 08:15–09:45, tratteggiata l'attività in corso](../img/picker.png)
+![La griglia degli orari: 16:00–16:45, tratteggiate le altre attività del giorno](../img/picker.png)
 
 **Preferenze.** Dall'icona della tavolozza, accanto al proprio nome (sul
 telefono: *Altro → Preferenze*), ognuno sceglie:
@@ -418,7 +424,7 @@ telefono come "Non sincronizzati", con il motivo.
 
 ## 9. Report
 
-![Report](../img/report.png)
+![Report: il Riepilogativo](../img/report.png)
 
 I **Report** sono due, voci del menu (schede sul telefono), con gli stessi filtri (periodo, azienda, persona):
 - **Riepilogativo**: i totali per azienda e cliente in un periodo (attività, lavoro, viaggio, pause, spese; il tempo
@@ -434,6 +440,8 @@ I **Report** sono due, voci del menu (schede sul telefono), con gli stessi filtr
   durata, i km (viaggio) e la nota, e i dati della sua attività. Qui i minuti sono quelli **registrati**, non
   arrotondati, quindi i totali possono differire dal riepilogo (la pagina lo dice). Questa vista ha colonne proprie;
   ordine, colonne, esportazioni e stampa seguono la vista mostrata.
+
+![Report: il Dettaglio attività, una riga per attività, con alcune colonne scelte dal menu "Colonne"](../img/report-detail.png)
 
 Un periodo senza righe non ha la riga del totale.
 

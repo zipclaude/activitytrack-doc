@@ -96,14 +96,14 @@ login starts again from the password. Paired phones are not concerned: they
 sync with their token.
 
 The menu on the left has **Home**, **Da fare** (To-dos), **Agenda**, **Report**, **Attività** (Activities), **Cestino**
-(Bin), **Anagrafiche** (Master data) and **Dispositivi** (Devices); administrators also have **Policy** and **Utenti**
+(Bin), **Anagrafiche** (Master data) and **Dispositivi** (Devices); administrators also have **Policy**, **Mappe** (Maps), **Aggiornamenti** (Updates) and **Utenti**
 (Users). **Report** and **Anagrafiche** are **branches** that open and close: under **Report** are **Riepilogativo**
 (Summary) and **Dettaglio attività** (Activity detail), under **Anagrafiche** **Aziende** (Companies), **Clienti**
 (Clients), **Ruoli** (Roles), **Tag**, **Scelte rapide** (Quick choices) and **Materiali** (Materials); the branch of the
 page you are on is open, with the current entry marked, and it can also be opened from the keyboard (Enter or Space). On
 a phone there is the bar at the bottom (Home, Da fare, Agenda, Report, Altro) and the two pages have the same entries as
 tabs at the top. At the bottom is one's own
-name: a click opens **"Cambia password"** (change password).
+name: a click opens **"Sicurezza dell'account"** (account security), which also has **"Cambia password"** (change password).
 
 The web interface comes in **Italian, English, German and Spanish**. The language is, in this order: the one set by the
 policy (`ui.language`, §7), else the choice made in the Preferences (§8), else the browser's; if the browser asks for one
@@ -315,6 +315,9 @@ Everyone finds their own work on the web, as in the app.
   someone else only a trip **already made** is recorded: a running one would set aside the activities they have open on
   their phone. The rules of the person's policy hold: the Travel feature, "activities only from planned ones"
   (`entries.source`: a To do is required) and locked times (no times can be chosen).
+
+  ![The trip form: a manager records a trip already made by a person of the team](../img/trip.png)
+
 - **States.** Every activity shows one of eleven states, with icon and colour (the same as in the app):
 
   | State | Icon | Colour |
@@ -347,6 +350,9 @@ Everyone finds their own work on the web, as in the app.
   with the number when there are several, and, when there are travel segments, the travel time and the km (the declared
   ones, else the estimated). The period also includes the activities recorded **later** for a past day (the "Passata"
   form).
+
+  ![Activities: the order, the attachment icons, the travel time and the km](../img/activities.png)
+
 - **Cestino** (Bin): the deleted activities, with **Restore** and **Delete permanently** (instead of "Ignored").
 - **Absences**: the form asks the kind (Absence, Holiday, Leave, Sick leave), the company (optional: empty = all), from day
   to day and optional times (a leave); without times one segment is created per working day, skipping days off. Future
@@ -372,7 +378,7 @@ other activities of that day. **Orario esatto** (exact time) takes the
 minutes off the grid (e.g. 09:37). In the forms the **company** comes before
 the **client** and filters its list; a client chosen brings its company.
 
-![The time grid: 08:15–09:45, the running activity hatched](../img/picker.png)
+![The time grid: 16:00–16:45, the day's other activities hatched](../img/picker.png)
 
 **Preferences.** From the palette icon next to one's name (on a phone:
 *Altro → Preferenze*), everyone chooses:
@@ -418,7 +424,7 @@ shows on the phone as "Not synced", with the reason.
 
 ## 9. Reports
 
-![Report](../img/report.png)
+![Report: the Summary](../img/report.png)
 
 There are two **Reports**, entries of the menu (tabs on a phone), with the same filters (period, company, person):
 - **Riepilogativo** (Summary): the totals by company and client over a period (activities, work, travel, pauses,
@@ -434,6 +440,8 @@ There are two **Reports**, entries of the menu (tabs on a phone), with the same 
   with its own start and end, kind, duration, km (travel) and note, and its activity's data. Here the minutes are the
   **recorded** ones, not rounded, so the totals can differ from the summary's (the page says so). This view has its
   own columns; sort, columns, exports and print follow the view shown.
+
+![Report: the Activity detail, one row per activity, with some columns chosen from the "Colonne" menu](../img/report-detail.png)
 
 A period with no rows has no total row.
 
