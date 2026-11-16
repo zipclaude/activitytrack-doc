@@ -242,6 +242,19 @@ Se sul telefono e sul server c'è un'anagrafica con lo stesso nome,
 diventano una sola alla prima sincronizzazione, con i dati del server. Per i
 tag conta il testo: il nome resta, il colore è quello del server.
 
+**Rendere centrali le proprie anagrafiche.** Un amministratore o un responsabile che ha anagrafiche
+personali può renderle centrali dal pulsante **Rendi centrali le mie** nelle pagine di **Anagrafiche**
+(per una sola voce, **Rendi centrale** nella sua pagina). La pagina mostra prima cosa diventerà
+centrale e cosa resta personale, e chiede conferma. La voce non cambia identità: le attività e le scelte rapide
+che la usano restano valide, i telefoni la ricevono di nuovo come centrale e gli altri utenti la vedono come nuova
+(se hanno una voce personale con lo stesso nome, la loro app le unisce da sola). Le sedi e i contatti di
+un'azienda o di un cliente la seguono. Restano personali, con il motivo accanto: le voci per cui esiste già una
+voce centrale con lo stesso nome o codice (senza distinguere maiuscole e minuscole), e un cliente, una scelta rapida
+o un materiale che si riferisce a un'azienda o a un ruolo personale non reso centrale insieme (prima va
+resa centrale l'azienda o il ruolo; il pulsante generale lo fa nell'ordine giusto). Dopo, la voce la modificano
+solo amministratori e responsabili, e **l'operazione non si annulla**. Gli altri utenti non possono
+farlo per te: ognuno rende centrali le proprie.
+
 ## 7. Policy
 
 ![Policy](../img/policy.png)

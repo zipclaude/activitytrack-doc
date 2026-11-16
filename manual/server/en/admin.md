@@ -241,6 +241,18 @@ When the phone and the server have master data with the same name, they
 become one at the first sync, with the server's data. For tags the text
 counts: the name stays, the colour is the server's.
 
+**Making your own master data central.** An administrator or a manager who has personal master data can make
+it central with the **Make mine central** (*Rendi centrali le mie*) button on the **Master data** pages
+(for a single item, **Make central** (*Rendi centrale*) on its page). The page first shows what will become
+central and what stays personal, and asks to confirm. The item keeps its identity: the activities and quick picks
+that use it stay valid, the phones receive it again as central and the other users see it as new (if they have a
+personal item of the same name, their app merges the two by itself). The sites and contacts of a company or client
+go with it. These stay personal, with the reason beside them: items for which a central one with the same name or
+code already exists (case is ignored), and a client, quick pick or material that refers to a personal company or
+role that is not made central together with it (make the company or role central first; the general button does
+it in the right order). Afterwards only administrators and managers change the item, and **it cannot be undone**.
+Other users cannot do it for you: each makes their own central.
+
 ## 7. Policies
 
 ![Policies](../img/policy.png)
