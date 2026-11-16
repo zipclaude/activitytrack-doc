@@ -234,8 +234,8 @@ Companies, clients, roles, tags, quick choices and materials are
 **central** (everyone sees them; administrators and managers change them)
 or **personal** (a user's own, when the policy allows it). The app and the
 web show which is which. Companies, clients and tags have an optional
-**colour**, chosen among the app's, from the web too. In the menu on the left **Anagrafiche** is a branch with an entry
-for each (Companies, Clients, Roles, Tags, Quick choices, Materials), the same as the tabs of the page.
+**colour**, chosen among the app's, from the web too. In the menu on the left **Master data** (*Anagrafiche*) is a branch with an entry
+for each (Companies, Clients, Roles, Tags, Quick picks, Materials; *Aziende, Clienti, Ruoli, Tag, Scelte rapide, Materiali*), the same as the tabs of the page.
 
 When the phone and the server have master data with the same name, they
 become one at the first sync, with the server's data. For tags the text
@@ -248,15 +248,15 @@ counts: the name stays, the colour is the server's.
 A policy decides what the phones' apps may do and change: features,
 fields, settings, behaviours. Each phone gets, key by key, the
 **organisation's** policy, then the **profile's**, then the **user's**:
-the most specific wins. What stays "non impostato" (not set) leaves the app
+the most specific wins. What stays "not set" (*non impostato*) leaves the app
 as it is.
 
 ![The organisation's policy](../img/policyedit.png)
 
 For each setting:
-- **valore iniziale** (initial value): suggested, the user may change it;
-- **bloccato** (locked): grey with a padlock for the user;
-- **nascosto** (hidden): not shown.
+- **starting value** (*valore iniziale*): suggested, the user may change it;
+- **locked** (*bloccato*): grey with a padlock for the user;
+- **hidden** (*nascosto*): not shown.
 
 The policies reach the phones with the sync, signed by the server: with the
 key and certificate of `[policy]` in `settings.ini` if you set them, otherwise with a key the
@@ -278,8 +278,8 @@ Some settings count on the web too:
   imported or old policy with another value of any type, even not a text, makes the pages of its users English and never
   blocks them): also fixes the language of the web pages for the users the
   policy applies to, as for the apps; in the Preferences the language buttons are then disabled, with the note
-  "Impostato dalla policy" (set by the policy); with a wrong value: "Lingua forzata sull'inglese da una policy con un
-  valore errato" (forced to English by a policy with an invalid value).
+  "Set by the policy" (*Impostato dalla policy*); with a wrong value: "Forced to English by a policy with an invalid
+  value" (*Lingua forzata sull'inglese da una policy con un valore errato*).
 - **Export** (feature `export`, formats `export.formats`, behaviour `exportMaxDays`): they hold for the web reports and
   the CSV too (§9): without the feature there are no exports, the formats are the ones listed (all three if it lists
   none), and a period longer than `exportMaxDays` days (366 when missing) is not exported.
@@ -294,7 +294,7 @@ Some settings count on the web too:
 - **Save rounded values** (`roundStoredTimes`): the start, switch, stop and reopen buttons record rounded times; only with
   editable times; times typed by hand stay exact.
 
-**Field names.** In the **Campi** (Fields) table of the editor, the **"Etichetta per lingua"** (label per language) column has a box for every language
+**Field names.** In the **Fields** (*Campi*) table of the editor, the **"Label per language"** (*"Etichetta per lingua"*) column has a box for every language
 of the apps: Italian, English, German and Spanish. The app shows the field's name in the phone's language; if there is no
 label for that language it uses the English one, then the app's own text. A policy with German or Spanish labels
 written elsewhere keeps them when you save it from the web.
@@ -302,13 +302,13 @@ written elsewhere keeps them when you save it from the web.
 ## 8. Working on the web
 
 Everyone finds their own work on the web, as in the app.
-- **Home**: the running activities with their commands (Pause, Work, Travel, Stop; there is no Suspend any more), then
+- **Home**: the running activities with their commands (Pause, Work, Travel, Stop; *Pausa, Lavoro, Viaggio, Stop*; there is no Suspend any more), then
   one list of all the activities in their **states**, with the filters period, state, company and tag. The groups of the
-  list, with **State → "All"**, follow the time: **In ritardo** (Late), **Incompleta** (Incomplete: when the State filter
+  list, with **State → "All"** (*Stato → "Tutti"*), follow the time: **Late** (*In ritardo*), **Incomplete** (*Incompleta*: when the State filter
   includes it, as it does at the start, and there are any),
-  **Oggi** (Today), **Prossimi giorni** (Next days), **Senza data** (Without a date), **Giorni precedenti**
-  (Earlier): the to-dos without a date sit between the next days and the previous ones, not after the done ones.
-- **Viaggio** (Travel). The Home's button opens a form: the **person** (oneself or, for a manager or an administrator, a
+  **Today** (*Oggi*), **Next days** (*Prossimi giorni*), **Without a date** (*Senza data*), **Earlier**
+  (*Giorni precedenti*): the to-dos without a date sit between the next days and the previous ones, not after the done ones.
+- **Travel** (*Viaggio*). The Home's button opens a form: the **person** (oneself or, for a manager or an administrator, a
   person of the team), the **company** and the **client**, all three required (a client goes with its company and
   brings it; a linked To do brings its company and client; the description is optional; if the person sees no company,
   or no client, at all, that one is not asked) and **when** (now, from a time, or already made, with start and end). From the web a trip is never anonymous. For
@@ -322,66 +322,66 @@ Everyone finds their own work on the web, as in the app.
 
   | State | Icon | Colour |
   |---|---|---|
-  | To do | check box | white |
-  | Planned | clock | grey |
-  | Late | **!** | brown |
-  | Work | ▶ | green |
-  | Travel | car | blue |
-  | Pause | ⏸ | yellow |
-  | Suspended | moon | orange |
-  | Done | ✓ | greenish |
-  | Incomplete | ■ | reddish |
-  | Absence | dot | fuchsia |
-  | Deleted | bin | grey |
+  | To do (*Da fare*) | check box | white |
+  | Planned (*Pianificata*) | clock | grey |
+  | Late (*In ritardo*) | **!** | brown |
+  | Working (*Lavoro*) | ▶ | green |
+  | Travelling (*Viaggio*) | car | blue |
+  | Paused (*Pausa*) | ⏸ | yellow |
+  | Suspended (*Sospesa*) | moon | orange |
+  | Done (*Fatta*) | ✓ | greenish |
+  | Incomplete (*Incompleta*) | ■ | reddish |
+  | Absence (*Assenza*) | dot | fuchsia |
+  | Deleted (*Eliminata*) | bin | grey |
 
   *Suspended* appears only when another activity starts and concurrent ones are not allowed; *Incomplete* is a closed
   activity without a client or a work segment (fixed like any other: there is no "Complete" step). "Late" uses a single
   rule, on the Home as on the work page.
 - **Activities** and the **activity sheet**: state ("In <state> since"), the state's actions, details, times (segments,
-  planned ones too), expenses, attachments, place, tags. **Reopen** is split into **Work** and **Travel** and always asks
-  for confirmation; **"Put back to do"** removes the tick from an item ticked by mistake (no real segments). Stopping an
-  activity with an outbound trip and work can add the **return trip**. **Priority** has the names None, Low, Medium, High,
-  Urgent, Emergency.
-- **Activities, the list.** **"Ordina per"** (sort by) offers Data (date: by day, as before), Ora di inizio (start time),
-  Azienda (company), Cliente (client), Durata (duration), Stato (state) and, for those who see several people, Persona
-  (person), with a direction (also in the address, `?sort=` and `&dir=`); the orders other than the date are one list
+  planned ones too), expenses, attachments, place, tags. **Reopen** is split into **"Reopen · Work"** and **"Reopen · Travel"** (*"Riapri · Lavoro"*, *"Riapri · Viaggio"*) and always asks
+  for confirmation; **"Back to to-do"** (*"Rimetti da fare"*) removes the tick from an item ticked by mistake (no real segments). Stopping an
+  activity with an outbound trip and work can add the **return trip**. **Priority** (*Priorità*) has the names None, Low, Medium, High,
+  Urgent, Emergency (*Nessuna, Bassa, Media, Alta, Urgenza, Emergenza*).
+- **Activities, the list.** **"Sort by"** (*"Ordina per"*) offers Date (*Data*: by day, as before), Start time (*Ora di inizio*),
+  Company (*Azienda*), Client (*Cliente*), Duration (*Durata*), State (*Stato*) and, for those who see several people, Person
+  (*Persona*), with a direction (also in the address, `?sort=` and `&dir=`); the orders other than the date are one list
   where every row says its day, and what has no value stays last in both directions. Every row (and those of the Home)
-  has an icon for each kind of attachment (**Foto** photo, **Nota vocale** voice note, **Scontrino** receipt, **File**),
+  has an icon for each kind of attachment (**Photo** *Foto*, **Voice note** *Nota vocale*, **Receipt** *Scontrino*, **File**),
   with the number when there are several, and, when there are travel segments, the travel time and the km (the declared
-  ones, else the estimated). The period also includes the activities recorded **later** for a past day (the "Passata"
-  form).
+  ones, else the estimated). The period also includes the activities recorded **later** for a past day (the "Past"
+  form, *Passata*).
 
   ![Activities: the order, the attachment icons, the travel time and the km](../img/activities.png)
 
-- **Cestino** (Bin): the deleted activities, with **Restore** and **Delete permanently** (instead of "Ignored").
-- **Absences**: the form asks the kind (Absence, Holiday, Leave, Sick leave), the company (optional: empty = all), from day
+- **Bin** (*Cestino*): the deleted activities, with **Restore** (*Ripristina*) and **Delete permanently** (*Elimina definitivamente*; instead of "Ignored").
+- **Absences**: the form asks the kind (Absence, Holiday, Leave, Sick leave; *Assenza, Ferie, Permesso, Malattia*), the company (optional: empty = all), from day
   to day and optional times (a leave); without times one segment is created per working day, skipping days off. Future
   holidays can be planned too.
 - **Agenda**: day, week and month; a click on a free slot plans a To do
   activity at that time (planned segments are dashed, absences fuchsia; the colour is the client's, else the company's).
-  At the top of one's own agenda there are three buttons: **"Da fare"** (To do: the new To do activity of the day, when
-  planning and To-dos are on), **"Assenza"** (Absence: the absence form on the agenda's day, then back to the agenda) and
-  **"Già svolta"** (Already done), which opens the new-activity form on **"Passata"** (Past) with the times already
+  At the top of one's own agenda there are three buttons: **"To-dos"** (*"Da fare"*: the new To do activity of the day, when
+  planning and To-dos are on), **"Absence"** (*"Assenza"*: the absence form on the agenda's day, then back to the agenda) and
+  **"Already done"** (*"Già svolta"*), which opens the new-activity form on **"Past"** with the times already
   proposed: the hour ending at the last quarter of an hour that has passed if the day is today, else 09:00–10:00.
-  "Già svolta" is there only for today and past days, and when the policy leaves the times editable (§7).
+  "Already done" is there only for today and past days, and when the policy leaves the times editable (§7).
 
 ![Agenda: the week](../img/agenda.png)
 
 **Dates and times.** In the forms dates and times are typed in the format
 chosen in the preferences, or picked with the button at the right of the
 field: a calendar starting on Monday and, for times, the app's **5-minute
-grid** (one row per hour, 12 hours at a time; **▲ Prima** / **Dopo ▼**
+grid** (one row per hour, 12 hours at a time; **▲ Before** / **After ▼** (*▲ Prima* / *Dopo ▼*)
 move the window by 3 hours). Start and end are chosen together: drag from
 the first cell to the last, or tap the first and then the last, and **OK**;
 at the top the range and its length, the **hatched** cells are taken by
-other activities of that day. **Orario esatto** (exact time) takes the
+other activities of that day. **Exact time** (*Orario esatto*) takes the
 minutes off the grid (e.g. 09:37). In the forms the **company** comes before
 the **client** and filters its list; a client chosen brings its company.
 
 ![The time grid: 16:00–16:45, the day's other activities hatched](../img/picker.png)
 
 **Preferences.** From the palette icon next to one's name (on a phone:
-*Altro → Preferenze*), everyone chooses:
+*More → Preferences*, in Italian *Altro → Preferenze*), everyone chooses:
 - the **date format**: European (31/12/2026), American (12/31/2026) or ISO
   (2026-12-31);
 - the **time format**: 24 hours (18:30) or 12 hours (6:30 PM);
@@ -396,20 +396,20 @@ with.
 The **language** (Italian, English, German or Spanish) is chosen on the same page and holds for
 the browser in use; until you choose one, the pages follow the browser's
 language, or English if the server does not have it. If the policy fixes the language (§7) the buttons are disabled and
-the page says "Impostato dalla policy"; with a wrong value it says "Lingua forzata sull'inglese da una policy con un
-valore errato" and the pages are English. The buttons, labels, messages and emails are translated; what you type
+the page says "Set by the policy" (*Impostato dalla policy*); with a wrong value it says "Forced to English by a policy
+with an invalid value" (*Lingua forzata sull'inglese da una policy con un valore errato*) and the pages are English. The buttons, labels, messages and emails are translated; what you type
 (names, notes) stays as written.
 
 ![Preferences](../img/preferences.png)
 
 **Assigned to-dos.** A manager, or an administrator, creates a To do activity and
-picks **"Assegnata a"** (assigned to): it becomes the chosen
+picks **"Assigned to"** (*"Assegnata a"*): it becomes the chosen
 person's and reaches their phones. While it is still in the To do state it can be reassigned: it then leaves the phones of
-whoever had it. The assignee sees "Assegnata da …" (assigned by) and works
-it as their own; the manager follows it on the *Da fare* page with
-**Persona → "Tutto il team"** (the whole team).
+whoever had it. The assignee sees "Assigned by …" (*Assegnata da …*) and works
+it as their own; the manager follows it on the *To-dos* (*Da fare*) page with
+**Person → "The whole team"** (*Persona → "Tutto il team"*).
 
-On the **Da fare** (To-dos) page the buttons **"Nuova voce"** (new item) and **"Nuova assenza"** (new absence) sit at the top
+On the **To-dos** page the buttons **"New to-do"** (*"Nuova voce"*) and **"New absence"** (*"Nuova assenza"*) sit at the top
 right, side by side.
 
 ![The team's to-dos](../img/todos.png)
@@ -417,7 +417,7 @@ right, side by side.
 ![An assigned to-do](../img/todo.png)
 
 **Checks after a sync.** When two phones changed the same activity and its
-segments overlap, the activity is marked **"To check"**. With times locked by
+segments overlap, the activity is marked **"To check"** (*"Da verificare"*). With times locked by
 the policy, an administrator or the manager fixes it from the sheet on the
 web. A change the server refuses (for example locked central master data)
 shows on the phone as "Not synced", with the reason.
@@ -427,38 +427,38 @@ shows on the phone as "Not synced", with the reason.
 ![Report: the Summary](../img/report.png)
 
 There are two **Reports**, entries of the menu (tabs on a phone), with the same filters (period, company, person):
-- **Riepilogativo** (Summary): the totals by company and client over a period (activities, work, travel, pauses,
+- **Summary** (*Riepilogativo*): the totals by company and client over a period (activities, work, travel, pauses,
   expenses; the **reported** time and the km on request), with the times **rounded** as in the app and, in small, the
   recorded ones. An activity over several days counts in each, except for the night carry-over. **Absences** are
-  counted apart, by kind (Absence, Holiday, Leave, Sick leave), in an *Assenze* section.
-- **Dettaglio attività** (Activity detail): one row per **activity and day** (like the app's report line, so the rows
+  counted apart, by kind (Absence, Holiday, Leave, Sick leave), in an *Absences* (*Assenze*) section.
+- **Activity detail** (*Dettaglio attività*): one row per **activity and day** (like the app's report line, so the rows
   add up to the summary and are rounded by the same rules), plus the rows of the days' **absences**: date, time,
   person, company, client, role, activity, place, tags, work, travel, pauses, reported, km, expenses, attachments,
   state. Km, expenses and attachments are on the activity's first row in the period. A switch above the filters chooses
-  between **"Una riga per attività"** (one row per activity, the default) and **"Una riga per tratto"** (one row per
-  segment; `?rows=activity` or `segment`): a row for each work, travel, pause or absence segment, on the day it starts,
+  between **"One row per activity"** (*"Una riga per attività"*, the default) and **"One row per segment"** (*"Una riga per
+  tratto"*; `?rows=activity` or `segment`): a row for each work, travel, pause or absence segment, on the day it starts,
   with its own start and end, kind, duration, km (travel) and note, and its activity's data. Here the minutes are the
   **recorded** ones, not rounded, so the totals can differ from the summary's (the page says so). This view has its
   own columns; sort, columns, exports and print follow the view shown.
 
-![Report: the Activity detail, one row per activity, with some columns chosen from the "Colonne" menu](../img/report-detail.png)
+![Report: the Activity detail, one row per activity, with some columns chosen from the "Columns" (*Colonne*) menu](../img/report-detail.png)
 
 A period with no rows has no total row.
 
 **Columns.** A click on a column's head sorts the table, and a second click reverses the order (also in the address:
-`?sort=` and `&dir=`); rows without a value stay last. The **"Colonne"** (columns) menu shows or hides columns.
+`?sort=` and `&dir=`); rows without a value stay last. The **"Columns"** (*"Colonne"*) menu shows or hides columns.
 Columns, sort and the detail's view stay **with the user, permanently** (at every login and on every browser), for each
-report and view; **"Colonne predefinite"** (default columns) forgets the table's choice, sort included.
+report and view; **"Default columns"** (*"Colonne predefinite"*) forgets the table's choice, sort included.
 
 **Exporting.** The table **as shown** (filters, sort, visible columns) downloads as **CSV** (semicolon, with the byte
 order mark spreadsheets want; free text that would read as a formula is guarded), **XML** or **JSON**, with plain values
 (ISO dates, 24-hour times, durations in minutes, amounts in euros) and the unit in the head; the addresses are
 `/report/esporta/summary.csv`, `/report/esporta/detail.json` and so on. The **policy** (§7) decides: the export feature,
 the allowed formats and the longest period (`exportMaxDays`); when it does not allow, the page says so. On the detail
-the **"CSV completo"** (full CSV; semicolon and byte order mark, like the others) stays: one row per activity and day with all the columns, the recorded and the rounded
+the **"Full CSV"** (*"CSV completo"*; semicolon and byte order mark, like the others) stays: one row per activity and day with all the columns, the recorded and the rounded
 minutes; absence segments have rows of their own and there is an `absence_min` column.
 
-**Stampa / PDF** (print / PDF) prints the page with a print style sheet (no menu, filters or tabs, the table's head
+**Print / PDF** (*Stampa / PDF*) prints the page with a print style sheet (no menu, filters or tabs, the table's head
 repeated, the chosen sort and columns kept); for a PDF use the browser's print.
 
 Managers and administrators filter by person; a reader only sees the closed activities of their companies.
@@ -490,10 +490,10 @@ With PostgreSQL, use `pg_dump activitytrack`.
 |---|---|
 | The site answers 400 "Bad Request" | the name used is not in `allowed_hosts` |
 | The phone says "certificate not valid" | self-signed certificate without `tls_pin`, or made as a CA (`docs/INSTALL.md` §4) |
-| The QR code is not read | raise the screen brightness, or paste in the app the link under "Non riesci a inquadrarlo?" |
-| "Codice scaduto" (code expired) | the code is good for 10 minutes and once: make another |
-| A user lost the phone with the authenticator app | a recovery code, or the administrator **"Azzera"** (resets) it on their sheet |
-| The app's code is always "non valido" (not valid) | the phone's or the server's clock is wrong: sync it (NTP) |
+| The QR code is not read | raise the screen brightness, or paste in the app the link under the code ("Link (for the PC, or if the phone cannot scan the code)", *Collegamento (per il PC, o se il telefono non riesce a inquadrare il codice)*) |
+| "Code expired." (*Codice scaduto.*) | the code is good for 10 minutes and once: make another |
+| A user lost the phone with the authenticator app | a recovery code, or the administrator resets it with **"Reset"** (*"Azzera"*) on their sheet |
+| The app's code is always refused: "Invalid code." (*Codice non valido.*) | the phone's or the server's clock is wrong: sync it (NTP) |
 | A user no longer syncs | deactivated, or the phone was revoked (Users → their sheet) |
 | Attachments do not open on the web | with `offload = nginx` or `apache` the web server needs the example's configuration |
 | A phone or PC says "Update the app to sync" | the server is on 1.0 and the device is not: update the app or Desktop to 1.0 |
