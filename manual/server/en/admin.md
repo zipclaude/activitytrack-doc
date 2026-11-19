@@ -350,7 +350,8 @@ Everyone finds their own work on the web, as in the app.
   activity without a client or a work segment (fixed like any other: there is no "Complete" step). "Late" uses a single
   rule, on the Home as on the work page.
 - **Activities** and the **activity sheet**: state ("In <state> since"), the state's actions, details, times (segments,
-  planned ones too), expenses, attachments, place, tags. **Reopen** is split into **"Reopen · Work"** and **"Reopen · Travel"** (*"Riapri · Lavoro"*, *"Riapri · Viaggio"*) and always asks
+  planned ones too, as rows like the app's: the round mark of the kind in its colour, kind and times, duration; whoever may
+  correct them opens the row with its arrow and changes kind, start and end), expenses, attachments, place, tags. **Reopen** is split into **"Reopen · Work"** and **"Reopen · Travel"** (*"Riapri · Lavoro"*, *"Riapri · Viaggio"*) and always asks
   for confirmation; **"Back to to-do"** (*"Rimetti da fare"*) removes the tick from an item ticked by mistake (no real segments). Stopping an
   activity with an outbound trip and work can add the **return trip**. **Priority** (*Priorità*) has the names None, Low, Medium, High,
   Urgent, Emergency (*Nessuna, Bassa, Media, Alta, Urgenza, Emergenza*).

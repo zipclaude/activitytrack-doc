@@ -353,7 +353,8 @@ Ognuno trova sul web il proprio lavoro, come nell'app.
   cliente o senza tratto di lavoro (si corregge come le altre: non c'è un passo "Completa"). Lo stato "In ritardo" usa
   una sola regola, sulla Home come nella pagina del lavoro.
 - **Attività** e la **scheda dell'attività**: stato ("In <stato> dalle"), azione dello stato, dettagli, orari
-  (segmenti, anche pianificati), spese, allegati, località, tag. **Riapri** si divide in **Lavoro** e **Viaggio** e
+  (segmenti, anche pianificati, in righe come quelle dell'app: il pallino del tipo con il suo colore, tipo e orari,
+  durata; chi può correggerli apre la riga con la freccia e cambia tipo, inizio e fine), spese, allegati, località, tag. **Riapri** si divide in **Lavoro** e **Viaggio** e
   chiede sempre conferma; **"Rimetti da fare"** toglie la spunta a una voce spuntata per errore (senza tratti reali).
   Allo Stop di un'attività con andata e lavoro si può aggiungere il **viaggio di ritorno**. La **priorità** ha i nomi
   Nessuna, Bassa, Media, Alta, Urgenza, Emergenza.
